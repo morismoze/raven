@@ -1,0 +1,15 @@
+:root {
+  --primary: #541690;
+  --bg-main: #212121;
+  --bg-main-opacity: #27272a;
+  --border-main: #3f3f46;
+  --white: #fff;
+}
+
+:root[data-theme='light'] {
+  --primary: #541690;
+  --bg-main: #212121;
+  --bg-main-opacity: #27272a;
+  --border-main: #3f3f46;
+  --white: #fff;
+}

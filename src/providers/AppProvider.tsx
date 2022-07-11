@@ -3,7 +3,6 @@ import React from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { ErrorBoundary } from 'react-error-boundary';
 import { QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
 
 import { AuthProvider } from '@/api/auth';
 import { queryClient } from '@/lib/react-query';
@@ -33,7 +32,6 @@ export const AppProvider = ({ children }: AppProviderProps) => {
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <HelmetProvider>
           <QueryClientProvider client={queryClient}>
-            {import.meta.env.DEV && <ReactQueryDevtools />}
             <AuthProvider>{children}</AuthProvider>
           </QueryClientProvider>
         </HelmetProvider>

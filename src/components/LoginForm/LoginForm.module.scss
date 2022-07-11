@@ -1,0 +1,8 @@
+@import 'src/styles/util.module.scss';
+
+.root {
+  border-radius: 8px;
+  background-color: var(--bg-main-opacity);
+  padding: toRem(32) toRem(40);
+  border: 1px solid var(--border-main);
+}

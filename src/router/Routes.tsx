@@ -12,7 +12,6 @@ export const Routes = () => {
   return (
     <Switch>
       <Route path="/login" component={Login} />
-      <Route path="/" component={Home} />
       <PrivateRoute path="/user/:id" component={UserProfile} />
       <Route component={FourZeroFour} />
     </Switch>
