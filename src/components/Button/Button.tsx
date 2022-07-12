@@ -27,9 +27,6 @@ export const Button = ({
   Icon,
   action = ButtonAction.secondary,
 }: ButtonProps): JSX.Element => {
-  console.log(size);
-  console.log(action);
-
   return (
     <div className={classNames(styles.root, styles[size], styles[action])}>
       <button onClick={onClick} className={styles.root__button}>
