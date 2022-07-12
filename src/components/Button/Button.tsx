@@ -12,26 +12,27 @@ export enum ButtonAction {
   secondary = 'secondary',
 }
 
-interface ButtonProps {
-  onClick: () => void;
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  onClick?: () => void;
   size: ButtonSize;
-  text: string;
   Icon?: React.ElementType;
   action: ButtonAction;
+  children: React.ReactNode;
 }
 
 export const Button = ({
   onClick,
   size = ButtonSize.small,
-  text,
   Icon,
   action = ButtonAction.secondary,
+  children,
+  ...rest
 }: ButtonProps): JSX.Element => {
   return (
     <div className={classNames(styles.root, styles[size], styles[action])}>
-      <button onClick={onClick} className={styles.root__button}>
+      <button {...rest} onClick={onClick} className={styles.root__button}>
         {Icon && <Icon className={styles.root__icon} />}
-        <span className={styles.root__text}>{text}</span>
+        <span className={styles.root__text}>{children}</span>
       </button>
     </div>
   );
