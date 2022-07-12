@@ -26,16 +26,16 @@ export const Button = ({
   text,
   Icon,
   action = ButtonAction.secondary,
-}: ButtonProps) => {
+}: ButtonProps): JSX.Element => {
   console.log(size);
   console.log(action);
 
   return (
-    <button
-      onClick={onClick}
-      className={classNames(styles.root, styles[size], styles[action])}>
-      {Icon && <Icon className={styles.root__icon} />}
-      <span className={styles.root__text}>{text}</span>
-    </button>
+    <div className={classNames(styles.root, styles[size], styles[action])}>
+      <button onClick={onClick} className={styles.root__button}>
+        {Icon && <Icon className={styles.root__icon} />}
+        <span className={styles.root__text}>{text}</span>
+      </button>
+    </div>
   );
 };

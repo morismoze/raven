@@ -1,8 +1,48 @@
 @import 'src/styles/util.module.scss';
 
 .root {
-  border-radius: 8px;
   background-color: var(--bg-main-opacity);
-  padding: toRem(32) toRem(40);
+  padding: 40px;
   border: 1px solid var(--border-main);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+
+  &__alternativeBinder {
+    color: var(--text-darker);
+    font-size: toRem(16);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: toRem(12);
+    white-space: nowrap;
+
+    &::before,
+    &::after {
+      content: '';
+      width: 100%;
+      height: 1px;
+      background-color: var(--border-main);
+      display: inline-block;
+    }
+
+    &::before {
+      margin-right: 8px;
+    }
+
+    &::after {
+      margin-left: 8px;
+    }
+  }
+
+  &__alternativeContainer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    > div {
+      flex: 1;
+    }
+  }
 }

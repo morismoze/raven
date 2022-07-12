@@ -1,0 +1,13 @@
+@import 'src/styles/util.module.scss';
+
+.root {
+  color: var(--text-darker);
+  font-size: toRem(11);
+
+  &__tos,
+  &__pp {
+    color: var(--primary);
+    font-weight: 500;
+    text-decoration: none;
+  }
+}

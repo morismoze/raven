@@ -4,12 +4,9 @@ import { HelmetProvider } from 'react-helmet-async';
 import { ErrorBoundary } from 'react-error-boundary';
 import { QueryClientProvider } from 'react-query';
 
+import { Loader } from '@/components';
 import { AuthProvider } from '@/api/auth';
 import { queryClient } from '@/lib/react-query';
-
-const Loader = (): JSX.Element => {
-  return <div>custom spinner</div>;
-};
 
 const ErrorFallback = (): JSX.Element => {
   return (

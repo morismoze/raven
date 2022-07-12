@@ -1,55 +1,103 @@
 @import 'src/styles/util.module.scss';
 
 .root {
-  border-radius: 8px;
   display: flex;
-  align-items: center;
-  gap: 16px;
-  border: none;
-  cursor: pointer;
+  position: relative;
+  background-color: var(--primary);
 
-  &.small {
-    padding: 12px 24px;
-
-    &__icon {
-      font-size: toRem(16);
-    }
-
-    &__text {
-      font-weight: 500;
-      font-size: toRem(16);
-    }
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    border: none;
+    cursor: pointer;
+    flex: 1;
+    transform: translate(0, 0);
+    transition: all 0.15s ease;
+    position: relative;
+    z-index: 10;
+    border: 1px solid var(--border-main);
+    background-color: var(--bg-main-opacity);
   }
 
-  &.large {
+  &.small &__button {
+    padding: 12px 24px;
+  }
+
+  &.small &__button &__icon {
+    font-size: toRem(16);
+  }
+
+  &.small &__button &__text {
+    font-weight: 500;
+    font-size: toRem(16);
+  }
+
+  &.large &__button {
     padding: 40px 48px;
   }
 
-  &.large &__icon {
+  &.large &__button &__icon {
     font-size: toRem(30);
     width: 30x;
   }
 
-  &.large &__text {
+  &.large &__button &__text {
     font-weight: 600;
-    font-size: toRem(20);
+    font-size: toRem(18);
   }
 
-  &.primary {
-    background-color: var(--primary);
+  &.primary &__button {
+    border: 1px solid var(--primary);
   }
 
-  &.secondary {
-    background-color: var(--bg-main-opacity);
-    border: 1px solid var(--border-main);
+  &.primary &__button &__text,
+  &.primary &__button &__icon {
+    color: var(--primary);
+    fill: var(--primary);
   }
 
-  &__icon {
+  &.secondary &__button &__text,
+  &.secondary &__button &__icon {
     color: var(--white);
     fill: var(--white);
   }
 
-  &__text {
-    color: var(--white);
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    background-color: var(--primary);
+    transition: all 0.15s ease;
+  }
+
+  &:before {
+    top: 0;
+    left: 0;
+    transform-origin: top left;
+    transform: rotate(-45deg) scale(0);
+  }
+
+  &:after {
+    right: 0;
+    bottom: 0;
+    transform-origin: bottom right;
+    transform: rotate(45deg) scale(0);
+  }
+
+  &:hover &__button {
+    transform: translate(6px, -6px);
+  }
+
+  &:hover:before {
+    transform: rotate(-45deg) scale(1);
+  }
+
+  &:hover:after {
+    transform: rotate(45deg) scale(1);
   }
 }
