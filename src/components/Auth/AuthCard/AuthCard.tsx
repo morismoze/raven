@@ -14,7 +14,9 @@ export const AuthCard = ({
   onAuth,
   isAuthenticating,
 }: AuthCardLayoutProps): JSX.Element => {
-  const handleGoogleAuth = () => {};
+  const handleGoogleAuth = () => {
+    // google auth
+  };
 
   return (
     <div className={styles.root}>

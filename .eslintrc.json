@@ -29,7 +29,10 @@
   ],
   "rules": {
     // suppress errors for missing 'import React' in files
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "no-useless-escape": "off",
+    "no-constant-condition": "off",
+    "@typescript-eslint/no-empty-function": "off"
   },
   "ignorePatterns": ["**/*.css", "**/*.scss"]
 }
