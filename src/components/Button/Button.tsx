@@ -28,8 +28,14 @@ export const Button = ({
   children,
   ...rest
 }: ButtonProps): JSX.Element => {
+  const { disabled } = rest;
+
   return (
-    <div className={classNames(styles.root, styles[size], styles[action])}>
+    <div
+      className={classNames(styles.root, styles[size], styles[action], {
+        [styles.disabled]: disabled,
+      })}
+    >
       <button {...rest} onClick={onClick} className={styles.root__button}>
         {Icon && <Icon className={styles.root__icon} />}
         <span className={styles.root__text}>{children}</span>

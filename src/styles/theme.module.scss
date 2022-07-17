@@ -1,17 +1,21 @@
 :root {
-  --primary: #541690;
+  --primary: #d1ff69;
   --bg-main: #212121;
   --bg-main-opacity: #27272a;
   --border-main: #3f3f46;
   --text-darker: #71717a;
+  --error: #d44333;
+  --success: #3aa76d;
   --white: #fff;
 }
 
 :root[data-theme='light'] {
-  --primary: #541690;
+  --primary: #d1ff69;
   --bg-main: #212121;
   --bg-main-opacity: #27272a;
   --border-main: #3f3f46;
   --text-darker: #71717a;
+  --error: #d44333;
+  --success: #3aa76d;
   --white: #fff;
 }

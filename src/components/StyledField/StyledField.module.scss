@@ -1,0 +1,46 @@
+@import 'src/styles/util.module.scss';
+
+.root {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  &__field {
+    width: 100%;
+    padding: 15px 10px;
+    background-color: var(--bg-main);
+    border: none;
+    color: var(--white);
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:focus {
+      transition: background-color 600000s 0s, color 600000s 0s;
+    }
+
+    &[data-autocompleted] {
+      background-color: var(--bg-main) !important;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__error {
+    color: var(--error);
+    font-size: toRem(12);
+    margin-top: 5px;
+    word-break: break-word;
+  }
+
+  &__noError {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--success);
+    font-size: 22.5px;
+  }
+}

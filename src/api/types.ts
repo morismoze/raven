@@ -12,15 +12,16 @@ export type UserResponse = {
 };
 
 export type LoginCredentialsDTO = {
-  email: string;
+  username: string;
   password: string;
 };
 
 export type RegisterCredentialsDTO = {
-  email: string;
-  password: string;
   firstName: string;
   lastName: string;
+  email: string;
+  username: string;
+  password: string;
 };
 
 export type User = {

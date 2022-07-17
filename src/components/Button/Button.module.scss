@@ -20,6 +20,10 @@
     z-index: 10;
     border: 1px solid var(--border-main);
     background-color: var(--bg-main-opacity);
+
+    &:disabled {
+      cursor: not-allowed;
+    }
   }
 
   &.small &__button {
@@ -61,8 +65,8 @@
 
   &.secondary &__button &__text,
   &.secondary &__button &__icon {
-    color: var(--white);
-    fill: var(--white);
+    color: var(--text-darker);
+    fill: var(--text-darker);
   }
 
   &:before,
@@ -90,15 +94,15 @@
     transform: rotate(45deg) scale(0);
   }
 
-  &:hover &__button {
+  &:hover &__button:not(:disabled) {
     transform: translate(6px, -6px);
   }
 
-  &:hover:before {
+  &:not(.disabled):hover:before {
     transform: rotate(-45deg) scale(1);
   }
 
-  &:hover:after {
+  &:not(.disabled):hover:after {
     transform: rotate(45deg) scale(1);
   }
 }
