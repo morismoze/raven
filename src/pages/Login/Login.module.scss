@@ -12,4 +12,9 @@
   justify-content: center;
   gap: 20px;
   padding: 50px 10px;
+
+  &__wrapper {
+    display: grid;
+    gap: 20px;
+  }
 }

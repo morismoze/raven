@@ -7,20 +7,13 @@
   height: auto;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 20px;
   padding: 50px 10px;
 
-  &__accountExist {
-    color: var(--text-darker);
-    font-size: toRem(12);
-  }
-
-  &__signIn {
-    color: var(--primary);
-    font-weight: 500;
-    text-decoration: none;
-    font-size: toRem(12);
+  &__wrapper {
+    display: grid;
+    gap: 20px;
   }
 }

@@ -2,35 +2,33 @@ import { Loader } from '@/components';
 import axios from 'axios';
 import { initReactQueryAuth } from 'react-query-auth';
 
-import {
-  AuthUser,
-  LoginCredentialsDTO,
-  RegisterCredentialsDTO,
-  UserResponse,
-} from './types';
+import { AuthUser, LoginCredentialsDTO, RegisterCredentialsDTO } from './types';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 const loadUser = async () => {
-  // if jwt exists in LS check if it is valid, otherwise return null
   if (false) {
-    const currentUser = await axios.get('/auth/current');
-    return currentUser.data;
+    const response = await axios.get(`${API_URL}/user/current`, {
+      headers: {
+        Authorization: 'Bearer token',
+      },
+    });
+
+    return response.data;
   }
   return null;
 };
 
 const loginFn = async (data: LoginCredentialsDTO) => {
   const response = await axios.post(`${API_URL}/login`, data);
-  console.log(response.data);
 
   const user = null;
   return user;
 };
 
-const registerFn = async (data: RegisterCredentialsDTO) => {
+const registerFn = async (data: RegisterCredentialsDTO): Promise<AuthUser> => {
   const response = await axios.post(`${API_URL}/user/create`, data);
-  const user = null;
+  const user = await response.data;
 
   return user;
 };

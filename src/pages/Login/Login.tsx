@@ -1,3 +1,5 @@
+import FadeIn from 'react-fade-in';
+
 import {
   AccountExistence,
   AuthCard,
@@ -16,16 +18,18 @@ export const Login = (): JSX.Element => {
 
   return (
     <div className={styles.root}>
-      <AuthCard
-        form={LoginForm}
-        onAuth={handleLogin}
-        isAuthenticating={isLoggingIn}
-      />
-      <AccountExistence
-        preText="Don't have an account?"
-        linkText="Sign up"
-        link="/signup"
-      />
+      <FadeIn className={styles.root__wrapper}>
+        <AuthCard
+          form={LoginForm}
+          onAuth={handleLogin}
+          isAuthenticating={isLoggingIn}
+        />
+        <AccountExistence
+          preText="Don't have an account?"
+          linkText="Sign up"
+          link="/signup"
+        />
+      </FadeIn>
     </div>
   );
 };
