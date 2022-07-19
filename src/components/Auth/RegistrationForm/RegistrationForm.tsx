@@ -12,10 +12,10 @@ import styles from './RegistrationForm.module.scss';
 
 const RegistrationSchema = Yup.object().shape({
   firstName: Yup.string()
-    .max(30, 'First name must be at most 60 characters')
+    .max(30, 'First name must be at most 30 characters')
     .required('First name is required'),
   lastName: Yup.string()
-    .max(30, 'Last name must be at most 60 characters')
+    .max(30, 'Last name must be at most 30 characters')
     .required('Last name is required'),
   email: Yup.string()
     .max(255, 'Email must be at most 255 characters')
@@ -77,9 +77,10 @@ export const RegistrationForm = ({
     <Formik
       initialValues={initialValues}
       validationSchema={RegistrationSchema}
+      validateOnChange
       onSubmit={handleLocalAuthSubmit}
     >
-      {({ errors, touched, dirty, isValid, initialStatus }) => (
+      {({ errors, touched, values }) => (
         <Form className={styles.root}>
           <StyledField
             name="firstName"
@@ -87,7 +88,7 @@ export const RegistrationForm = ({
             placeholder="First name"
             error={errors.firstName}
             touched={touched.firstName}
-            success={initialStatus}
+            value={values.firstName}
           />
           <StyledField
             name="lastName"
@@ -95,6 +96,7 @@ export const RegistrationForm = ({
             placeholder="Last name"
             error={errors.lastName}
             touched={touched.lastName}
+            value={values.lastName}
           />
           <StyledField
             name="email"
@@ -102,6 +104,7 @@ export const RegistrationForm = ({
             placeholder="Email"
             error={errors.email}
             touched={touched.email}
+            value={values.email}
           />
           <StyledField
             name="password"
@@ -109,6 +112,7 @@ export const RegistrationForm = ({
             placeholder="Password"
             error={errors.password}
             touched={touched.password}
+            value={values.password}
           />
           <StyledField
             name="passwordConfirmation"
@@ -116,12 +120,13 @@ export const RegistrationForm = ({
             placeholder="Confirm password"
             error={errors.passwordConfirmation}
             touched={touched.passwordConfirmation}
+            value={values.passwordConfirmation}
           />
           <Button
             size={ButtonSize.small}
             action={ButtonAction.secondary}
             type="submit"
-            disabled={!(isValid && dirty) || isAuthenticating}
+            disabled={isAuthenticating}
           >
             <div className={styles.root__submitContainer}>
               <span>Sign up</span>

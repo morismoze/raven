@@ -4,24 +4,27 @@ import { Check } from 'react-bootstrap-icons';
 import styles from './StyledField.module.scss';
 
 type StyledFieldProps = FieldAttributes<any> & {
-  error: string | undefined;
-  touched: boolean | undefined;
-  success: boolean | undefined;
+  error?: string;
+  touched?: boolean;
+  value?: string;
 };
 
 export const StyledField = ({
   error,
   touched,
-  success,
+  value,
   ...props
 }: StyledFieldProps) => {
+  const isError =
+    props.type === 'password' || props.type === 'email'
+      ? (error && value) || (error && !value && touched)
+      : error && touched;
+
   return (
     <div className={styles.root}>
       <Field {...props} className={styles.root__field} />
-      {error && touched ? (
-        <span className={styles.root__error}>{error}</span>
-      ) : null}
-      {success && <Check className={styles.root__noError} />}
+      {isError ? <span className={styles.root__error}>{error}</span> : null}
+      {!error && value && <Check className={styles.root__noError} />}
     </div>
   );
 };

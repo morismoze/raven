@@ -45,7 +45,7 @@ export const LoginForm = ({
       validationSchema={LoginSchema}
       onSubmit={handleLocalAuthSubmit}
     >
-      {({ errors, touched, dirty, isValid }) => (
+      {({ errors, touched, values }) => (
         <Form className={styles.root}>
           <StyledField
             name="username"
@@ -53,6 +53,7 @@ export const LoginForm = ({
             placeholder="Username"
             error={errors.username}
             touched={touched.username}
+            value={values.username}
           />
           <StyledField
             name="password"
@@ -60,12 +61,13 @@ export const LoginForm = ({
             placeholder="Password"
             error={errors.password}
             touched={touched.password}
+            value={values.password}
           />
           <Button
             size={ButtonSize.small}
             action={ButtonAction.secondary}
             type="submit"
-            disabled={!(isValid && dirty) || isAuthenticating}
+            disabled={isAuthenticating}
           >
             <div className={styles.root__submitContainer}>
               <span>Sign in</span>
