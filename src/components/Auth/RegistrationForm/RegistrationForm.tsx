@@ -8,6 +8,7 @@ import {
   ButtonAction,
   AlternateLoader,
 } from '@/components';
+import { FieldError } from '@/api';
 import styles from './RegistrationForm.module.scss';
 
 const RegistrationSchema = Yup.object().shape({
@@ -20,11 +21,7 @@ const RegistrationSchema = Yup.object().shape({
   email: Yup.string()
     .max(255, 'Email must be at most 255 characters')
     .email('Email is invalid')
-    .required('Email is required')
-    .test('Unique email', 'Email is already in use', () => {
-      // API check if email is taken and return true if not, false otherwise
-      return true;
-    }),
+    .required('Email is required'),
   password: Yup.string()
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
@@ -50,7 +47,7 @@ export interface RegistrationFormValues {
 interface RegistrationFormProps {
   onAuth: (
     values: Omit<RegistrationFormValues, 'passwordConfirmation'>,
-  ) => void;
+  ) => Promise<FieldError[] | null>;
   isAuthenticating: boolean;
 }
 
@@ -67,10 +64,24 @@ export const RegistrationForm = ({
     passwordConfirmation: '',
   };
 
-  const handleLocalAuthSubmit = (values: any) => {
+  const handleLocalAuthSubmit = async (values: any, { setFieldError }: any) => {
     let { firstName, lastName, email, username, password } = values;
     username = email;
-    onAuth({ firstName, lastName, email, username, password });
+    const response = await onAuth({
+      firstName,
+      lastName,
+      email,
+      username,
+      password,
+    });
+
+    console.log(response);
+
+    if (response) {
+      response.forEach((e) => {
+        setFieldError(e.field, e.error);
+      });
+    }
   };
 
   return (
@@ -84,7 +95,7 @@ export const RegistrationForm = ({
         <Form className={styles.root}>
           <StyledField
             name="firstName"
-            type="firstName"
+            type="text"
             placeholder="First name"
             error={errors.firstName}
             touched={touched.firstName}
@@ -92,7 +103,7 @@ export const RegistrationForm = ({
           />
           <StyledField
             name="lastName"
-            type="lastName"
+            type="text"
             placeholder="Last name"
             error={errors.lastName}
             touched={touched.lastName}

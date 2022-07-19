@@ -1,8 +1,13 @@
-import { Loader } from '@/components';
-import axios from 'axios';
 import { initReactQueryAuth } from 'react-query-auth';
 
-import { AuthUser, LoginCredentialsDTO, RegisterCredentialsDTO } from './types';
+import { Loader } from '@/components';
+import {
+  AuthUser,
+  Error,
+  LoginCredentialsDTO,
+  RegisterCredentialsDTO,
+} from './types';
+import { axios } from '@/lib';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -20,17 +25,21 @@ const loadUser = async () => {
 };
 
 const loginFn = async (data: LoginCredentialsDTO) => {
-  const response = await axios.post(`${API_URL}/login`, data);
-
-  const user = null;
-  return user;
+  try {
+    const response = await axios.post(`${API_URL}/login`, data);
+    return response.data;
+  } catch (error: any) {
+    return error.response.status;
+  }
 };
 
 const registerFn = async (data: RegisterCredentialsDTO): Promise<AuthUser> => {
-  const response = await axios.post(`${API_URL}/user/create`, data);
-  const user = await response.data;
-
-  return user;
+  try {
+    const response = await axios.post(`${API_URL}/user/create`, data);
+    return response.data;
+  } catch (error: any) {
+    return error.response.data;
+  }
 };
 
 const logoutFn = async () => {
@@ -47,8 +56,8 @@ const authConfig = {
 };
 
 export const { AuthProvider, useAuth } = initReactQueryAuth<
-  AuthUser | null,
-  unknown,
+  AuthUser,
+  Error,
   LoginCredentialsDTO,
   RegisterCredentialsDTO
 >(authConfig);

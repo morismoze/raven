@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import FadeIn from 'react-fade-in';
 
 import {
@@ -10,10 +12,14 @@ import { useAuth } from '@/api';
 import styles from './Login.module.scss';
 
 export const Login = (): JSX.Element => {
+  const [error, setError] = useState<boolean>(false);
   const { login, isLoggingIn } = useAuth();
 
-  const handleLogin = (values: LoginFormValues) => {
-    login(values);
+  const handleLogin = async (values: LoginFormValues) => {
+    const response = await login(values);
+    if (response === 403) {
+      setError(true);
+    }
   };
 
   return (

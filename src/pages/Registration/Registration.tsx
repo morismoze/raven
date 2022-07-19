@@ -12,8 +12,14 @@ import styles from './Registration.module.scss';
 export const Registration = (): JSX.Element => {
   const { register, isRegistering } = useAuth();
 
-  const handleRegistration = (values: RegistrationFormValues) => {
-    register(values);
+  const handleRegistration = async (values: RegistrationFormValues) => {
+    const response = await register(values);
+
+    if (response?.hasErrors) {
+      return response.fieldErrors;
+    }
+
+    return null;
   };
 
   return (

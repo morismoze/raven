@@ -3,13 +3,28 @@ export type RoleName = {
   roleName: string;
 };
 
-export type AuthUser = {
+export type User = {
   id: string;
   email: string;
   firstName: string;
   lastName: string;
+  username: string;
   roles: RoleName[];
 };
+
+export type FieldError = {
+  field: string;
+  error: string;
+};
+
+export type AuthUser = {
+  data?: User;
+  fieldErrors: FieldError[];
+  hasErrors: boolean;
+  message?: string;
+};
+
+export type Error = AuthUser;
 
 export type LoginCredentialsDTO = {
   username: string;
@@ -22,9 +37,4 @@ export type RegisterCredentialsDTO = {
   email: string;
   username: string;
   password: string;
-};
-
-export type User = {
-  name: string;
-  surname: string;
 };

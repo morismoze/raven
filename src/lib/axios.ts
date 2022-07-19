@@ -5,11 +5,12 @@ export const axios = Axios.create({
 });
 
 axios.interceptors.request.use((config: AxiosRequestConfig) => {
-  const token = 'token';
+  /* const token = 'token';
+  console.log(config);
 
   if (token) {
     config.headers!.authorization = `Bearer ${token}`;
-  }
+  } */
   config.headers!.Accept = 'application/json';
 
   return config;
@@ -17,11 +18,9 @@ axios.interceptors.request.use((config: AxiosRequestConfig) => {
 
 axios.interceptors.response.use(
   (response) => {
-    return response.data;
+    return response;
   },
   (error) => {
-    const message = error.response?.data?.message || error.message;
-
     return Promise.reject(error);
   },
 );
