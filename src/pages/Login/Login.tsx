@@ -1,25 +1,41 @@
+import { useState } from 'react';
+
+import { useLocation } from 'wouter';
 import FadeIn from 'react-fade-in';
 
 import {
   AccountExistence,
   AuthCard,
+  AuthNotificationMessageType,
   LoginForm,
   LoginFormValues,
+  SuccessAnimation,
 } from '@/components';
-import { useAuth } from '@/api';
+import { AuthUser, useAuth } from '@/api';
 import styles from './Login.module.scss';
-import { useState } from 'react';
 
 export const Login = (): JSX.Element => {
-  const [isError, setIsError] = useState<boolean>(false);
+  const [location, setLocation] = useLocation();
+
   const { login, isLoggingIn } = useAuth();
 
+  const [notification, setNotification] = useState<string>('');
+
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
+
   const handleLogin = async (values: LoginFormValues) => {
-    const response = await login(values);
+    const response: AuthUser = await login(values);
+
     if (response.data === 401) {
-      setIsError(true);
+      setNotification('Incorrect username or password');
+      setIsSuccess(false);
     } else {
+      setIsSuccess(true);
     }
+  };
+
+  const handleSuccessfulLogin = () => {
+    setLocation('/');
   };
 
   return (
@@ -29,6 +45,8 @@ export const Login = (): JSX.Element => {
           form={LoginForm}
           onAuth={handleLogin}
           isAuthenticating={isLoggingIn}
+          notificationMessage={!isSuccess ? notification : undefined}
+          notificationType={AuthNotificationMessageType.error}
         />
         <AccountExistence
           preText="Don't have an account?"
@@ -36,6 +54,10 @@ export const Login = (): JSX.Element => {
           link="/signup"
         />
       </FadeIn>
+      <SuccessAnimation
+        show={isSuccess}
+        onAnimationFinish={handleSuccessfulLogin}
+      />
     </div>
   );
 };

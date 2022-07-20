@@ -22,10 +22,11 @@ export type FieldError = {
   error: string;
 };
 
+// 401
 export type Unauthorized = number;
 
 export type AuthUser = {
-  data?: User | Tokens | Unauthorized;
+  data: User | Tokens | Unauthorized;
   fieldErrors: FieldError[];
   hasErrors: boolean;
   message?: string;

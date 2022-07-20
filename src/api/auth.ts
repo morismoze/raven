@@ -29,7 +29,7 @@ const loginFn = async (data: LoginCredentialsDTO) => {
     const response = await axiosInstance.post(`${API_URL}/login`, data);
     return response.data;
   } catch (error: any) {
-    return error.response.status;
+    return error.response.data;
   }
 };
 

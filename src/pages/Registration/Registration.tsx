@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { useLocation } from 'wouter';
 import FadeIn from 'react-fade-in';
@@ -15,6 +15,7 @@ import styles from './Registration.module.scss';
 
 export const Registration = (): JSX.Element => {
   const [location, setLocation] = useLocation();
+
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
   const { register, isRegistering } = useAuth();

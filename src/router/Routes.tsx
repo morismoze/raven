@@ -14,6 +14,7 @@ export const Routes = () => {
     <Switch>
       <Route path="/signup" component={Registration} />
       <Route path="/signin" component={Login} />
+      <Route path="/" component={Home} />
       <PrivateRoute path="/user/:id" component={UserProfile} />
       <Route component={FourZeroFour} />
     </Switch>

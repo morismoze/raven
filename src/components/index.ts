@@ -2,6 +2,7 @@ export * from './Auth/AuthCard/AuthCard';
 export * from './Auth/LoginForm/LoginForm';
 export * from './Auth/RegistrationForm/RegistrationForm';
 export * from './Auth/AccountExistence/AccountExistence';
+export * from './Auth/AuthNotificationMessage/AuthNotificationMessage';
 export * from './StyledField/StyledField';
 export * from './Button/Button';
 export * from './ToS/ToS';
