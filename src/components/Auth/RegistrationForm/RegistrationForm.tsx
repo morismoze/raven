@@ -75,8 +75,6 @@ export const RegistrationForm = ({
       password,
     });
 
-    console.log(response);
-
     if (response) {
       response.forEach((e) => {
         setFieldError(e.field, e.error);

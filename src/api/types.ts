@@ -12,13 +12,20 @@ export type User = {
   roles: RoleName[];
 };
 
+export type Tokens = {
+  access_token: string;
+  refresh_token: string;
+};
+
 export type FieldError = {
   field: string;
   error: string;
 };
 
+export type Unauthorized = number;
+
 export type AuthUser = {
-  data?: User;
+  data?: User | Tokens | Unauthorized;
   fieldErrors: FieldError[];
   hasErrors: boolean;
   message?: string;

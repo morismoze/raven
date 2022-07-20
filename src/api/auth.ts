@@ -7,13 +7,13 @@ import {
   LoginCredentialsDTO,
   RegisterCredentialsDTO,
 } from './types';
-import { axios } from '@/lib';
+import { axiosInstance } from '@/lib';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 const loadUser = async () => {
   if (false) {
-    const response = await axios.get(`${API_URL}/user/current`, {
+    const response = await axiosInstance.get(`${API_URL}/user/current`, {
       headers: {
         Authorization: 'Bearer token',
       },
@@ -26,7 +26,7 @@ const loadUser = async () => {
 
 const loginFn = async (data: LoginCredentialsDTO) => {
   try {
-    const response = await axios.post(`${API_URL}/login`, data);
+    const response = await axiosInstance.post(`${API_URL}/login`, data);
     return response.data;
   } catch (error: any) {
     return error.response.status;
@@ -35,7 +35,7 @@ const loginFn = async (data: LoginCredentialsDTO) => {
 
 const registerFn = async (data: RegisterCredentialsDTO): Promise<AuthUser> => {
   try {
-    const response = await axios.post(`${API_URL}/user/create`, data);
+    const response = await axiosInstance.post(`${API_URL}/user/create`, data);
     return response.data;
   } catch (error: any) {
     return error.response.data;

@@ -7,3 +7,4 @@ export * from './Button/Button';
 export * from './ToS/ToS';
 export * from './Loader/Loader';
 export * from './Loader/AlternateLoader/AlternateLoader';
+export * from './SuccessAnimation/SuccessAnimation';

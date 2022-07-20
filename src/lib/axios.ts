@@ -1,23 +1,26 @@
-import Axios, { AxiosRequestConfig } from 'axios';
+import Axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import Pace from 'pace-js';
 
-export const axios = Axios.create({
+export const axiosInstance = Axios.create({
   baseURL: import.meta.env.VITE_API_URL,
 });
 
-axios.interceptors.request.use((config: AxiosRequestConfig) => {
+axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
   /* const token = 'token';
   console.log(config);
 
   if (token) {
     config.headers!.authorization = `Bearer ${token}`;
   } */
+
   config.headers!.Accept = 'application/json';
+  Pace.restart();
 
   return config;
 });
 
-axios.interceptors.response.use(
-  (response) => {
+axiosInstance.interceptors.response.use(
+  (response: AxiosResponse) => {
     return response;
   },
   (error) => {
