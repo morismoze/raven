@@ -20,12 +20,15 @@ const RegistrationSchema = Yup.object().shape({
     .required('Last name is required'),
   email: Yup.string()
     .max(255, 'Email must be at most 255 characters')
-    .email('Email is invalid')
+    .matches(
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}/,
+      'Email is not of valid type',
+    )
     .required('Email is required'),
   password: Yup.string()
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-      'Password must be atleast 8 characters, one uppercase, one lowercase, one number and one special character',
+      'Password must be atleast eight characters, one uppercase, one lowercase, one number and one special character',
     )
     .max(60, 'Password must be at most 60 characters')
     .required('Password is required'),
@@ -65,9 +68,9 @@ export const RegistrationForm = ({
   };
 
   const handleLocalAuthSubmit = async (values: any, { setFieldError }: any) => {
-    let { firstName, lastName, email, username, password } = values;
-    username = email;
-    const response = await onAuth({
+    const { firstName, lastName, email, username, password } = values;
+
+    const fieldErrors = await onAuth({
       firstName,
       lastName,
       email,
@@ -75,8 +78,8 @@ export const RegistrationForm = ({
       password,
     });
 
-    if (response) {
-      response.forEach((e) => {
+    if (fieldErrors) {
+      fieldErrors.forEach((e) => {
         setFieldError(e.field, e.error);
       });
     }
@@ -114,6 +117,14 @@ export const RegistrationForm = ({
             error={errors.email}
             touched={touched.email}
             value={values.email}
+          />
+          <StyledField
+            name="username"
+            type="text"
+            placeholder="Username"
+            error={errors.username}
+            touched={touched.username}
+            value={values.username}
           />
           <StyledField
             name="password"

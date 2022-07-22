@@ -14,6 +14,11 @@ import {
 import { AuthUser, useAuth } from '@/api';
 import styles from './Login.module.scss';
 
+const LOGIN_ERROR_MESSAGE =
+  'There was a problem during logging in. Try again later.';
+
+const INCORRECT_CREDENTIALS = 'Incorrect username or password';
+
 export const Login = (): JSX.Element => {
   const [location, setLocation] = useLocation();
 
@@ -26,11 +31,19 @@ export const Login = (): JSX.Element => {
   const handleLogin = async (values: LoginFormValues) => {
     const response: AuthUser = await login(values);
 
-    if (response.data === 401) {
-      setNotification('Incorrect username or password');
-      setIsSuccess(false);
+    if (response?.hasErrors) {
+      if (response?.fieldErrors.length > 0) {
+        return response.fieldErrors;
+      } else if (response.message === '401') {
+        setNotification(INCORRECT_CREDENTIALS);
+      } else {
+        setNotification(LOGIN_ERROR_MESSAGE);
+      }
     } else {
+      // resetting notification so the previous error message dissapears
+      setNotification('');
       setIsSuccess(true);
+      return null;
     }
   };
 
@@ -45,7 +58,7 @@ export const Login = (): JSX.Element => {
           form={LoginForm}
           onAuth={handleLogin}
           isAuthenticating={isLoggingIn}
-          notificationMessage={!isSuccess ? notification : undefined}
+          notificationMessage={notification}
           notificationType={AuthNotificationMessageType.error}
         />
         <AccountExistence

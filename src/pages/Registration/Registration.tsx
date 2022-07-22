@@ -6,6 +6,7 @@ import FadeIn from 'react-fade-in';
 import {
   AccountExistence,
   AuthCard,
+  AuthNotificationMessageType,
   RegistrationForm,
   RegistrationFormValues,
   SuccessAnimation,
@@ -13,23 +14,33 @@ import {
 import { AuthUser, useAuth } from '@/api';
 import styles from './Registration.module.scss';
 
+const REGISTER_ERROR_MESSAGE =
+  'There was a problem during registering. Try again later.';
+
 export const Registration = (): JSX.Element => {
   const [location, setLocation] = useLocation();
 
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
+
+  const [notification, setNotification] = useState<string>('');
 
   const { register, isRegistering } = useAuth();
 
   const handleRegistration = async (values: RegistrationFormValues) => {
     const response: AuthUser = await register(values);
 
-    if (response?.hasErrors) {
-      return response.fieldErrors;
+    if (response && response.hasErrors) {
+      if (response?.fieldErrors.length > 0) {
+        return response.fieldErrors;
+      } else {
+        setNotification(response.message!);
+      }
+    } else {
+      // resetting notification so the previous error message dissapears
+      setNotification('');
+      setIsSuccess(true);
+      return null;
     }
-
-    setIsSuccess(true);
-
-    return null;
   };
 
   const handleSuccessfulRegistration = () => {
@@ -43,6 +54,8 @@ export const Registration = (): JSX.Element => {
           form={RegistrationForm}
           onAuth={handleRegistration}
           isAuthenticating={isRegistering}
+          notificationMessage={notification}
+          notificationType={AuthNotificationMessageType.error}
         />
         <AccountExistence
           preText="Already have an account?"
