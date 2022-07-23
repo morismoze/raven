@@ -12,16 +12,12 @@ import { axiosInstance } from '@/lib';
 const API_URL = import.meta.env.VITE_API_URL;
 
 const loadUser = async () => {
-  if (false) {
-    const response = await axiosInstance.get(`${API_URL}/user/current`, {
-      headers: {
-        Authorization: 'Bearer token',
-      },
-    });
-
+  try {
+    const response = await axiosInstance.get(`${API_URL}/user/current`);
     return response.data;
+  } catch (error: any) {
+    return error.response.data;
   }
-  return null;
 };
 
 const loginFn = async (data: LoginCredentialsDTO) => {
@@ -45,6 +41,15 @@ const registerFn = async (data: RegisterCredentialsDTO): Promise<AuthUser> => {
 const logoutFn = async () => {
   // clear jwt from LS
   window.location.assign(window.location.origin as unknown as string);
+};
+
+export const refreshAccessToken = async () => {
+  try {
+    const response = await axiosInstance.post(`${API_URL}/user/token/refresh`);
+    return response.data;
+  } catch (error: any) {
+    return error.response.data;
+  }
 };
 
 const authConfig = {

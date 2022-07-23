@@ -1,4 +1,5 @@
-import Axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { refreshAccessToken } from '@/api';
+import Axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import Pace from 'pace-js';
 
 export const axiosInstance = Axios.create({
@@ -6,14 +7,17 @@ export const axiosInstance = Axios.create({
 });
 
 axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
-  /* const token = 'token';
-  console.log(config);
+  const accessToken = localStorage.getItem('access_token');
+  const refreshTooken = localStorage.getItem('refresh_token');
 
-  if (token) {
-    config.headers!.authorization = `Bearer ${token}`;
-  } */
+  // set up sending refresh token only on route for refershing token
 
-  config.headers!.Accept = 'application/json';
+  config.headers = {
+    Authorization: `Bearer ${accessToken}`,
+    Accept: 'application/json',
+    'Content-Type': 'application/x-www-form-urlencoded',
+  };
+
   Pace.restart();
 
   return config;
@@ -21,9 +25,22 @@ axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
 
 axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => {
+    const accessToken = response.headers.access_token;
+    const refreshToken = response.headers.refresh_token;
+
+    if (accessToken && refreshToken) {
+      localStorage.setItem('access_token', accessToken);
+      localStorage.setItem('refresh_token', refreshToken);
+    }
+
     return response;
   },
-  (error) => {
+  async (error: AxiosError) => {
+    const errorHeader = error.config.headers?.error;
+    if (errorHeader && errorHeader === 'expired_token') {
+      await refreshAccessToken();
+    }
+
     return Promise.reject(error);
   },
 );

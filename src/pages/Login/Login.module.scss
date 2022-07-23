@@ -14,5 +14,7 @@
   &__wrapper {
     display: grid;
     gap: 20px;
+    width: 90%;
+    max-width: 490px;
   }
 }

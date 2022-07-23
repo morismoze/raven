@@ -1,3 +1,8 @@
+import { useAuth } from '@/api';
+
 export const Home = (): JSX.Element => {
-  return <div>Home</div>;
+  const { user } = useAuth();
+  console.log(user);
+
+  return <div></div>;
 };

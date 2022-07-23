@@ -3,8 +3,8 @@ import { QueryClient, DefaultOptions } from 'react-query';
 const queryConfig: DefaultOptions = {
   queries: {
     useErrorBoundary: true,
-    refetchOnWindowFocus: true,
-    retry: true,
+    refetchOnWindowFocus: false,
+    retry: 2,
   },
 };
 

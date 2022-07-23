@@ -14,9 +14,6 @@ import {
 import { AuthUser, useAuth } from '@/api';
 import styles from './Registration.module.scss';
 
-const REGISTER_ERROR_MESSAGE =
-  'There was a problem during registering. Try again later.';
-
 export const Registration = (): JSX.Element => {
   const [location, setLocation] = useLocation();
 

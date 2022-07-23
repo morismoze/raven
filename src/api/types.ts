@@ -10,6 +10,8 @@ export type User = {
   lastName: string;
   username: string;
   roles: RoleName[];
+  createdAt: number;
+  updatedAt: number;
 };
 
 export type Tokens = {
