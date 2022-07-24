@@ -14,11 +14,6 @@ export type User = {
   updatedAt: number;
 };
 
-export type Tokens = {
-  access_token: string;
-  refresh_token: string;
-};
-
 export type FieldError = {
   field: string;
   error: string;
@@ -28,7 +23,7 @@ export type FieldError = {
 export type Unauthorized = number;
 
 export type AuthUser = {
-  data: User | Tokens | Unauthorized;
+  data: User | Unauthorized;
   fieldErrors: FieldError[];
   hasErrors: boolean;
   message?: string;

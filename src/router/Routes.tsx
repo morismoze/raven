@@ -1,6 +1,5 @@
 import { Route, Switch } from 'wouter';
 
-import { PrivateRoute } from './PrivateRoute';
 import { lazyImport } from '@/utils';
 
 const { Registration } = lazyImport(() => import('@/pages'), 'Registration');
@@ -15,7 +14,7 @@ export const Routes = () => {
       <Route path="/signup" component={Registration} />
       <Route path="/signin" component={Login} />
       <Route path="/" component={Home} />
-      <PrivateRoute path="/user/:id" component={UserProfile} />
+      <Route path="/user/:id" component={UserProfile} />
       <Route component={FourZeroFour} />
     </Switch>
   );

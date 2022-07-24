@@ -45,10 +45,10 @@ const logoutFn = async () => {
 
 export const refreshAccessToken = async () => {
   try {
-    const response = await axiosInstance.post(`${API_URL}/user/token/refresh`);
-    return response.data;
+    const response = await axiosInstance.get(`${API_URL}/user/token/refresh`);
+    return response.status;
   } catch (error: any) {
-    return error.response.data;
+    return error.response.status;
   }
 };
 
