@@ -1,3 +1,10 @@
+import { Header } from '@/components';
+
 export const Home = (): JSX.Element => {
-  return <div></div>;
+  return (
+    <>
+      <Header />
+      <div style={{ height: '1000px' }} />
+    </>
+  );
 };

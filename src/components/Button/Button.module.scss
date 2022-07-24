@@ -10,7 +10,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    gap: 14px;
     border: none;
     cursor: pointer;
     flex: 1;
@@ -26,12 +26,16 @@
     }
   }
 
+  &__text {
+    white-space: nowrap;
+  }
+
   &.small &__button {
-    padding: 12px 24px;
+    padding: 12px 20px;
   }
 
   &.small &__button &__icon {
-    font-size: toRem(13);
+    font-size: toRem(16);
   }
 
   &.small &__button &__text {

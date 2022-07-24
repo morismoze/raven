@@ -14,7 +14,7 @@ export enum ButtonAction {
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   onClick?: () => void;
-  size: ButtonSize;
+  size?: ButtonSize;
   Icon?: React.ElementType;
   action: ButtonAction;
   children: React.ReactNode;
