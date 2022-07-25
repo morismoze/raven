@@ -1,4 +1,4 @@
-import { Header, HeaderLayout, UploadDnD } from '@/components';
+import { Header, HeaderLayout, UploadCard } from '@/components';
 import styles from './Upload.module.scss';
 
 export const Upload = (): JSX.Element => {
@@ -6,7 +6,7 @@ export const Upload = (): JSX.Element => {
     <div className={styles.root}>
       <Header />
       <HeaderLayout className={styles.root__contentContainer}>
-        <UploadDnD />
+        <UploadCard />
       </HeaderLayout>
     </div>
   );

@@ -11,5 +11,7 @@ export * from './Loader/AlternateLoader/AlternateLoader';
 export * from './SuccessAnimation/SuccessAnimation';
 export * from './Header/Header';
 export * from './Logo/Logo';
-export * from './UploadDnD/UploadDnD';
+export * from './UploadCard/UploadCard';
+export * from './UploadCard/DnDUploadCard/DnDUploadCard';
+export * from './UploadCard/DefaultUploadCard/DefaultUploadCard';
 export * from './Layout/HeaderLayout/HeaderLayout';

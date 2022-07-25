@@ -1,24 +1,33 @@
 @import 'src/styles/util.module.scss';
 
 .root {
-  background: var(--primary);
-  background: linear-gradient(215deg, var(--primary) 0%, var(--secondary) 100%);
   width: 90%;
   max-width: 480px;
   height: 320px;
-  border-radius: 8px;
-  padding: 20px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding: 20px 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 20px;
+  background-color: var(--bg-main-opacity);
 
   &__basicUploadContainer {
+    transition: filter 0.2s ease-in-out;
+
+    &:hover {
+      filter: brightness(85%);
+    }
+  }
+
+  &__labelContainer {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
+    cursor: pointer;
   }
 
   &__imageIcon {
@@ -30,6 +39,10 @@
     color: var(--white);
     font-size: toRem(13);
     font-weight: 600;
+  }
+
+  &__input {
+    display: none;
   }
 
   &__alternativeBinder {
@@ -59,19 +72,11 @@
     }
   }
 
-  &__dropUploadContainer {
-    border: 3px dashed var(--white-opacity);
-    width: 60%;
-    height: 25%;
-    border-radius: 8px;
+  &__form {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-  }
-
-  &__dropText {
-    color: var(--white);
-    font-size: toRem(13);
-    font-weight: 600;
+    gap: 12px;
+    width: 100%;
   }
 }

@@ -1,0 +1,32 @@
+@import 'src/styles/util.module.scss';
+
+.root {
+  width: 90%;
+  max-width: 480px;
+  height: 320px;
+  padding: 20px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  background: var(--primary);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='480' height='320' preserveAspectRatio='none' viewBox='0 0 480 320'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1188%26quot%3b)' fill='none'%3e%3cpath d='M191.22%2c242.755C201.263%2c242.788%2c211.185%2c238.133%2c215.878%2c229.254C220.329%2c220.834%2c216.865%2c211.206%2c212.322%2c202.835C207.481%2c193.916%2c201.33%2c184.699%2c191.22%2c183.821C179.782%2c182.827%2c168.085%2c188.41%2c162.641%2c198.518C157.413%2c208.226%2c160.857%2c219.833%2c166.84%2c229.094C172.258%2c237.48%2c181.236%2c242.722%2c191.22%2c242.755' fill='rgba(255%2c 255%2c 255%2c 0.25)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M238.456%2c81.52C252.633%2c81.183%2c265.398%2c73.282%2c272.403%2c60.952C279.321%2c48.774%2c279.216%2c33.99%2c272.413%2c21.747C265.402%2c9.131%2c252.887%2c-0.369%2c238.456%2c-0.139C224.353%2c0.086%2c213.464%2c10.636%2c206.322%2c22.799C199.065%2c35.157%2c194.717%2c50.061%2c201.597%2c62.633C208.701%2c75.613%2c223.663%2c81.871%2c238.456%2c81.52' fill='rgba(255%2c 255%2c 255%2c 0.25)' class='triangle-float3'%3e%3c/path%3e%3cpath d='M104.074%2c141.151C117.606%2c140.835%2c127.878%2c130.82%2c135.058%2c119.345C142.848%2c106.895%2c149.689%2c92.059%2c142.958%2c79.006C135.817%2c65.158%2c119.652%2c58.972%2c104.074%2c59.256C89.009%2c59.531%2c74.786%2c67.153%2c67.571%2c80.381C60.63%2c93.107%2c63.014%2c108.425%2c70.478%2c120.852C77.699%2c132.873%2c90.055%2c141.478%2c104.074%2c141.151' fill='rgba(255%2c 255%2c 255%2c 0.25)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M427.402%2c251.915C443.182%2c251.615%2c460.498%2c250.332%2c468.998%2c237.034C478.006%2c222.941%2c475.065%2c204.813%2c466.806%2c190.268C458.43%2c175.516%2c444.365%2c163.922%2c427.402%2c163.776C410.218%2c163.628%2c395.575%2c174.801%2c386.807%2c189.581C377.831%2c204.711%2c373.369%2c223.929%2c382.969%2c238.671C392.009%2c252.552%2c410.84%2c252.23%2c427.402%2c251.915' fill='rgba(255%2c 255%2c 255%2c 0.25)' class='triangle-float3'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1188'%3e%3crect width='480' height='320' fill='white'%3e%3c/rect%3e%3c/mask%3e%3cstyle%3e %40keyframes float1 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(-10px%2c 0)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float1 %7b animation: float1 5s infinite%3b %7d %40keyframes float2 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(-5px%2c -5px)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float2 %7b animation: float2 4s infinite%3b %7d %40keyframes float3 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(0%2c -10px)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float3 %7b animation: float3 6s infinite%3b %7d %3c/style%3e%3c/defs%3e%3c/svg%3e"),
+    linear-gradient(215deg, var(--primary) 0%, var(--secondary) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__dropZone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px dashed var(--white-opacity);
+    width: 60%;
+    height: 25%;
+    border-radius: 8px;
+  }
+
+  &__dropText {
+    color: var(--white);
+    font-size: toRem(13);
+    font-weight: 600;
+  }
+}
