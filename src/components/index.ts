@@ -10,3 +10,6 @@ export * from './Loader/Loader';
 export * from './Loader/AlternateLoader/AlternateLoader';
 export * from './SuccessAnimation/SuccessAnimation';
 export * from './Header/Header';
+export * from './Logo/Logo';
+export * from './UploadDnD/UploadDnD';
+export * from './Layout/HeaderLayout/HeaderLayout';

@@ -1,20 +1,28 @@
 import Headroom from 'react-headroom';
 import { PlusSquareFill, PersonFill, KeyFill } from 'react-bootstrap-icons';
 
-import { Button, ButtonAction } from '@/components';
-import { ReactComponent as Logo } from '@/assets/images/logo-short.svg';
+import { Button, ButtonAction, Logo } from '@/components';
 import styles from './Header.module.scss';
+import { useLocation } from 'wouter';
 
 export const Header = () => {
-  const handleAddNewPost = () => {};
-  const handleSignIn = () => {};
-  const handleSignUp = () => {};
+  const [location, setLocation] = useLocation();
+
+  const handleAddNewPost = () => {
+    setLocation('/upload');
+  };
+  const handleSignIn = () => {
+    setLocation('/signin');
+  };
+  const handleSignUp = () => {
+    setLocation('/signup');
+  };
 
   return (
     <Headroom>
       <header className={styles.root}>
         <div className={styles.root__mainContainer}>
-          <Logo className={styles.root__logo} />
+          <Logo />
           <Button
             action={ButtonAction.primary}
             onClick={handleAddNewPost}

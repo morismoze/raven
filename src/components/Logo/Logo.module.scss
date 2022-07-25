@@ -1,0 +1,9 @@
+.root {
+  &__link {
+    text-decoration: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

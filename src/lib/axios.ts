@@ -11,10 +11,14 @@ export const axiosInstance = Axios.create({
 });
 
 const REFRESH_TOKEN_ROUTE = '/token/refresh';
+const ACCESS_TOKEN_HEADER = 'access_token';
+const REFRESH_TOKEN_HEADER = 'refresh_token';
+const EXPIRED_ACCESS_TOKEN_ERROR = 'expired_access_token';
+const EXPIRED_REFRESH_TOKEN_ERROR = 'expired_refresh_token';
 
 axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
-  const accessToken = localStorage.getItem('access_token');
-  const refreshTooken = localStorage.getItem('refresh_token');
+  const accessToken = localStorage.getItem(ACCESS_TOKEN_HEADER);
+  const refreshTooken = localStorage.getItem(REFRESH_TOKEN_HEADER);
 
   if (config.url?.includes(REFRESH_TOKEN_ROUTE)) {
     config.headers = {
@@ -33,12 +37,12 @@ axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
 
 axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => {
-    const accessToken = response.headers.access_token;
-    const refreshToken = response.headers.refresh_token;
+    const accessToken = response.headers[ACCESS_TOKEN_HEADER];
+    const refreshToken = response.headers[REFRESH_TOKEN_HEADER];
 
     if (accessToken && refreshToken) {
-      localStorage.setItem('access_token', accessToken);
-      localStorage.setItem('refresh_token', refreshToken);
+      localStorage.setItem(ACCESS_TOKEN_HEADER, accessToken);
+      localStorage.setItem(REFRESH_TOKEN_HEADER, refreshToken);
     }
 
     return response;
@@ -49,13 +53,13 @@ axiosInstance.interceptors.response.use(
 
     if (
       errorHeader &&
-      errorHeader === 'expired_access_token' &&
+      errorHeader === EXPIRED_ACCESS_TOKEN_ERROR &&
       !originalRequest._retry
     ) {
       originalRequest._retry = true;
       await refreshAccessToken();
       return axiosInstance(originalRequest);
-    } else if (errorHeader && errorHeader === 'expired_refresh_token') {
+    } else if (errorHeader && errorHeader === EXPIRED_REFRESH_TOKEN_ERROR) {
       window.history.pushState(window.location.pathname, '', '/signin');
     }
 
