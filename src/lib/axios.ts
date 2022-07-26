@@ -20,14 +20,16 @@ axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
   const accessToken = localStorage.getItem(ACCESS_TOKEN_HEADER);
   const refreshTooken = localStorage.getItem(REFRESH_TOKEN_HEADER);
 
-  if (config.url?.includes(REFRESH_TOKEN_ROUTE)) {
-    config.headers = {
-      Authorization: `Bearer ${refreshTooken}`,
-    };
-  } else {
-    config.headers = {
-      Authorization: `Bearer ${accessToken}`,
-    };
+  if (config.url?.includes(config.baseURL!)) {
+    if (config.url?.includes(REFRESH_TOKEN_ROUTE)) {
+      config.headers = {
+        Authorization: `Bearer ${refreshTooken}`,
+      };
+    } else {
+      config.headers = {
+        Authorization: `Bearer ${accessToken}`,
+      };
+    }
   }
 
   Pace.restart();
