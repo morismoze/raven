@@ -6,6 +6,7 @@ const { Registration } = lazyImport(() => import('@/pages'), 'Registration');
 const { Login } = lazyImport(() => import('@/pages'), 'Login');
 const { Home } = lazyImport(() => import('@/pages'), 'Home');
 const { Upload } = lazyImport(() => import('@/pages'), 'Upload');
+const { UploadPreview } = lazyImport(() => import('@/pages'), 'UploadPreview');
 const { UserProfile } = lazyImport(() => import('@/pages'), 'UserProfile');
 const { FourZeroFour } = lazyImport(() => import('@/pages'), 'FourZeroFour');
 
@@ -16,6 +17,7 @@ export const Routes = () => {
       <Route path="/signin" component={Login} />
       <Route path="/" component={Home} />
       <Route path="/upload" component={Upload} />
+      <Route path="/upload/preview" component={UploadPreview} />
       <Route path="/user/:id" component={UserProfile} />
       <Route component={FourZeroFour} />
     </Switch>

@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent } from 'react';
+import { FormEvent } from 'react';
 
 import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
@@ -8,40 +8,47 @@ import styles from './LinkUpload.module.scss';
 import { axiosInstance } from '@/lib';
 
 const LinkUploadSchema = Yup.object().shape({
-  url: Yup.string()
-    .matches(
-      /^(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif))/i,
-      'Image URL is not valid',
-    )
-    .required('Image URL is required'),
+  url: Yup.string().required('Image URL is required'),
 });
 
-export interface LinkUploadValues {
+export interface ILinkUploadValues {
   url: string;
 }
 
-interface LinkUploadProps {
-  onLinkUpload: (url: string) => void;
+interface ILinkUploadProps {
+  onUpload: (url: string) => void;
 }
 
-export const LinkUpload = ({ onLinkUpload }: LinkUploadProps) => {
-  const initialValues: LinkUploadValues = {
+type FormikSetFieldErrorFn = (
+  field: string,
+  message: string | undefined,
+) => void;
+
+export const LinkUpload = ({ onUpload }: ILinkUploadProps) => {
+  const initialValues: ILinkUploadValues = {
     url: '',
   };
 
-  const handleOnSubmit = (values: LinkUploadValues): void => {
+  const handleOnSubmit = (values: ILinkUploadValues): void => {
     // do nothing
   };
 
-  const handleOnChange = async (event: FormEvent) => {
+  const handleOnChange = async (
+    event: FormEvent,
+    setFieldError: FormikSetFieldErrorFn,
+  ) => {
     const url = (event.target as HTMLInputElement).value.trim().toLowerCase();
     if (url) {
       try {
         const response = await axiosInstance.head(url);
-        if (response.headers['content-type'].match('image/*')) {
-          onLinkUpload(url);
+        if (!response.headers['content-type'].match('image/*')) {
+          setFieldError('url', 'Given image URL is not valid');
+        } else {
+          onUpload(url);
         }
-      } catch (error: any) {}
+      } catch (error: any) {
+        setFieldError('url', 'Given image URL is not valid');
+      }
     }
   };
 
@@ -49,20 +56,28 @@ export const LinkUpload = ({ onLinkUpload }: LinkUploadProps) => {
     <Formik
       initialValues={initialValues}
       validationSchema={LinkUploadSchema}
+      validateOnChange
       onSubmit={handleOnSubmit}
     >
-      {({ errors, touched, values }) => (
-        <Form className={styles.root} onChange={handleOnChange}>
-          <StyledField
-            name="url"
-            type="text"
-            placeholder="Type or paste image URL"
-            error={errors.url}
-            touched={touched.url}
-            value={values.url}
-          />
-        </Form>
-      )}
+      {({ errors, touched, values, setFieldError }) => {
+        return (
+          <Form
+            className={styles.root}
+            onChange={(event: FormEvent) =>
+              handleOnChange(event, setFieldError)
+            }
+          >
+            <StyledField
+              name="url"
+              type="url"
+              placeholder="Type or paste image URL"
+              error={errors.url}
+              touched={touched.url}
+              value={values.url}
+            />
+          </Form>
+        );
+      }}
     </Formik>
   );
 };

@@ -10,7 +10,7 @@ import {
 } from '@/components';
 import styles from './AuthCard.module.scss';
 
-interface AuthCardLayoutProps {
+interface IAuthCardLayoutProps {
   form: React.ElementType;
   onAuth: (values: any) => void;
   isAuthenticating: boolean;
@@ -24,7 +24,7 @@ export const AuthCard = ({
   isAuthenticating,
   notificationMessage,
   notificationType,
-}: AuthCardLayoutProps): JSX.Element => {
+}: IAuthCardLayoutProps): JSX.Element => {
   const handleGoogleAuth = () => {
     // google auth
   };

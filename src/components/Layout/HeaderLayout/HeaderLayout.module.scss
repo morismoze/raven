@@ -1,4 +1,5 @@
 .root {
-  margin: calc(var(--headerHeight) * -1) var(--generalHorizontalMargin) 0;
-  padding-top: var(--headerHeight);
+  margin: 0 var(--generalHorizontalMargin);
+  height: calc(100% - var(--headerHeight));
+  min-height: calc(100% - var(--headerHeight));
 }

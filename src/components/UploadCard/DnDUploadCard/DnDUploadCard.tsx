@@ -4,7 +4,7 @@ import styles from './DnDUploadCard.module.scss';
 
 export const DnDUploadCard = () => {
   const acceptTypes = {
-    'image/*': ['.jpeg', '.jpg', '.png'],
+    'image/*': ['.jpeg', '.gif', '.png', '.webp'],
   };
 
   return (

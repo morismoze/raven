@@ -16,4 +16,6 @@ export * from './UploadCard/DnDUploadCard/DnDUploadCard';
 export * from './UploadCard/DefaultUploadCard/DefaultUploadCard';
 export * from './UploadCard/DefaultUploadCard/FileUpload/FileUpload';
 export * from './UploadCard/DefaultUploadCard/LinkUpload/LinkUpload';
+export * from './UploadPreviewImage/UploadPreviewImage';
+export * from './UploadForm/UploadForm';
 export * from './Layout/HeaderLayout/HeaderLayout';

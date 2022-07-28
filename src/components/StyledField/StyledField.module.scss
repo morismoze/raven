@@ -13,6 +13,7 @@
     background-color: var(--bg-main);
     border: none;
     color: var(--white);
+    resize: vertical;
 
     &:-webkit-autofill,
     &:-webkit-autofill:focus {
@@ -28,6 +29,24 @@
     }
   }
 
+  &__checkboxLabel {
+    color: white;
+    display: flex;
+    gap: 5px;
+    align-self: flex-start;
+    font-size: toRem(13);
+  }
+
+  &__checkbox {
+    width: unset;
+    accent-color: var(--primary);
+    cursor: pointer;
+    border-color: var(--bg-main) !important;
+    width: 18px;
+    height: 18px;
+    border-radius: 2px;
+  }
+
   &__error {
     color: var(--error);
     font-size: toRem(12);
@@ -41,7 +60,6 @@
     top: 50%;
     transform: translateY(-50%);
     color: var(--success);
-    background-color: rgba(0, 0, 0, 0.5);
     font-size: 22.5px;
   }
 }

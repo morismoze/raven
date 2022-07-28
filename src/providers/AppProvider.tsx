@@ -6,6 +6,7 @@ import { QueryClientProvider } from 'react-query';
 
 import { Loader } from '@/components';
 import { AuthProvider } from '@/api/auth';
+import { UploadProvider } from '@/context';
 import { queryClient } from '@/lib/react-query';
 
 const ErrorFallback = (): JSX.Element => {
@@ -19,17 +20,19 @@ const ErrorFallback = (): JSX.Element => {
   );
 };
 
-interface AppProviderProps {
+interface IAppProviderProps {
   children: React.ReactNode;
 }
 
-export const AppProvider = ({ children }: AppProviderProps) => {
+export const AppProvider = ({ children }: IAppProviderProps) => {
   return (
     <React.Suspense fallback={<Loader />}>
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <HelmetProvider>
           <QueryClientProvider client={queryClient}>
-            <AuthProvider>{children}</AuthProvider>
+            <AuthProvider>
+              <UploadProvider>{children}</UploadProvider>
+            </AuthProvider>
           </QueryClientProvider>
         </HelmetProvider>
       </ErrorBoundary>

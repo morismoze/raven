@@ -3,11 +3,11 @@ import styles from './Upload.module.scss';
 
 export const Upload = (): JSX.Element => {
   return (
-    <div className={styles.root}>
+    <>
       <Header />
-      <HeaderLayout className={styles.root__contentContainer}>
+      <HeaderLayout className={styles.root}>
         <UploadCard />
       </HeaderLayout>
-    </div>
+    </>
   );
 };

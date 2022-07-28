@@ -1,35 +1,44 @@
-import { ChangeEvent } from 'react';
+import React from 'react';
+import { flushSync } from 'react-dom';
 
-import * as Yup from 'yup';
+import { useLocation } from 'wouter';
 
 import { LinkUpload, FileUpload } from '@/components';
+import { IUploadContext, UploadContext } from '@/context';
 import styles from './DefaultUploadCard.module.scss';
 
-const DefaultUploadSchema = Yup.object().shape({
-  image: Yup.string()
-    .matches(
-      /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-      'URL is not of valid type',
-    )
-    .required('Image link is required'),
-});
-
 export const DefaultUploadCard = () => {
-  const handleImageUpload = (event: ChangeEvent): void => {
-    const target = event.target as HTMLInputElement;
-    const file = (target.files as FileList)[0];
-    console.log(file);
+  const [location, setLocation] = useLocation();
+
+  const { setUrl, setFile, setBytes } = React.useContext(
+    UploadContext,
+  ) as IUploadContext;
+
+  const handleImageFileUplaod = (
+    file: File,
+    imageArrayBuffer: Uint8Array,
+  ): void => {
+    flushSync(() => {
+      setFile(file);
+      setBytes(imageArrayBuffer);
+      setUrl('');
+      setLocation('/upload/preview');
+    });
   };
 
   const handleLinkUpload = (url: string) => {
-    // send to API
+    flushSync(() => {
+      setUrl(url);
+      setFile(null);
+      setLocation('/upload/preview');
+    });
   };
 
   return (
     <div className={styles.root}>
-      <FileUpload />
+      <FileUpload onUpload={handleImageFileUplaod} />
       <span className={styles.root__alternativeBinder}>or</span>
-      <LinkUpload onLinkUpload={handleLinkUpload} />
+      <LinkUpload onUpload={handleLinkUpload} />
     </div>
   );
 };

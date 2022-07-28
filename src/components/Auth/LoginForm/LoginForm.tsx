@@ -15,26 +15,26 @@ const LoginSchema = Yup.object().shape({
   password: Yup.string().required('Password is required'),
 });
 
-export interface LoginFormValues {
+export interface ILoginFormValues {
   username: string;
   password: string;
 }
 
-interface LoginFormProps {
-  onAuth: (values: LoginFormValues) => void;
+interface ILoginFormProps {
+  onAuth: (values: ILoginFormValues) => void;
   isAuthenticating: boolean;
 }
 
 export const LoginForm = ({
   onAuth,
   isAuthenticating,
-}: LoginFormProps): JSX.Element => {
-  const initialValues: LoginFormValues = {
+}: ILoginFormProps): JSX.Element => {
+  const initialValues: ILoginFormValues = {
     username: '',
     password: '',
   };
 
-  const handleLocalAuthSubmit = (values: LoginFormValues) => {
+  const handleLocalAuthSubmit = (values: ILoginFormValues) => {
     const { username, password } = values;
     onAuth({ username, password });
   };

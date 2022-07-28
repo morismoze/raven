@@ -12,7 +12,7 @@ export enum ButtonAction {
   secondary = 'secondary',
 }
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   onClick?: () => void;
   size?: ButtonSize;
   Icon?: React.ElementType;
@@ -27,7 +27,7 @@ export const Button = ({
   action = ButtonAction.secondary,
   children,
   ...rest
-}: ButtonProps): JSX.Element => {
+}: IButtonProps): JSX.Element => {
   const { disabled } = rest;
 
   return (

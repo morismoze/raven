@@ -1,0 +1,27 @@
+.root {
+  background-color: var(--bg-main-opacity);
+  padding: 35px;
+  border: 1px solid var(--border-main);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+
+    & > div:last-child {
+      margin-top: 10px;
+    }
+  }
+
+  &__submitContainer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+}

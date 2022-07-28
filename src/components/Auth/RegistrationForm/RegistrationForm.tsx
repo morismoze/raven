@@ -38,7 +38,7 @@ const RegistrationSchema = Yup.object().shape({
     .required('Password confirmation is required'),
 });
 
-export interface RegistrationFormValues {
+export interface IRegistrationFormValues {
   firstName: string;
   lastName: string;
   email: string;
@@ -47,9 +47,9 @@ export interface RegistrationFormValues {
   passwordConfirmation: string;
 }
 
-interface RegistrationFormProps {
+interface IRegistrationFormProps {
   onAuth: (
-    values: Omit<RegistrationFormValues, 'passwordConfirmation'>,
+    values: Omit<IRegistrationFormValues, 'passwordConfirmation'>,
   ) => Promise<FieldError[] | null>;
   isAuthenticating: boolean;
 }
@@ -57,8 +57,8 @@ interface RegistrationFormProps {
 export const RegistrationForm = ({
   onAuth,
   isAuthenticating,
-}: RegistrationFormProps): JSX.Element => {
-  const initialValues: RegistrationFormValues = {
+}: IRegistrationFormProps): JSX.Element => {
+  const initialValues: IRegistrationFormValues = {
     firstName: '',
     lastName: '',
     email: '',

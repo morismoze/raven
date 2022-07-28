@@ -3,7 +3,7 @@ import Lottie from 'react-lottie';
 import success from '@/assets/lottie/success.json';
 import styles from './SuccessAnimation.module.scss';
 
-interface SuccessAnimationProps {
+interface ISuccessAnimationProps {
   show: boolean;
   onAnimationFinish?: () => void;
 }
@@ -11,7 +11,7 @@ interface SuccessAnimationProps {
 export const SuccessAnimation = ({
   show,
   onAnimationFinish,
-}: SuccessAnimationProps): JSX.Element | null => {
+}: ISuccessAnimationProps): JSX.Element | null => {
   const defaultOptions = {
     loop: false,
     autoplay: true,

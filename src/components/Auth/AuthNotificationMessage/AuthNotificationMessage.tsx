@@ -8,7 +8,7 @@ export enum AuthNotificationMessageType {
   error = 'error',
 }
 
-interface AuthNotificationMessageProps {
+interface IAuthNotificationMessageProps {
   message: string;
   type: AuthNotificationMessageType;
 }
@@ -16,7 +16,7 @@ interface AuthNotificationMessageProps {
 export const AuthNotificationMessage = ({
   message,
   type,
-}: AuthNotificationMessageProps): JSX.Element => {
+}: IAuthNotificationMessageProps): JSX.Element => {
   return (
     <FadeIn>
       <div

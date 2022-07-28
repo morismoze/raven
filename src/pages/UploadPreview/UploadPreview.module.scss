@@ -1,0 +1,15 @@
+.root {
+  display: grid;
+  grid-template-columns: 1fr 0.75fr;
+  gap: 30px;
+  align-items: center;
+  margin-top: -20px;
+
+  &__preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+}
