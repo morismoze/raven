@@ -1,0 +1,33 @@
+@import 'src/styles/util.module.scss';
+
+.root {
+  padding: 20px 200px 20px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: var(--white);
+  width: 100%;
+  cursor: pointer;
+  transition: filter 0.1s ease-in-out;
+
+  &__tag {
+    color: var(--bg-main);
+    font-size: toRem(12);
+    font-weight: 600;
+    text-transform: lowercase;
+  }
+
+  &:first-of-type {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+
+  &:last-of-type {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+
+  &:hover {
+    filter: brightness(95%);
+  }
+}

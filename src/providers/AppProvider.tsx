@@ -5,7 +5,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { QueryClientProvider } from 'react-query';
 
 import { Loader } from '@/components';
-import { AuthProvider } from '@/api/auth';
+import { AuthProvider } from '@/api/auth/auth';
 import { UploadProvider } from '@/context';
 import { queryClient } from '@/lib/react-query';
 

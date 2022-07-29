@@ -13,16 +13,6 @@
     background-color: var(--bg-main);
     border: none;
     color: var(--white);
-    resize: vertical;
-
-    &:-webkit-autofill,
-    &:-webkit-autofill:focus {
-      transition: background-color 600000s 0s, color 600000s 0s;
-    }
-
-    &[data-autocompleted] {
-      background-color: var(--bg-main) !important;
-    }
 
     &:focus {
       outline: none;

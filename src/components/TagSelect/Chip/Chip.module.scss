@@ -1,0 +1,33 @@
+@import 'src/styles/util.module.scss';
+
+.root {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border-radius: 25px;
+  padding: 7px 10px;
+  background-color: var(--text-darker);
+  cursor: pointer;
+  transition: filter 0.15s ease-in-out;
+
+  &.primary {
+    background-color: var(--primary);
+  }
+
+  &__icon {
+    fill: var(--white);
+    font-size: toRem(20);
+  }
+
+  &__text {
+    color: var(--white);
+    text-transform: capitalize;
+    font-weight: 600;
+    font-size: toRem(13);
+    text-transform: lowercase;
+  }
+
+  &:hover {
+    filter: brightness(80%);
+  }
+}

@@ -2,8 +2,16 @@ import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { ArrowBarUp } from 'react-bootstrap-icons';
 
-import { StyledField, Button, ButtonSize, ButtonAction } from '@/components';
+import {
+  StyledField,
+  Button,
+  ButtonSize,
+  ButtonAction,
+  StyledCheckbox,
+  TagSelect,
+} from '@/components';
 import styles from './UploadForm.module.scss';
+import { Tag } from '@/api';
 
 const UploadSchema = Yup.object().shape({
   title: Yup.string()
@@ -12,23 +20,36 @@ const UploadSchema = Yup.object().shape({
   description: Yup.string()
     .max(2200, 'Description must be at most 2200 characters')
     .required('Description is required'),
+  tags: Yup.array()
+    .min(1, 'Atleast one tag must be selected')
+    .required('Tag is required'),
   mature: Yup.boolean(),
 });
 
-export interface IUploadPreviewValues {
+export interface IUploadFormValues {
   title: string;
   description: string;
+  tags: Tag[];
   mature: boolean;
 }
 
-export const UploadForm = (): JSX.Element => {
-  const initialValues: IUploadPreviewValues = {
+export interface IUploadFormProps {
+  onSubmit: (values: IUploadFormValues) => void;
+  tags?: Tag[];
+}
+
+export const UploadForm = ({
+  onSubmit,
+  tags,
+}: IUploadFormProps): JSX.Element => {
+  const initialValues: IUploadFormValues = {
     title: '',
     description: '',
+    tags: [],
     mature: false,
   };
 
-  const handleOnSubmit = (values: IUploadPreviewValues) => {
+  const handleOnSubmit = (values: IUploadFormValues) => {
     console.log(values);
   };
 
@@ -40,7 +61,7 @@ export const UploadForm = (): JSX.Element => {
         validateOnChange
         onSubmit={handleOnSubmit}
       >
-        {({ errors, touched, values, setFieldError }) => (
+        {({ errors, touched, values }) => (
           <Form className={styles.root__form}>
             <StyledField
               name="title"
@@ -60,10 +81,19 @@ export const UploadForm = (): JSX.Element => {
               as="textarea"
               rows={5}
             />
-            <StyledField
+            <TagSelect
+              name="tags"
+              error={errors.tags}
+              touched={touched.tags}
+              tags={tags || []}
+            />
+            <StyledCheckbox
               name="mature"
               label="Is mature content?"
               type="checkbox"
+              error={errors.mature}
+              touched={touched.mature}
+              value={values.mature}
             />
             <Button
               size={ButtonSize.small}
