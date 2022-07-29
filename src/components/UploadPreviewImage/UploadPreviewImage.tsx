@@ -1,8 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useLocation } from 'wouter';
+import { AlternateLoader } from '@/components';
 
 import styles from './UploadPreviewImage.module.scss';
+import classNames from 'classnames';
 
 interface IUploadPreviewImageProps {
   file: File | null;
@@ -14,6 +16,12 @@ export const UploadPreviewImage = ({
   url,
 }: IUploadPreviewImageProps): JSX.Element | null => {
   const [location, setLocation] = useLocation();
+
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const handleOnLoad = () => {
+    setIsLoading(false);
+  };
 
   if (!file && !url) {
     setLocation('/upload');
@@ -33,5 +41,15 @@ export const UploadPreviewImage = ({
   }, []);
 
   // upload by url
-  return <img src={url || undefined} id="preview" className={styles.root} />;
+  return (
+    <>
+      <AlternateLoader isLoading={isLoading} size={32} />
+      <img
+        src={url || undefined}
+        onLoad={handleOnLoad}
+        id="preview"
+        className={classNames(styles.root, { [styles.loaded]: !isLoading })}
+      />
+    </>
+  );
 };

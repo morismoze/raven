@@ -1,7 +1,13 @@
 .root {
   height: auto;
-  max-height: 100%;
-  width: 100%;
-  max-width: 100%;
+  max-height: 500px;
+  width: auto;
+  max-width: 55%;
   object-fit: cover;
+
+  &.loaded {
+    border: 1px solid var(--border-main);
+    border-radius: 4px;
+    padding: 7px;
+  }
 }

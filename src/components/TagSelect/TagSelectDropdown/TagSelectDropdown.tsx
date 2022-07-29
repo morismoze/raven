@@ -20,11 +20,19 @@ export const TagSelectDropdown = ({
   }
 
   return (
-    <FadeIn>
-      <div className={styles.root}>
-        {tags.map((tag: Tag, index) => (
-          <TagSelectOption tag={tag} onClick={onTagClick} key={index} />
-        ))}
+    <FadeIn className={styles.root}>
+      <div className={styles.root__wrapper}>
+        {tags.length > 0 ? (
+          <>
+            {tags.map((tag: Tag) => (
+              <TagSelectOption tag={tag} onClick={onTagClick} key={tag.id} />
+            ))}
+          </>
+        ) : (
+          <span className={styles.root__emptyTags}>
+            No more tags left to choose
+          </span>
+        )}
       </div>
     </FadeIn>
   );

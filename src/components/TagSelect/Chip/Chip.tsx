@@ -1,3 +1,5 @@
+import FadeIn from 'react-fade-in';
+import { X } from 'react-bootstrap-icons';
 import classNames from 'classnames';
 
 import styles from './Chip.module.scss';
@@ -12,6 +14,7 @@ interface IChipProps {
   Icon?: React.ElementType;
   onClick: () => void;
   action: ChipAction;
+  onRemove?: () => void;
 }
 
 export const Chip = ({
@@ -19,6 +22,7 @@ export const Chip = ({
   Icon,
   onClick,
   action,
+  onRemove,
 }: IChipProps): JSX.Element => {
   const handleOnClick = () => {
     onClick();
@@ -31,6 +35,13 @@ export const Chip = ({
     >
       {Icon && <Icon className={styles.root__icon} />}
       <span className={styles.root__text}>{text}</span>
+      {onRemove && (
+        <div className={styles.root__removeContainer}>
+          <FadeIn>
+            <X className={styles.root__removeicon} />
+          </FadeIn>
+        </div>
+      )}
     </div>
   );
 };

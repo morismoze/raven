@@ -1,10 +1,22 @@
+@import 'src/styles/util.module.scss';
+
 .root {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  justify-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
 
   &__dropdownContainer {
     position: relative;
   }
+}
+
+.errorMessage {
+  color: var(--error);
+  font-size: toRem(12);
+  word-break: break-word;
+  justify-self: flex-start;
+  display: inline-block;
+  width: 100%;
 }

@@ -24,11 +24,11 @@ export const StyledSelect = ({
 }: StyledCheckboxProps) => {
   return (
     <Field {...props} type="select" as="select" className={styles.root}>
-      {options?.map((option: Option, index: number) => (
+      {options?.map((option: Option) => (
         <option
           className={styles.root__selectOption}
           value={option.value}
-          key={index}
+          key={option.id}
         >
           {option.id}
         </option>

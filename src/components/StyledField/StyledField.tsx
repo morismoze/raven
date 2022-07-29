@@ -25,7 +25,7 @@ export const StyledField = ({
   return (
     <div className={styles.root}>
       <Field {...props} className={styles.root__field} />
-      {isError ? <span className={styles.root__error}>{error}</span> : null}
+      {isError && <span className={styles.root__error}>{error}</span>}
       {!error && value && <Check className={styles.root__success} />}
     </div>
   );

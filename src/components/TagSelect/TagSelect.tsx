@@ -27,6 +27,8 @@ export const TagSelect = ({
 }: ITagSelectProps): JSX.Element => {
   const [isDropdownActive, setIsDropdownActive] = useState<boolean>(false);
 
+  const [selectableTags, setSelectableTabs] = useState<Tag[]>(tags);
+
   const handleToggleDropdown = () => {
     setIsDropdownActive(!isDropdownActive);
   };
@@ -40,44 +42,52 @@ export const TagSelect = ({
 
     handleToggleDropdown();
     setFieldValue(name, [...value, tag]);
+    const newSelectableTags = selectableTags.filter(
+      (selectableTag: Tag) => selectableTag.id !== tag.id,
+    );
+    setSelectableTabs(newSelectableTags);
   };
 
   const handleOnTagClick = (value: Tag[], setFieldValue: any, tag: Tag) => {
     const newValue = value.filter((valueTag: Tag) => valueTag.id !== tag.id);
     setFieldValue(name, newValue);
+    setSelectableTabs([...selectableTags, tag]);
   };
 
   return (
-    <Field name={name} error={error} touched={touched}>
-      {({ field: { value }, form: { setFieldValue } }: FieldRenderProps) => (
-        <div className={styles.root}>
-          <div className={styles.root__dropdownContainer}>
-            <Chip
-              Icon={PlusCircleDotted}
-              text="Tag"
-              onClick={handleToggleDropdown}
-              action={ChipAction.primary}
-            />
-            <TagSelectDropdown
-              active={isDropdownActive}
-              tags={tags}
-              onTagClick={(tag: Tag) =>
-                handleOnTagOptionClick(value, setFieldValue, tag)
-              }
-            />
+    <>
+      <Field name={name} error={error} touched={touched}>
+        {({ field: { value }, form: { setFieldValue } }: FieldRenderProps) => (
+          <div className={styles.root}>
+            <div className={styles.root__dropdownContainer}>
+              <Chip
+                Icon={PlusCircleDotted}
+                text="Tag"
+                onClick={handleToggleDropdown}
+                action={ChipAction.primary}
+              />
+              <TagSelectDropdown
+                active={isDropdownActive}
+                tags={selectableTags}
+                onTagClick={(tag: Tag) =>
+                  handleOnTagOptionClick(value, setFieldValue, tag)
+                }
+              />
+            </div>
+            {value.map((selectedTag: Tag) => (
+              <Chip
+                text={selectedTag.tagName}
+                onClick={() =>
+                  handleOnTagClick(value, setFieldValue, selectedTag)
+                }
+                action={ChipAction.secondary}
+                key={selectedTag.id}
+              />
+            ))}
           </div>
-          {value.map((selectedTag: Tag, index) => (
-            <Chip
-              text={selectedTag.tagName}
-              onClick={() =>
-                handleOnTagClick(value, setFieldValue, selectedTag)
-              }
-              action={ChipAction.secondary}
-              key={index}
-            />
-          ))}
-        </div>
-      )}
-    </Field>
+        )}
+      </Field>
+      <span className={styles.errorMessage}>{error as string}</span>
+    </>
   );
 };

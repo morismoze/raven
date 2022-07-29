@@ -49,9 +49,7 @@ export const UploadForm = ({
     mature: false,
   };
 
-  const handleOnSubmit = (values: IUploadFormValues) => {
-    console.log(values);
-  };
+  const handleOnSubmit = (values: IUploadFormValues) => {};
 
   return (
     <div className={styles.root}>
