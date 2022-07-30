@@ -8,7 +8,7 @@ import {
   AuthCard,
   AuthNotificationMessageType,
   LoginForm,
-  LoginFormValues,
+  ILoginFormValues,
   SuccessAnimation,
 } from '@/components';
 import { AuthUser, useAuth } from '@/api';
@@ -28,7 +28,7 @@ export const Login = (): JSX.Element => {
 
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
-  const handleLogin = async (values: LoginFormValues) => {
+  const handleLogin = async (values: ILoginFormValues) => {
     const response: AuthUser = await login(values);
 
     if (response?.hasErrors) {

@@ -10,7 +10,7 @@ import styles from './DefaultUploadCard.module.scss';
 export const DefaultUploadCard = () => {
   const [location, setLocation] = useLocation();
 
-  const { setUrl, setFile, setBytes } = React.useContext(
+  const { setUrl, setFile, setFileBytes } = React.useContext(
     UploadContext,
   ) as IUploadContext;
 
@@ -20,7 +20,7 @@ export const DefaultUploadCard = () => {
   ): void => {
     flushSync(() => {
       setFile(file);
-      setBytes(imageArrayBuffer);
+      setFileBytes(imageArrayBuffer);
       setUrl('');
       setLocation('/upload/preview');
     });

@@ -4,12 +4,13 @@ import Dropzone from 'react-dropzone';
 import { useLocation } from 'wouter';
 
 import { IUploadContext, UploadContext } from '@/context';
+import { convertFileToBytes } from '@/utils';
 import styles from './DnDUploadCard.module.scss';
 
 export const DnDUploadCard = () => {
   const [location, setLocation] = useLocation();
 
-  const { setUrl, setFile, setBytes } = React.useContext(
+  const { setUrl, setFile, setFileBytes } = React.useContext(
     UploadContext,
   ) as IUploadContext;
 
@@ -22,9 +23,8 @@ export const DnDUploadCard = () => {
       setUrl('');
       const file = fileArray[0];
       setFile(file);
-      const imageArrayBuffer = await file.arrayBuffer();
-      const uint8Image = new Uint8Array(imageArrayBuffer);
-      setBytes(uint8Image);
+      const uint8 = await convertFileToBytes(file);
+      setFileBytes(uint8);
       setLocation('/upload/preview');
     }
   };

@@ -1,7 +1,15 @@
 import { Tag } from '../tag/types';
 
-export type PostUploadRequestDto = {
+export type PostUrlUploadRequestDto = {
   url: string;
+  title: string;
+  description: string;
+  tags: Tag[];
+  mature: boolean;
+};
+
+export type PostFileUploadRequestDto = {
+  fileBytes: string;
   title: string;
   description: string;
   tags: Tag[];

@@ -15,8 +15,8 @@ export type Data = {
 export interface IUploadContext {
   url: string;
   setUrl: (url: string | '') => void;
-  bytes: Uint8Array | null;
-  setBytes: (bytes: Uint8Array) => void;
+  fileBytes: Uint8Array | null;
+  setFileBytes: (bytes: Uint8Array) => void;
   file: File | null;
   setFile: (file: File | null) => void;
 }
@@ -32,13 +32,13 @@ export const UploadProvider = ({
 }: IUploadProviderProps): JSX.Element => {
   const [url, setUrl] = React.useState<string>('');
   const [file, setFile] = React.useState<File | null>(null);
-  const [bytes, setBytes] = React.useState<Uint8Array | null>(null);
+  const [fileBytes, setFileBytes] = React.useState<Uint8Array | null>(null);
 
   const contextValue = {
     url,
     setUrl,
-    bytes,
-    setBytes,
+    fileBytes,
+    setFileBytes,
     file,
     setFile,
   };

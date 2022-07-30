@@ -9,6 +9,7 @@ import {
   ButtonAction,
   StyledCheckbox,
   TagSelect,
+  AlternateLoader,
 } from '@/components';
 import styles from './UploadForm.module.scss';
 import { Tag } from '@/api';
@@ -36,11 +37,13 @@ export interface IUploadFormValues {
 export interface IUploadFormProps {
   onSubmit: (values: IUploadFormValues) => void;
   tags?: Tag[];
+  isLoading: boolean;
 }
 
 export const UploadForm = ({
   onSubmit,
   tags,
+  isLoading,
 }: IUploadFormProps): JSX.Element => {
   const initialValues: IUploadFormValues = {
     title: '',
@@ -49,7 +52,9 @@ export const UploadForm = ({
     mature: false,
   };
 
-  const handleOnSubmit = (values: IUploadFormValues) => {};
+  const handleOnSubmit = (values: IUploadFormValues) => {
+    onSubmit(values);
+  };
 
   return (
     <div className={styles.root}>
@@ -59,7 +64,7 @@ export const UploadForm = ({
         validateOnChange
         onSubmit={handleOnSubmit}
       >
-        {({ errors, touched, values }) => (
+        {({ errors, touched, values, isSubmitting }) => (
           <Form className={styles.root__form}>
             <StyledField
               name="title"
@@ -99,7 +104,10 @@ export const UploadForm = ({
               type="submit"
               Icon={ArrowBarUp}
             >
-              Submit
+              <div className={styles.root__submitContainer}>
+                <span>Submit post</span>
+                <AlternateLoader isLoading={isLoading} />
+              </div>
             </Button>
           </Form>
         )}

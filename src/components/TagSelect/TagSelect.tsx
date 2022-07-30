@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Field, FormikErrors, FormikTouched } from 'formik';
 import { PlusCircleDotted } from 'react-bootstrap-icons';
@@ -27,7 +27,7 @@ export const TagSelect = ({
 }: ITagSelectProps): JSX.Element => {
   const [isDropdownActive, setIsDropdownActive] = useState<boolean>(false);
 
-  const [selectableTags, setSelectableTabs] = useState<Tag[]>(tags);
+  const [selectableTags, setSelectableTabs] = useState<Tag[]>([]);
 
   const handleToggleDropdown = () => {
     setIsDropdownActive(!isDropdownActive);
@@ -38,8 +38,6 @@ export const TagSelect = ({
     setFieldValue: any,
     tag: Tag,
   ) => {
-    console.log(tag);
-
     handleToggleDropdown();
     setFieldValue(name, [...value, tag]);
     const newSelectableTags = selectableTags.filter(
@@ -53,6 +51,10 @@ export const TagSelect = ({
     setFieldValue(name, newValue);
     setSelectableTabs([...selectableTags, tag]);
   };
+
+  useEffect(() => {
+    setSelectableTabs(tags);
+  }, [tags]);
 
   return (
     <>
@@ -87,7 +89,9 @@ export const TagSelect = ({
           </div>
         )}
       </Field>
-      <span className={styles.errorMessage}>{error as string}</span>
+      <span className={styles.errorMessage}>
+        {touched && error && (error as string)}
+      </span>
     </>
   );
 };
