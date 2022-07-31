@@ -6,6 +6,9 @@
   align-items: stretch;
 
   &__activityPostContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
   }
 
   &__trendingContainer {

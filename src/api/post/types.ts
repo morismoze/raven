@@ -23,8 +23,9 @@ export type Post = {
   url: string;
   username: string;
   tags: Tag[];
-  postUpvotes: number;
-  postDownvotes: number;
+  upvotes: number;
+  downvotes: number;
+  votes: number;
   createdAt: string;
   updatedAt: string;
 };

@@ -13,16 +13,27 @@ export const Post = (): JSX.Element => {
     () => fetchPost(params!.postId),
     {
       refetchOnMount: true,
+      refetchOnReconnect: true,
     },
   );
-  console.log(post?.data);
+
+  const handleOnUpvote = () => {};
+
+  const handleOnDownvote = () => {};
+
+  const handleOnFavorize = () => {};
 
   return (
     <>
       <Header />
       <HeaderLayout className={styles.root}>
         <div className={styles.root__activityPostContainer}>
-          <ActivityBar />
+          <ActivityBar
+            votes={post?.data.votes}
+            onUpvote={handleOnUpvote}
+            onDownvote={handleOnDownvote}
+            onFavorize={handleOnFavorize}
+          />
           <PostContent />
         </div>
         <div className={styles.root__trendingContainer}></div>

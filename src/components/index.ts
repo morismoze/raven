@@ -26,4 +26,6 @@ export * from './TagSelect/Chip/Chip';
 export * from './TagSelect/TagSelectDropdown/TagSelectDropdown';
 export * from './Layout/HeaderLayout/HeaderLayout';
 export * from './ActivityBar/ActivityBar';
+export * from './ActivityBar/VoteButton/VoteButton';
+export * from './ActivityBar/FavorizeButton/FavorizeButton';
 export * from './PostContent/PostContent';
