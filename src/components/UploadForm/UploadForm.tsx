@@ -64,7 +64,7 @@ export const UploadForm = ({
         validateOnChange
         onSubmit={handleOnSubmit}
       >
-        {({ errors, touched, values, isSubmitting }) => (
+        {({ errors, touched, values }) => (
           <Form className={styles.root__form}>
             <StyledField
               name="title"
@@ -103,6 +103,7 @@ export const UploadForm = ({
               action={ButtonAction.primary}
               type="submit"
               Icon={ArrowBarUp}
+              disabled={isLoading}
             >
               <div className={styles.root__submitContainer}>
                 <span>Submit post</span>

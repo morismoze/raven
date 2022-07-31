@@ -2,19 +2,17 @@ import { ChangeEvent } from 'react';
 
 import { FileImage } from 'react-bootstrap-icons';
 
-import { convertFileToBytes } from '@/utils';
 import styles from './FileUpload.module.scss';
 
 interface IFileUploadProps {
-  onUpload: (file: File, base64Image: Uint8Array) => void;
+  onUpload: (file: File) => void;
 }
 
 export const FileUpload = ({ onUpload }: IFileUploadProps) => {
   const handleImageUpload = async (event: ChangeEvent): Promise<void> => {
     const target = event.target as HTMLInputElement;
     const file = (target.files as FileList)[0];
-    const uint8 = await convertFileToBytes(file);
-    onUpload(file, uint8);
+    onUpload(file);
   };
 
   return (

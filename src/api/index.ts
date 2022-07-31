@@ -4,3 +4,4 @@ export * from './post/post';
 export * from './post/types';
 export * from './tag/tag';
 export * from './tag/types';
+export * from './types';

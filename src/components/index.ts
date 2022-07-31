@@ -25,3 +25,5 @@ export * from './TagSelect/TagSelectOption/TagSelectOption';
 export * from './TagSelect/Chip/Chip';
 export * from './TagSelect/TagSelectDropdown/TagSelectDropdown';
 export * from './Layout/HeaderLayout/HeaderLayout';
+export * from './ActivityBar/ActivityBar';
+export * from './PostContent/PostContent';

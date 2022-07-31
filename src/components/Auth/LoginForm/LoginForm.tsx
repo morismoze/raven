@@ -54,6 +54,7 @@ export const LoginForm = ({
             error={errors.username}
             touched={touched.username}
             value={values.username}
+            showSuccessIcon={false}
           />
           <StyledField
             name="password"
@@ -62,6 +63,7 @@ export const LoginForm = ({
             error={errors.password}
             touched={touched.password}
             value={values.password}
+            showSuccessIcon={false}
           />
           <Button
             size={ButtonSize.small}

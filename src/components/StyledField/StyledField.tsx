@@ -7,12 +7,14 @@ type StyledFieldProps = FieldAttributes<any> & {
   error?: string;
   touched?: boolean;
   value?: string;
+  showSuccessIcon?: boolean;
 };
 
 export const StyledField = ({
   error,
   touched,
   value,
+  showSuccessIcon = true,
   ...props
 }: StyledFieldProps) => {
   const { type } = props;
@@ -26,7 +28,9 @@ export const StyledField = ({
     <div className={styles.root}>
       <Field {...props} className={styles.root__field} />
       {isError && <span className={styles.root__error}>{error}</span>}
-      {!error && value && <Check className={styles.root__success} />}
+      {showSuccessIcon && !error && value && (
+        <Check className={styles.root__success} />
+      )}
     </div>
   );
 };

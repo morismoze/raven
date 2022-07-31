@@ -1,3 +1,5 @@
+import { Response } from '../types';
+
 export type RoleName = {
   id: number;
   roleName: string;
@@ -14,20 +16,10 @@ export type User = {
   updatedAt: number;
 };
 
-export type FieldError = {
-  field: string;
-  error: string;
-};
-
 // 401
 export type Unauthorized = number;
 
-export type AuthUser = {
-  data: User | Unauthorized;
-  fieldErrors: FieldError[];
-  hasErrors: boolean;
-  message?: string;
-};
+export type AuthUser = Response<User | Unauthorized>;
 
 export type Error = AuthUser;
 

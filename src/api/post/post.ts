@@ -26,3 +26,12 @@ export const uploadPostByImageFile = async (post: PostFileUploadRequestDto) => {
     return error.response;
   }
 };
+
+export const fetchPost = async (webId: string) => {
+  try {
+    const response = await axiosInstance.get(`${API_URL}/post/${webId}`);
+    return response.data;
+  } catch (error: any) {
+    return error.response;
+  }
+};

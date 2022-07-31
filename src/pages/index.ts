@@ -5,3 +5,4 @@ export * from './Registration/Registration';
 export * from './UserProfile';
 export * from './Upload/Upload';
 export * from './UploadPreview/UploadPreview';
+export * from './Post/Post';
