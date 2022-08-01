@@ -1,0 +1,12 @@
+.root {
+  width: 720px;
+  max-width: 720px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__img {
+    width: 100%;
+    height: auto;
+  }
+}

@@ -1,0 +1,34 @@
+@import 'src/styles/util.module.scss';
+
+.root {
+  margin: 12px 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  &__username {
+    font-size: toRem(14);
+    font-weight: 600;
+    color: var(--success);
+  }
+
+  &__dataContainer {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  &__views {
+    font-size: toRem(12);
+    color: var(--text-darker);
+  }
+
+  &__separator {
+    color: var(--text-darker);
+  }
+
+  &__createdAt {
+    font-size: toRem(12);
+    color: var(--text-darker);
+  }
+}

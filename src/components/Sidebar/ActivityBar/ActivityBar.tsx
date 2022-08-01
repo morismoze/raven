@@ -1,4 +1,9 @@
-import { VoteButton, VoteAction, FavorizeButton } from '@/components';
+import {
+  VoteButton,
+  VoteAction,
+  FavorizeButton,
+  ShareButton,
+} from '@/components';
 import styles from './ActivityBar.module.scss';
 
 interface IVotingBar {
@@ -6,7 +11,6 @@ interface IVotingBar {
   onUpvote: () => void;
   onDownvote: () => void;
   onFavorize: () => void;
-  vertical?: boolean;
 }
 
 export const ActivityBar = ({

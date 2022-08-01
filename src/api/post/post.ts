@@ -35,3 +35,14 @@ export const fetchPost = async (webId: string) => {
     return error.response;
   }
 };
+
+export const fetchPostComments = async (webId: string) => {
+  try {
+    const response = await axiosInstance.get(
+      `${API_URL}/post/${webId}/comments`,
+    );
+    return response.data;
+  } catch (error: any) {
+    return error.response;
+  }
+};

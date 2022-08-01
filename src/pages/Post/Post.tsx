@@ -1,12 +1,21 @@
+import { useRef } from 'react';
+
 import { useRoute } from 'wouter';
 import { useQuery } from 'react-query';
 
-import { ActivityBar, Header, HeaderLayout, PostContent } from '@/components';
-import { fetchPost, PostResponseDto } from '@/api';
+import { Sidebar, Header, HeaderLayout, PostContent } from '@/components';
+import {
+  fetchPost,
+  fetchPostComments,
+  PostCommentsResponseDto,
+  PostResponseDto,
+} from '@/api';
 import styles from './Post.module.scss';
 
 export const Post = (): JSX.Element => {
   const [match, params] = useRoute('/p/:postId');
+
+  const commentsRef = useRef<HTMLDivElement>();
 
   const { data: post } = useQuery<PostResponseDto>(
     'fetch-post',
@@ -17,24 +26,26 @@ export const Post = (): JSX.Element => {
     },
   );
 
-  const handleOnUpvote = () => {};
-
-  const handleOnDownvote = () => {};
-
-  const handleOnFavorize = () => {};
+  const { data: postComments } = useQuery<PostCommentsResponseDto>(
+    'fetch-post-comments',
+    () => fetchPostComments(params!.postId),
+    {
+      refetchOnMount: true,
+      refetchOnReconnect: true,
+    },
+  );
 
   return (
     <>
       <Header />
       <HeaderLayout className={styles.root}>
         <div className={styles.root__activityPostContainer}>
-          <ActivityBar
-            votes={post?.data.votes}
-            onUpvote={handleOnUpvote}
-            onDownvote={handleOnDownvote}
-            onFavorize={handleOnFavorize}
+          <Sidebar
+            votesCount={post?.data.votes}
+            commentsCount={postComments?.data.count}
+            commentsSectionRef={commentsRef}
           />
-          <PostContent />
+          <PostContent post={post?.data} />
         </div>
         <div className={styles.root__trendingContainer}></div>
       </HeaderLayout>

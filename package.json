@@ -11,7 +11,6 @@
     "@types/node": "^18.0.3",
     "@types/react-headroom": "^2.2.2",
     "@types/react-lottie": "^1.2.6",
-    "@types/react-transition-group": "^4.4.5",
     "axios": "^0.27.2",
     "classnames": "^2.3.1",
     "formik": "^2.2.9",
@@ -30,6 +29,7 @@
     "react-query-auth": "^1.1.0",
     "react-transition-group": "^4.4.2",
     "sass": "^1.53.0",
+    "timeago.js": "^4.0.2",
     "vite-plugin-svgr": "^2.2.1",
     "wouter": "^2.8.0-alpha.2",
     "yup": "^0.32.11"

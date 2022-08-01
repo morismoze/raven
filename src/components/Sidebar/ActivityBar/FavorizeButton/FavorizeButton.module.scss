@@ -1,0 +1,17 @@
+@import 'src/styles/util.module.scss';
+
+.root {
+  stroke: var(--white);
+  cursor: pointer;
+
+  &:hover {
+    transition: transform 0.25s ease-in-out;
+    transform: scale(1.1);
+
+    path {
+      transition: stroke 0.25s ease-in-out;
+      stroke: var(--primary);
+      fill: var(--primary);
+    }
+  }
+}

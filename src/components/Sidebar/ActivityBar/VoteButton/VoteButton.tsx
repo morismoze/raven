@@ -20,6 +20,7 @@ export const VoteButton = ({
   const handleOnClick = () => {
     onClick();
   };
+
   return (
     <Vote
       onClick={handleOnClick}
