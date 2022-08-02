@@ -16,7 +16,7 @@ export const AccountExistence = ({
     <div className={styles.root}>
       <span className={styles.root__preText}>
         {preText}{' '}
-        <Link to={link} className={styles.root__link}>
+        <Link href={link} className={styles.root__link}>
           {linkText}
         </Link>
       </span>

@@ -12,7 +12,7 @@ export enum ChipAction {
 interface IChipProps {
   text: string;
   Icon?: React.ElementType;
-  onClick: () => void;
+  onClick?: () => void;
   action: ChipAction;
   onRemove?: () => void;
 }
@@ -24,15 +24,8 @@ export const Chip = ({
   action,
   onRemove,
 }: IChipProps): JSX.Element => {
-  const handleOnClick = () => {
-    onClick();
-  };
-
   return (
-    <div
-      className={classNames(styles.root, styles[action])}
-      onClick={handleOnClick}
-    >
+    <div className={classNames(styles.root, styles[action])} onClick={onClick}>
       {Icon && <Icon className={styles.root__icon} />}
       <span className={styles.root__text}>{text}</span>
       {onRemove && (

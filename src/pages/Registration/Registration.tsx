@@ -8,14 +8,14 @@ import {
   AuthCard,
   AuthNotificationMessageType,
   RegistrationForm,
-  RegistrationFormValues,
+  IRegistrationFormValues,
   SuccessAnimation,
 } from '@/components';
 import { AuthUser, useAuth } from '@/api';
 import styles from './Registration.module.scss';
 
 export const Registration = (): JSX.Element => {
-  const [location, setLocation] = useLocation();
+  const [, setLocation] = useLocation();
 
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
@@ -23,7 +23,7 @@ export const Registration = (): JSX.Element => {
 
   const { register, isRegistering } = useAuth();
 
-  const handleRegistration = async (values: RegistrationFormValues) => {
+  const handleRegistration = async (values: IRegistrationFormValues) => {
     const response: AuthUser = await register(values);
 
     if (response && response.hasErrors) {

@@ -6,3 +6,4 @@ export * from './UserProfile';
 export * from './Upload/Upload';
 export * from './UploadPreview/UploadPreview';
 export * from './Post/Post';
+export * from './TagPosts';

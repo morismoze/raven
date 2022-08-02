@@ -15,7 +15,7 @@ export const UploadPreviewImage = ({
   file,
   url,
 }: IUploadPreviewImageProps): JSX.Element | null => {
-  const [location, setLocation] = useLocation();
+  const [, setLocation] = useLocation();
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
 

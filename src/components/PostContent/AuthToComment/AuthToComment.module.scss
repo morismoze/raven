@@ -1,0 +1,23 @@
+@import 'src/styles/util.module.scss';
+
+.root {
+  border: 2px solid var(--border-main);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  width: 100%;
+  margin-top: 30px;
+
+  &__text {
+    color: var(--text-darker);
+    font-size: toRem(14);
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+}

@@ -24,7 +24,7 @@ import styles from './UploadPreview.module.scss';
 import { useLocation } from 'wouter';
 
 export const UploadPreview = (): JSX.Element => {
-  const [location, setLocation] = useLocation();
+  const [, setLocation] = useLocation();
 
   const { data: tags } = useQuery<AllTagsResponseDto>(
     'fetch-all-tags',

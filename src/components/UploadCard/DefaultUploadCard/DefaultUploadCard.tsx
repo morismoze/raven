@@ -8,7 +8,7 @@ import { IUploadContext, UploadContext } from '@/context';
 import styles from './DefaultUploadCard.module.scss';
 
 export const DefaultUploadCard = () => {
-  const [location, setLocation] = useLocation();
+  const [, setLocation] = useLocation();
 
   const { setUrl, setFile } = React.useContext(UploadContext) as IUploadContext;
 

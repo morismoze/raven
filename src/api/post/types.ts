@@ -15,6 +15,7 @@ export type Post = {
   description: string;
   mature: boolean;
   coverUrl: string;
+  userId: string;
   username: string;
   tags: Tag[];
   upvotes: number;

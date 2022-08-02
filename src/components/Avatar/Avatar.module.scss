@@ -1,0 +1,16 @@
+.root {
+  height: 32px;
+  width: 32px;
+
+  &__link {
+    height: 40px;
+    width: 40px;
+  }
+
+  &__avatar {
+    max-height: 100%;
+    height: 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+}

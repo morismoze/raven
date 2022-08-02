@@ -7,7 +7,7 @@ import { QueryClientProvider } from 'react-query';
 import { Loader } from '@/components';
 import { AuthProvider } from '@/api/auth/auth';
 import { UploadProvider } from '@/context';
-import { queryClient } from '@/lib/react-query';
+import { queryClient } from '@/lib/initializers/react-query';
 
 const ErrorFallback = (): JSX.Element => {
   return (

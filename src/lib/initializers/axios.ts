@@ -11,8 +11,8 @@ export const axiosInstance = Axios.create({
 });
 
 const REFRESH_TOKEN_ROUTE = '/token/refresh';
-const ACCESS_TOKEN_HEADER = 'access_token';
-const REFRESH_TOKEN_HEADER = 'refresh_token';
+export const ACCESS_TOKEN_HEADER = 'access_token';
+export const REFRESH_TOKEN_HEADER = 'refresh_token';
 const EXPIRED_ACCESS_TOKEN_ERROR = 'expired_access_token';
 const EXPIRED_REFRESH_TOKEN_ERROR = 'expired_refresh_token';
 
@@ -62,7 +62,7 @@ axiosInstance.interceptors.response.use(
       await refreshAccessToken();
       return axiosInstance(originalRequest);
     } else if (errorHeader && errorHeader === EXPIRED_REFRESH_TOKEN_ERROR) {
-      window.history.pushState(window.location.pathname, '', '/signin');
+      // do nothing for now
     }
 
     return Promise.reject(error);

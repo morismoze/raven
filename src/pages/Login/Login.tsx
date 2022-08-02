@@ -20,7 +20,7 @@ const LOGIN_ERROR_MESSAGE =
 const INCORRECT_CREDENTIALS = 'Incorrect username or password';
 
 export const Login = (): JSX.Element => {
-  const [location, setLocation] = useLocation();
+  const [, setLocation] = useLocation();
 
   const { login, isLoggingIn } = useAuth();
 
@@ -48,7 +48,8 @@ export const Login = (): JSX.Element => {
   };
 
   const handleSuccessfulLogin = () => {
-    setLocation('/');
+    const prevPath = localStorage.getItem('prevPath');
+    location.replace(prevPath || '/');
   };
 
   return (

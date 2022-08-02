@@ -7,7 +7,7 @@ import { IUploadContext, UploadContext } from '@/context';
 import styles from './DnDUploadCard.module.scss';
 
 export const DnDUploadCard = () => {
-  const [location, setLocation] = useLocation();
+  const [, setLocation] = useLocation();
 
   const { setUrl, setFile } = React.useContext(UploadContext) as IUploadContext;
 

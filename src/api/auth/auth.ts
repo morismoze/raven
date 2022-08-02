@@ -7,7 +7,11 @@ import {
   LoginCredentialsDTO,
   RegisterCredentialsDTO,
 } from './types';
-import { axiosInstance } from '@/lib';
+import {
+  ACCESS_TOKEN_HEADER,
+  axiosInstance,
+  REFRESH_TOKEN_HEADER,
+} from '@/lib';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -39,8 +43,13 @@ const registerFn = async (data: RegisterCredentialsDTO): Promise<AuthUser> => {
 };
 
 const logoutFn = async () => {
-  // clear jwt from LS
-  window.location.assign(window.location.origin as unknown as string);
+  try {
+    await axiosInstance.get(`${API_URL}/logout`);
+    localStorage.removeItem(ACCESS_TOKEN_HEADER);
+    localStorage.removeItem(REFRESH_TOKEN_HEADER);
+  } catch (error: any) {
+    return error.response.data;
+  }
 };
 
 export const refreshAccessToken = async () => {
