@@ -1,0 +1,21 @@
+.root {
+  background-color: var(--bg-main-opacity);
+  padding: 10px;
+
+  & form {
+    display: flex;
+    flex-direction: column;
+
+    & > div:last-child {
+      margin-top: 10px;
+      width: fit-content;
+    }
+  }
+
+  &__submitContainer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: fit-content;
+  }
+}

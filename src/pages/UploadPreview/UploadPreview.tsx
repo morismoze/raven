@@ -84,7 +84,7 @@ export const UploadPreview = (): JSX.Element => {
         <UploadForm
           onSubmit={handleUpload}
           tags={tags?.data}
-          isLoading={isPostUrlMutateLoading || isPostFileMutateLoading}
+          isUploading={isPostUrlMutateLoading || isPostFileMutateLoading}
         />
       </HeaderLayout>
     </>

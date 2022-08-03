@@ -39,6 +39,10 @@ export type PostComments = {
   count: number;
 };
 
+export type PostCommentRequestDto = {
+  comment: string;
+};
+
 export type PostFileUploadRequestDto = FormData;
 
 export type NewPostId = string;

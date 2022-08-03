@@ -37,3 +37,5 @@ export * from './PostContent/Title/Title';
 export * from './PostContent/Meta/Meta';
 export * from './PostContent/Cover/Cover';
 export * from './PostContent/AuthToComment/AuthToComment';
+export * from './PostCommentsContent/PostCommentsContent';
+export * from './PostCommentsContent/CommentForm/CommentForm';

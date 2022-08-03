@@ -1,14 +1,7 @@
 import { Link } from 'wouter';
 
-import {
-  Title,
-  Meta,
-  Cover,
-  Chip,
-  ChipAction,
-  AuthToComment,
-} from '@/components';
-import { Post, useAuth, User } from '@/api';
+import { Title, Meta, Cover, Chip, ChipAction } from '@/components';
+import { Post } from '@/api';
 import styles from './PostContent.module.scss';
 
 interface IPostContentProps {
@@ -16,9 +9,6 @@ interface IPostContentProps {
 }
 
 export const PostContent = ({ post }: IPostContentProps): JSX.Element => {
-  const { user } = useAuth();
-  const userPrincipal = user?.data as User;
-
   return (
     <div className={styles.root}>
       <Title>{post?.title}</Title>
@@ -42,7 +32,6 @@ export const PostContent = ({ post }: IPostContentProps): JSX.Element => {
           </Link>
         ))}
       </div>
-      {userPrincipal && <AuthToComment />}
     </div>
   );
 };

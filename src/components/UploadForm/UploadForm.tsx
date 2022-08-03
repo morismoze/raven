@@ -37,13 +37,13 @@ export interface IUploadFormValues {
 export interface IUploadFormProps {
   onSubmit: (values: IUploadFormValues) => void;
   tags?: Tag[];
-  isLoading: boolean;
+  isUploading: boolean;
 }
 
 export const UploadForm = ({
   onSubmit,
   tags,
-  isLoading,
+  isUploading,
 }: IUploadFormProps): JSX.Element => {
   const initialValues: IUploadFormValues = {
     title: '',
@@ -103,11 +103,11 @@ export const UploadForm = ({
               action={ButtonAction.primary}
               type="submit"
               Icon={ArrowBarUp}
-              disabled={isLoading}
+              disabled={isUploading}
             >
               <div className={styles.root__submitContainer}>
                 <span>Submit post</span>
-                <AlternateLoader isLoading={isLoading} />
+                <AlternateLoader isLoading={isUploading} />
               </div>
             </Button>
           </Form>

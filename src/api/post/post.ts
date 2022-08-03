@@ -1,7 +1,13 @@
 import { axiosInstance } from '@/lib';
-import { PostFileUploadRequestDto, PostUrlUploadRequestDto } from './types';
+import {
+  PostCommentRequestDto,
+  PostFileUploadRequestDto,
+  PostUrlUploadRequestDto,
+} from './types';
 
 const API_URL = import.meta.env.VITE_API_URL;
+
+const COMMENTS_LIMIT = 5;
 
 export const uploadPostByImageUrl = async (post: PostUrlUploadRequestDto) => {
   try {
@@ -36,10 +42,25 @@ export const fetchPost = async (webId: string) => {
   }
 };
 
-export const fetchPostComments = async (webId: string) => {
+export const fetchPostComments = async (webId: string, page: number) => {
   try {
     const response = await axiosInstance.get(
-      `${API_URL}/post/${webId}/comments`,
+      `${API_URL}/post/${webId}/comments?page=${page}&limit=${COMMENTS_LIMIT}`,
+    );
+    return response.data;
+  } catch (error: any) {
+    return error.response;
+  }
+};
+
+export const uploadPostComment = async (
+  webId: string,
+  comment: PostCommentRequestDto,
+) => {
+  try {
+    const response = await axiosInstance.post(
+      `${API_URL}/post/${webId}/comments/create`,
+      comment,
     );
     return response.data;
   } catch (error: any) {

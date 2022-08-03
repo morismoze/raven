@@ -13,7 +13,7 @@
     background-color: var(--bg-main);
     border: none;
     color: var(--white);
-    resize: vertical;
+    resize: none;
 
     &:-webkit-autofill,
     &:-webkit-autofill:focus {
