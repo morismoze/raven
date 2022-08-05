@@ -76,7 +76,7 @@ export const Comment = ({
         <VoteButton
           action={VoteAction.upvote}
           onClick={handleCommentUpvote}
-          isActive={comment.userPrincipalUpvoted || Boolean(upvoteData?.data)}
+          isActive={comment.userPrincipalUpvoted}
           size={16}
         />
         <span className={styles.root__votes}>{comment.votes}</span>
@@ -86,9 +86,7 @@ export const Comment = ({
         <VoteButton
           action={VoteAction.downvote}
           onClick={handleCommentDownvote}
-          isActive={
-            comment.userPrincipalDownvoted || Boolean(downvoteData?.data)
-          }
+          isActive={comment.userPrincipalDownvoted}
           size={16}
         />
       </div>
