@@ -67,3 +67,25 @@ export const uploadPostComment = async (
     return error.response;
   }
 };
+
+export const upvotePostComment = async (webId: string, commentId: number) => {
+  try {
+    const response = await axiosInstance.post(
+      `${API_URL}/post/${webId}/comments/${commentId}/upvote`,
+    );
+    return response.data;
+  } catch (error: any) {
+    return error.response;
+  }
+};
+
+export const downvotePostComment = async (webId: string, commentId: number) => {
+  try {
+    const response = await axiosInstance.post(
+      `${API_URL}/post/${webId}/comments/${commentId}/downvote`,
+    );
+    return response.data;
+  } catch (error: any) {
+    return error.response;
+  }
+};

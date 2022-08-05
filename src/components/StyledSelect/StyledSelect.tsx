@@ -21,7 +21,7 @@ export const StyledSelect = ({
   value,
   options,
   ...props
-}: StyledCheckboxProps) => {
+}: StyledCheckboxProps): JSX.Element => {
   return (
     <Field {...props} type="select" as="select" className={styles.root}>
       {options?.map((option: Option) => (

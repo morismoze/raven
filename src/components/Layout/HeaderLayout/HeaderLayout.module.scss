@@ -1,5 +1,4 @@
 .root {
   margin: 0 var(--generalHorizontalMargin);
-  height: calc(100% - var(--headerHeight));
-  min-height: calc(100% - var(--headerHeight));
+  min-height: calc(100vh - var(--headerHeight));
 }

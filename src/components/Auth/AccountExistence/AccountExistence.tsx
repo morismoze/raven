@@ -11,7 +11,7 @@ export const AccountExistence = ({
   preText,
   linkText,
   link,
-}: IAccountExistenceProps) => {
+}: IAccountExistenceProps): JSX.Element => {
   return (
     <div className={styles.root}>
       <span className={styles.root__preText}>

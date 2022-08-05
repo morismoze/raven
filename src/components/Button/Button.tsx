@@ -17,6 +17,7 @@ interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: ButtonSize;
   Icon?: React.ElementType;
   action: ButtonAction;
+  className?: string;
   children: React.ReactNode;
 }
 
@@ -25,6 +26,7 @@ export const Button = ({
   size = ButtonSize.small,
   Icon,
   action = ButtonAction.secondary,
+  className,
   children,
   ...rest
 }: IButtonProps): JSX.Element => {
@@ -32,9 +34,15 @@ export const Button = ({
 
   return (
     <div
-      className={classNames(styles.root, styles[size], styles[action], {
-        [styles.disabled]: disabled,
-      })}
+      className={classNames(
+        styles.root,
+        styles[size],
+        styles[action],
+        className,
+        {
+          [styles.disabled]: disabled,
+        },
+      )}
     >
       <button {...rest} onClick={onClick} className={styles.root__button}>
         {Icon && <Icon className={styles.root__icon} />}

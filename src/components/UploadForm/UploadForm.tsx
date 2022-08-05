@@ -1,6 +1,6 @@
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { ArrowBarUp } from 'react-bootstrap-icons';
+import { Upload } from 'react-bootstrap-icons';
 
 import {
   StyledField,
@@ -102,7 +102,7 @@ export const UploadForm = ({
               size={ButtonSize.small}
               action={ButtonAction.primary}
               type="submit"
-              Icon={ArrowBarUp}
+              Icon={Upload}
               disabled={isUploading}
             >
               <div className={styles.root__submitContainer}>

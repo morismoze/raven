@@ -1,0 +1,47 @@
+@import 'src/styles/util.module.scss';
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border-top: 1px solid var(--border-main);
+  padding: 15px 8px 12px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  &__username {
+    font-size: toRem(12);
+    font-weight: 600;
+    color: var(--success);
+  }
+
+  &__separator {
+    color: var(--text-darker);
+  }
+
+  &__createdAt {
+    font-size: toRem(12);
+    color: var(--text-darker);
+  }
+
+  &__comment {
+    color: var(--white);
+    font-size: toRem(14);
+    margin: 8px 0;
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__votes {
+    color: var(--white);
+    font-size: toRem(12);
+  }
+}

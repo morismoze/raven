@@ -5,7 +5,7 @@ interface ICoverProps {
   alt?: string;
 }
 
-export const Cover = ({ url, alt }: ICoverProps) => {
+export const Cover = ({ url, alt }: ICoverProps): JSX.Element => {
   return (
     <div className={styles.root}>
       <img src={url} alt={alt} className={styles.root__img} />

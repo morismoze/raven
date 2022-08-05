@@ -6,6 +6,9 @@ type HeaderLayoutProps = {
   children: React.ReactNode;
 };
 
-export const HeaderLayout = ({ className, children }: HeaderLayoutProps) => {
+export const HeaderLayout = ({
+  className,
+  children,
+}: HeaderLayoutProps): JSX.Element => {
   return <div className={classNames(styles.root, className)}>{children}</div>;
 };

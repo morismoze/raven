@@ -11,11 +11,15 @@ export enum VoteAction {
 interface IVoteButtonProps {
   action: VoteAction;
   onClick: () => void;
+  isActive: boolean;
+  size?: number;
 }
 
 export const VoteButton = ({
   action,
   onClick,
+  isActive,
+  size,
 }: IVoteButtonProps): JSX.Element => {
   const handleOnClick = () => {
     onClick();
@@ -28,7 +32,15 @@ export const VoteButton = ({
         styles.root,
         { [styles.upvote]: action === VoteAction.upvote },
         { [styles.downvote]: action === VoteAction.downvote },
+        {
+          [styles['upvote--active']]: isActive && action === VoteAction.upvote,
+        },
+        {
+          [styles['downvote--active']]:
+            isActive && action === VoteAction.downvote,
+        },
       )}
+      style={{ width: size, height: size }}
     />
   );
 };

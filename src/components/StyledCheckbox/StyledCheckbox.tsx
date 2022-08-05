@@ -15,7 +15,7 @@ export const StyledCheckbox = ({
   touched,
   value,
   ...props
-}: StyledCheckboxProps) => {
+}: StyledCheckboxProps): JSX.Element => {
   const { label } = props;
 
   return (

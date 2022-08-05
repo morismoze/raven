@@ -6,6 +6,10 @@
   transition: transform 0.25s ease-in-out;
 
   &.upvote {
+    &--active path {
+      stroke: var(--success);
+    }
+
     &:hover {
       transform: translateY(-2px);
 
@@ -18,6 +22,10 @@
 
   &.downvote {
     transform: rotate(180deg);
+
+    &--active path {
+      stroke: var(--error);
+    }
 
     &:hover {
       transform: translateY(2px) rotate(180deg);

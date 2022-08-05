@@ -6,7 +6,7 @@ import { useLocation } from 'wouter';
 import { IUploadContext, UploadContext } from '@/context';
 import styles from './DnDUploadCard.module.scss';
 
-export const DnDUploadCard = () => {
+export const DnDUploadCard = (): JSX.Element => {
   const [, setLocation] = useLocation();
 
   const { setUrl, setFile } = React.useContext(UploadContext) as IUploadContext;

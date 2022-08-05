@@ -3,7 +3,7 @@ import { Link } from 'wouter';
 import { ReactComponent as LogoIcon } from '@/assets/images/logo-reduced.svg';
 import styles from './Logo.module.scss';
 
-export const Logo = () => {
+export const Logo = (): JSX.Element => {
   return (
     <Link href="/" className={styles.root}>
       <a className={styles.root__link}>

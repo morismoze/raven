@@ -4,7 +4,7 @@ import { useLocation } from 'wouter';
 
 import styles from './AuthToComment.module.scss';
 
-export const AuthToComment = () => {
+export const AuthToComment = (): JSX.Element => {
   const [, setLocation] = useLocation();
 
   const handleSignIn = () => {

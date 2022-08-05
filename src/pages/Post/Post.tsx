@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react';
+import { flushSync } from 'react-dom';
 
 import { useRoute } from 'wouter';
-import { useQuery } from 'react-query';
+import { useInfiniteQuery, useQuery } from 'react-query';
 
 import {
   Sidebar,
@@ -19,11 +20,9 @@ import {
 import styles from './Post.module.scss';
 
 export const Post = (): JSX.Element => {
-  const [commentsPage, setCommentsPage] = useState<number>(0);
-
   const [, params] = useRoute('/p/:postId');
 
-  const commentsRef = useRef<HTMLDivElement>();
+  const commentsRef = useRef<HTMLDivElement>(null);
 
   const { data: post } = useQuery<PostResponseDto>(
     'fetch-post',
@@ -34,14 +33,36 @@ export const Post = (): JSX.Element => {
     },
   );
 
-  const { data: postComments } = useQuery<PostCommentsResponseDto>(
+  const {
+    data: postCommentsGroups,
+    fetchNextPage,
+    isFetchingNextPage,
+    hasNextPage,
+    refetch,
+  } = useInfiniteQuery<PostCommentsResponseDto>(
     'fetch-post-comments',
-    () => fetchPostComments(params!.postId, commentsPage),
+    ({ pageParam = 0 }) => fetchPostComments(params!.postId, pageParam),
     {
       refetchOnMount: true,
+      refetchOnWindowFocus: false,
       refetchOnReconnect: true,
+      getNextPageParam: (lastPage) => {
+        if (!lastPage.data.nextPage) {
+          return false;
+        } else {
+          return lastPage.data.nextPage;
+        }
+      },
     },
   );
+
+  const handleOnLoadMoreComments = () => {
+    fetchNextPage();
+  };
+
+  const refetchPage = (pageToRefetch: number) => {
+    refetch({ refetchPage: (page, index) => index === pageToRefetch });
+  };
 
   return (
     <>
@@ -50,14 +71,20 @@ export const Post = (): JSX.Element => {
         <div className={styles.root__activityPostContainer}>
           <Sidebar
             votesCount={post?.data.votes}
-            commentsCount={postComments?.data.count}
+            totalCommentsCount={postCommentsGroups?.pages[0].data.count}
             commentsSectionRef={commentsRef}
           />
           <div className={styles.root__postCommentsContainer}>
             <PostContent post={post?.data} />
             <PostCommentsContent
               postId={post?.data.webId}
-              comments={postComments?.data}
+              commentsGroups={postCommentsGroups?.pages}
+              hasMoreComments={hasNextPage}
+              totalCommentsCount={postCommentsGroups?.pages[0].data.count}
+              commentsRef={commentsRef}
+              onLoadMoreComments={handleOnLoadMoreComments}
+              isMoreCommentsRefetching={isFetchingNextPage}
+              refetchPage={refetchPage}
             />
           </div>
         </div>

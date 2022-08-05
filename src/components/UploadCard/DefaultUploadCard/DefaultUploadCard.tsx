@@ -7,7 +7,7 @@ import { LinkUpload, FileUpload } from '@/components';
 import { IUploadContext, UploadContext } from '@/context';
 import styles from './DefaultUploadCard.module.scss';
 
-export const DefaultUploadCard = () => {
+export const DefaultUploadCard = (): JSX.Element => {
   const [, setLocation] = useLocation();
 
   const { setUrl, setFile } = React.useContext(UploadContext) as IUploadContext;

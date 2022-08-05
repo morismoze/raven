@@ -1,0 +1,12 @@
+@import 'src/styles/util.module.scss';
+
+.root {
+  display: flex;
+  width: 100%;
+  padding: 15px 15px 15px 0;
+
+  &__title {
+    font-size: toRem(16);
+    color: var(--white);
+  }
+}

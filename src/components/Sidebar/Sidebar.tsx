@@ -3,15 +3,15 @@ import styles from './Sidebar.module.scss';
 
 interface ISidebarProps {
   votesCount?: number;
-  commentsSectionRef: React.MutableRefObject<HTMLDivElement | undefined>;
-  commentsCount?: number;
+  commentsSectionRef: React.MutableRefObject<HTMLDivElement | null>;
+  totalCommentsCount?: number;
 }
 
 export const Sidebar = ({
   votesCount,
   commentsSectionRef,
-  commentsCount,
-}: ISidebarProps) => {
+  totalCommentsCount,
+}: ISidebarProps): JSX.Element => {
   const handleOnUpvote = () => {};
 
   const handleOnDownvote = () => {};
@@ -31,7 +31,7 @@ export const Sidebar = ({
       <ShareButton onClick={handleOnShare} />
       <CommentsRefButton
         commentsSectionRef={commentsSectionRef}
-        comments={commentsCount}
+        comments={totalCommentsCount}
       />
     </div>
   );

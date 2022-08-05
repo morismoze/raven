@@ -1,9 +1,4 @@
-import {
-  VoteButton,
-  VoteAction,
-  FavorizeButton,
-  ShareButton,
-} from '@/components';
+import { VoteButton, VoteAction, FavorizeButton } from '@/components';
 import styles from './ActivityBar.module.scss';
 
 interface IVotingBar {

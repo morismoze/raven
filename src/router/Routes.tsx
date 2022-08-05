@@ -13,7 +13,7 @@ const { Post } = lazyImport(() => import('@/pages'), 'Post');
 const { TagPosts } = lazyImport(() => import('@/pages'), 'TagPosts');
 const { FourZeroFour } = lazyImport(() => import('@/pages'), 'FourZeroFour');
 
-export const Routes = () => {
+export const Routes = (): JSX.Element => {
   return (
     <Switch>
       <Route path="/signup" component={Registration} />

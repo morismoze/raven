@@ -1,10 +1,6 @@
 .root {
-  height: 32px;
-  width: 32px;
-
   &__link {
-    height: 40px;
-    width: 40px;
+    display: flex;
   }
 
   &__avatar {

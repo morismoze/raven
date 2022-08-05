@@ -11,7 +11,7 @@ import styles from './Header.module.scss';
 import { useLocation } from 'wouter';
 import { useAuth, User } from '@/api';
 
-export const Header = () => {
+export const Header = (): JSX.Element => {
   const [, setLocation] = useLocation();
 
   const { user, logout } = useAuth();

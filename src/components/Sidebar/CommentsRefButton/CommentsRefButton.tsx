@@ -3,7 +3,7 @@ import { ReactComponent as Comments } from '@/assets/icons/comments.svg';
 import styles from './CommentsRefButton.module.scss';
 
 interface ICommentsRefButtonProps {
-  commentsSectionRef: React.MutableRefObject<HTMLDivElement | undefined>;
+  commentsSectionRef: React.MutableRefObject<HTMLDivElement | null>;
   comments?: number;
 }
 

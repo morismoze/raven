@@ -16,7 +16,7 @@ export const StyledField = ({
   value,
   showSuccessIcon = true,
   ...props
-}: StyledFieldProps) => {
+}: StyledFieldProps): JSX.Element => {
   const { type } = props;
 
   const isError =

@@ -29,7 +29,13 @@ export type Post = {
 export type PostComment = {
   id: number;
   comment: string;
-  post: Post;
+  userId: string;
+  username: string;
+  upvotes: number;
+  downvotes: number;
+  votes: number;
+  userPrincipalUpvoted: boolean;
+  userPrincipalDownvoted: boolean;
   createdAt: string;
   updatedAt: string;
 };
@@ -37,6 +43,7 @@ export type PostComment = {
 export type PostComments = {
   comments: PostComment[];
   count: number;
+  nextPage: number | null;
 };
 
 export type PostCommentRequestDto = {
@@ -52,3 +59,7 @@ export type PostUploadResponseDto = Response<NewPostId>;
 export type PostResponseDto = Response<Post>;
 
 export type PostCommentsResponseDto = Response<PostComments>;
+
+export type PosCommentUpvoteResponseDto = Response<number>;
+
+export type PosCommentDownvoteResponseDto = Response<number>;

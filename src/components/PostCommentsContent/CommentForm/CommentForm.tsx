@@ -1,4 +1,4 @@
-import { Form, Formik } from 'formik';
+import { Form, Formik, FormikState } from 'formik';
 import * as Yup from 'yup';
 import { ArrowBarUp } from 'react-bootstrap-icons';
 
@@ -26,14 +26,22 @@ interface ICommentEditorProps {
   isSubmitting: boolean;
 }
 
+type ResetFormFn = (
+  nextState?: Partial<FormikState<ICommentFormValues>> | undefined,
+) => void;
+
 export const CommentForm = ({
   onSubmit,
   isSubmitting,
-}: ICommentEditorProps) => {
+}: ICommentEditorProps): JSX.Element => {
   const initialValues: ICommentFormValues = { comment: '' };
 
-  const handleOnSubmit = (values: ICommentFormValues) => {
+  const handleOnSubmit = (
+    values: ICommentFormValues,
+    resetForm: ResetFormFn,
+  ) => {
     onSubmit(values);
+    resetForm();
   };
 
   return (
@@ -42,7 +50,7 @@ export const CommentForm = ({
         initialValues={initialValues}
         validationSchema={CommentSchema}
         validateOnChange
-        onSubmit={handleOnSubmit}
+        onSubmit={(values, { resetForm }) => handleOnSubmit(values, resetForm)}
       >
         {({ errors, touched, values }) => (
           <Form className={styles.root__form}>
