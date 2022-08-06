@@ -12,7 +12,7 @@ import { useLocation } from 'wouter';
 import { useAuth, User } from '@/api';
 
 export const Header = (): JSX.Element => {
-  const [, setLocation] = useLocation();
+  const [location, setLocation] = useLocation();
 
   const { user, logout } = useAuth();
 
@@ -23,10 +23,12 @@ export const Header = (): JSX.Element => {
   };
 
   const handleSignIn = () => {
+    localStorage.setItem('prevPath', location);
     setLocation('/signin');
   };
 
   const handleSignUp = () => {
+    localStorage.setItem('prevPath', location);
     setLocation('/signup');
   };
 

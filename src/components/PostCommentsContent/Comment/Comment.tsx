@@ -3,7 +3,7 @@ import { useMutation } from 'react-query';
 import { Avatar, VoteButton, VoteAction, AlternateLoader } from '@/components';
 import {
   downvotePostComment,
-  PosCommentUpvoteResponseDto,
+  PostCommentVoteResponseDto,
   PostComment,
   upvotePostComment,
 } from '@/api';
@@ -23,35 +23,27 @@ export const Comment = ({
   commentPage,
   refetchPage,
 }: ICommentProps): JSX.Element => {
-  const {
-    mutate: upvoteMutate,
-    data: upvoteData,
-    isLoading: isUpvoteMutateLoading,
-    reset: upvoteReset,
-  } = useMutation<PosCommentUpvoteResponseDto, unknown>(
-    'upvote-post-comment',
-    () => upvotePostComment(postId, comment.id),
-    {
-      onSuccess: () => {
-        refetchPage(commentPage);
+  const { mutate: upvoteMutate, isLoading: isUpvoteMutateLoading } =
+    useMutation<PostCommentVoteResponseDto, unknown>(
+      'upvote-post-comment',
+      () => upvotePostComment(postId, comment.id),
+      {
+        onSuccess: () => {
+          refetchPage(commentPage);
+        },
       },
-    },
-  );
+    );
 
-  const {
-    mutate: downvoteMutate,
-    data: downvoteData,
-    isLoading: isDownvoteMutateLoading,
-    reset: downvoteReset,
-  } = useMutation<PosCommentUpvoteResponseDto, unknown>(
-    'downvote-post-comment',
-    () => downvotePostComment(postId, comment.id),
-    {
-      onSuccess: () => {
-        refetchPage(commentPage);
+  const { mutate: downvoteMutate, isLoading: isDownvoteMutateLoading } =
+    useMutation<PostCommentVoteResponseDto, unknown>(
+      'downvote-post-comment',
+      () => downvotePostComment(postId, comment.id),
+      {
+        onSuccess: () => {
+          refetchPage(commentPage);
+        },
       },
-    },
-  );
+    );
 
   const handleCommentUpvote = () => {
     upvoteMutate();
@@ -79,7 +71,9 @@ export const Comment = ({
           isActive={comment.userPrincipalUpvoted}
           size={16}
         />
-        <span className={styles.root__votes}>{comment.votes}</span>
+        {!isDownvoteMutateLoading && !isDownvoteMutateLoading && (
+          <span className={styles.root__votes}>{comment.votes}</span>
+        )}
         <AlternateLoader
           isLoading={isUpvoteMutateLoading || isDownvoteMutateLoading}
         />

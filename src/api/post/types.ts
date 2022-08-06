@@ -9,6 +9,22 @@ export type PostUrlUploadRequestDto = {
   mature: boolean;
 };
 
+export type ReducedPost = {
+  webId: string;
+  title: string;
+  mature: boolean;
+  coverUrl: string;
+  votes: number;
+  comments: number;
+  views: number;
+};
+
+export type Posts = {
+  posts: ReducedPost[];
+  count: number;
+  nextPage: number | null;
+};
+
 export type Post = {
   webId: string;
   title: string;
@@ -17,6 +33,8 @@ export type Post = {
   coverUrl: string;
   userId: string;
   username: string;
+  userPrincipalUpvoted: boolean;
+  userPrincipalDownvoted: boolean;
   tags: Tag[];
   upvotes: number;
   downvotes: number;
@@ -56,10 +74,12 @@ export type NewPostId = string;
 
 export type PostUploadResponseDto = Response<NewPostId>;
 
+export type PostsResponseDto = Response<Posts>;
+
 export type PostResponseDto = Response<Post>;
+
+export type PostVoteResponseDto = Response<number>;
 
 export type PostCommentsResponseDto = Response<PostComments>;
 
-export type PosCommentUpvoteResponseDto = Response<number>;
-
-export type PosCommentDownvoteResponseDto = Response<number>;
+export type PostCommentVoteResponseDto = Response<number>;

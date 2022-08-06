@@ -44,7 +44,6 @@ export const Post = (): JSX.Element => {
     ({ pageParam = 0 }) => fetchPostComments(params!.postId, pageParam),
     {
       refetchOnMount: true,
-      refetchOnWindowFocus: false,
       refetchOnReconnect: true,
       getNextPageParam: (lastPage) => {
         if (!lastPage.data.nextPage) {
@@ -60,7 +59,7 @@ export const Post = (): JSX.Element => {
     fetchNextPage();
   };
 
-  const refetchPage = (pageToRefetch: number) => {
+  const refetchCommentsPage = (pageToRefetch: number) => {
     refetch({ refetchPage: (page, index) => index === pageToRefetch });
   };
 
@@ -70,6 +69,9 @@ export const Post = (): JSX.Element => {
       <HeaderLayout className={styles.root}>
         <div className={styles.root__activityPostContainer}>
           <Sidebar
+            postId={post?.data.webId}
+            userPrincipalUpvoted={post?.data.userPrincipalUpvoted}
+            userPrincipalDownvoted={post?.data.userPrincipalDownvoted}
             votesCount={post?.data.votes}
             totalCommentsCount={postCommentsGroups?.pages[0].data.count}
             commentsSectionRef={commentsRef}
@@ -84,7 +86,7 @@ export const Post = (): JSX.Element => {
               commentsRef={commentsRef}
               onLoadMoreComments={handleOnLoadMoreComments}
               isMoreCommentsRefetching={isFetchingNextPage}
-              refetchPage={refetchPage}
+              refetchPage={refetchCommentsPage}
             />
           </div>
         </div>

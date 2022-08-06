@@ -11,7 +11,7 @@ export enum VoteAction {
 interface IVoteButtonProps {
   action: VoteAction;
   onClick: () => void;
-  isActive: boolean;
+  isActive?: boolean;
   size?: number;
 }
 

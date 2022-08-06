@@ -2,31 +2,31 @@ import { ActivityBar, ShareButton, CommentsRefButton } from '@/components';
 import styles from './Sidebar.module.scss';
 
 interface ISidebarProps {
+  postId?: string;
+  userPrincipalUpvoted?: boolean;
+  userPrincipalDownvoted?: boolean;
   votesCount?: number;
   commentsSectionRef: React.MutableRefObject<HTMLDivElement | null>;
   totalCommentsCount?: number;
 }
 
 export const Sidebar = ({
+  postId,
+  userPrincipalUpvoted,
+  userPrincipalDownvoted,
   votesCount,
   commentsSectionRef,
   totalCommentsCount,
 }: ISidebarProps): JSX.Element => {
-  const handleOnUpvote = () => {};
-
-  const handleOnDownvote = () => {};
-
-  const handleOnFavorize = () => {};
-
   const handleOnShare = () => {};
 
   return (
     <div className={styles.root}>
       <ActivityBar
+        postId={postId}
+        userPrincipalUpvoted={userPrincipalUpvoted}
+        userPrincipalDownvoted={userPrincipalDownvoted}
         votes={votesCount}
-        onUpvote={handleOnUpvote}
-        onDownvote={handleOnDownvote}
-        onFavorize={handleOnFavorize}
       />
       <ShareButton onClick={handleOnShare} />
       <CommentsRefButton

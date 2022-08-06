@@ -5,13 +5,15 @@ import { useLocation } from 'wouter';
 import styles from './AuthToComment.module.scss';
 
 export const AuthToComment = (): JSX.Element => {
-  const [, setLocation] = useLocation();
+  const [location, setLocation] = useLocation();
 
   const handleSignIn = () => {
+    localStorage.setItem('prevPath', location);
     setLocation('/signin');
   };
 
   const handleSignUp = () => {
+    localStorage.setItem('prevPath', location);
     setLocation('/signup');
   };
 

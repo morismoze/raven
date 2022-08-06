@@ -1,4 +1,4 @@
-import { InfiniteData, useMutation } from 'react-query';
+import { useMutation } from 'react-query';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 import {
@@ -15,7 +15,6 @@ import {
 import {
   PostComment,
   PostCommentRequestDto,
-  PostComments,
   PostCommentsResponseDto,
   uploadPostComment,
   useAuth,
