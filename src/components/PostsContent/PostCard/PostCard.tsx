@@ -20,8 +20,11 @@ export const PostCard = ({ post, gridRowHeight, gridGap }: IPostCardProps) => {
   const cardContentRef = useRef<HTMLAnchorElement>(null);
 
   const handleOnLoad = useCallback(() => {
+    console.log(cardContentRef.current!.getBoundingClientRect().height!);
+    console.log(cardContentRef.current!.clientHeight);
+
     const rowSpan = Math.ceil(
-      (cardContentRef.current!.getBoundingClientRect().height! + gridGap) /
+      (cardContentRef.current!.clientHeight + gridGap) /
         (gridRowHeight + gridGap),
     );
     cardRootRef.current!.style.gridRowEnd = `span ${rowSpan}`;
@@ -29,7 +32,7 @@ export const PostCard = ({ post, gridRowHeight, gridGap }: IPostCardProps) => {
 
   return (
     <div ref={cardRootRef} id={post.webId} className={styles.root}>
-      <Link href={`/p/${post.webId}`} className={styles.root__linkWrapper}>
+      <Link href={`/p/${post.webId}`}>
         <a ref={cardContentRef} className={styles.root__link}>
           <img
             src={post.coverUrl}
