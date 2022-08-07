@@ -55,12 +55,8 @@ export const Post = (): JSX.Element => {
     },
   );
 
-  const handleOnLoadMoreComments = () => {
-    fetchNextPage();
-  };
-
   const refetchCommentsPage = (pageToRefetch: number) => {
-    refetch({ refetchPage: (page, index) => index === pageToRefetch });
+    refetch({ refetchPage: (_, index) => index === pageToRefetch });
   };
 
   return (
@@ -84,7 +80,7 @@ export const Post = (): JSX.Element => {
               hasMoreComments={hasNextPage}
               totalCommentsCount={postCommentsGroups?.pages[0].data.count}
               commentsRef={commentsRef}
-              onLoadMoreComments={handleOnLoadMoreComments}
+              onLoadMoreComments={fetchNextPage}
               isMoreCommentsRefetching={isFetchingNextPage}
               refetchPage={refetchCommentsPage}
             />

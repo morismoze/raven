@@ -41,3 +41,5 @@ export * from './PostCommentsContent/PostCommentsContent';
 export * from './PostCommentsContent/CommentForm/CommentForm';
 export * from './PostCommentsContent/CommentsHeader/CommentsHeader';
 export * from './PostCommentsContent/Comment/Comment';
+export * from './PostsContent/PostsContent';
+export * from './PostsContent/PostCard/PostCard';

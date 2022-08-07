@@ -4,13 +4,8 @@
   fill: var(--white);
   cursor: pointer;
 
-  &:hover {
-    transition: transform 0.25s ease-in-out;
-    transform: scale(1.1);
-
-    path {
-      transition: fill 0.25s ease-in-out;
-      fill: var(--secondary);
-    }
+  &:hover path {
+    transition: fill 0.25s ease-in-out;
+    fill: var(--secondary);
   }
 }

@@ -1,7 +1,8 @@
 import { useInfiniteQuery } from 'react-query';
 
-import { Header, HeaderLayout } from '@/components';
+import { Header, HeaderLayout, PostsContent } from '@/components';
 import { fetchPosts, PostsResponseDto } from '@/api';
+import styles from './Home.module.scss';
 
 export const Home = (): JSX.Element => {
   const {
@@ -11,7 +12,7 @@ export const Home = (): JSX.Element => {
     hasNextPage,
     refetch,
   } = useInfiniteQuery<PostsResponseDto>(
-    'fetch-post-comments',
+    'fetch-posts',
     ({ pageParam = 0 }) => fetchPosts(pageParam),
     {
       refetchOnMount: true,
@@ -33,8 +34,13 @@ export const Home = (): JSX.Element => {
   return (
     <>
       <Header />
-      <HeaderLayout>
-        <div></div>
+      <HeaderLayout className={styles.root}>
+        <PostsContent
+          postsGroups={posts?.pages}
+          hasMorePosts={hasNextPage}
+          onLoadMorePosts={fetchNextPage}
+          isMorePostsRefetching={isFetchingNextPage}
+        />
       </HeaderLayout>
     </>
   );

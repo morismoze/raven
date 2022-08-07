@@ -7,9 +7,9 @@ import {
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-const POSTS_LIMIT = 5;
+const POSTS_LIMIT = 10;
 
-const COMMENTS_LIMIT = 5;
+const COMMENTS_LIMIT = 15;
 
 export const uploadPostByImageUrl = async (post: PostUrlUploadRequestDto) => {
   try {

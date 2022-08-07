@@ -80,7 +80,7 @@ export const PostCommentsContent = ({
         className={styles.root__componentsContainer}
       >
         {commentsGroups?.map((group: PostCommentsResponseDto, groupIndex) => {
-          return group?.data.comments.map((comment: PostComment, index) => (
+          return group.data.comments.map((comment: PostComment, index) => (
             <Comment
               postId={postId!}
               comment={comment}
@@ -97,9 +97,9 @@ export const PostCommentsContent = ({
           action={ButtonAction.primary}
           onClick={onLoadMoreComments}
           disabled={isMoreCommentsRefetching}
-          className={styles.root__moreCommentsButton}
+          className={styles.root__morePostCommentsButton}
         >
-          <div className={styles.root__submitContainer}>
+          <div className={styles.root__buttonContainer}>
             <span>Load more comments</span>
             <AlternateLoader isLoading={isMoreCommentsRefetching} />
           </div>

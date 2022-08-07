@@ -8,14 +8,16 @@
   &.upvote {
     &--active path {
       stroke: var(--success);
+      fill: var(--success);
     }
 
     &:hover {
       transform: translateY(-2px);
 
       & path {
-        transition: stroke 0.25s ease-in-out;
+        transition: stroke, fill 0.25s ease-in-out;
         stroke: var(--success);
+        fill: var(--success);
       }
     }
   }
@@ -25,14 +27,16 @@
 
     &--active path {
       stroke: var(--error);
+      fill: var(--error);
     }
 
     &:hover {
       transform: translateY(2px) rotate(180deg);
 
       & path {
-        transition: stroke 0.25s ease-in-out;
+        transition: stroke, fill 0.25s ease-in-out;
         stroke: var(--error);
+        fill: var(--error);
       }
     }
   }
