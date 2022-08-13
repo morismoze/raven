@@ -1,0 +1,22 @@
+@import 'src/styles/util.module.scss';
+
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  background-image: linear-gradient(to right, var(--primary), var(--secondary));
+  background-attachment: fixed;
+  width: 110px;
+  height: 80px;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &__tag {
+    color: var(--white);
+    font-size: toRem(13);
+    font-weight: 600;
+    word-break: keep-all;
+    text-align: center;
+  }
+}

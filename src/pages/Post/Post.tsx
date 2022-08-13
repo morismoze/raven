@@ -1,5 +1,4 @@
-import { useRef, useState } from 'react';
-import { flushSync } from 'react-dom';
+import { useRef } from 'react';
 
 import { useRoute } from 'wouter';
 import { useInfiniteQuery, useQuery } from 'react-query';
@@ -29,7 +28,6 @@ export const Post = (): JSX.Element => {
     () => fetchPost(params!.postId),
     {
       refetchOnMount: true,
-      refetchOnReconnect: true,
     },
   );
 
@@ -44,7 +42,6 @@ export const Post = (): JSX.Element => {
     ({ pageParam = 0 }) => fetchPostComments(params!.postId, pageParam),
     {
       refetchOnMount: true,
-      refetchOnReconnect: true,
       getNextPageParam: (lastPage) => {
         if (!lastPage.data.nextPage) {
           return false;

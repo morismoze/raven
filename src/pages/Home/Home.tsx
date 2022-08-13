@@ -1,7 +1,13 @@
-import { useInfiniteQuery } from 'react-query';
+import { useInfiniteQuery, useQuery } from 'react-query';
 
-import { Header, HeaderLayout, PostsContent } from '@/components';
-import { fetchPosts, PostsResponseDto } from '@/api';
+import { Header, HeaderLayout, PostsContent, TagsContent } from '@/components';
+import {
+  AllTagsResponseDto,
+  fetchAllTags,
+  fetchPosts,
+  PostsResponseDto,
+  Tag,
+} from '@/api';
 import styles from './Home.module.scss';
 
 export const Home = (): JSX.Element => {
@@ -10,13 +16,11 @@ export const Home = (): JSX.Element => {
     fetchNextPage,
     isFetchingNextPage,
     hasNextPage,
-    refetch,
   } = useInfiniteQuery<PostsResponseDto>(
     'fetch-posts',
     ({ pageParam = 0 }) => fetchPosts(pageParam),
     {
       refetchOnMount: true,
-      refetchOnReconnect: true,
       getNextPageParam: (lastPage) => {
         if (!lastPage.data.nextPage) {
           return false;
@@ -27,14 +31,23 @@ export const Home = (): JSX.Element => {
     },
   );
 
-  const refetchPostsPage = (pageToRefetch: number) => {
-    refetch({ refetchPage: (page, index) => index === pageToRefetch });
+  const { data: tags } = useQuery<AllTagsResponseDto>(
+    'fetch-all-tags',
+    fetchAllTags,
+    {
+      refetchOnMount: true,
+    },
+  );
+
+  const handleOnTagSelect = (tagId: number) => {
+    // fetch posts on specific tag
   };
 
   return (
     <>
       <Header />
       <HeaderLayout className={styles.root}>
+        <TagsContent tags={tags?.data} onSelect={handleOnTagSelect} />
         <PostsContent
           postsGroups={posts?.pages}
           hasMorePosts={hasNextPage}

@@ -1,3 +1,4 @@
+import { Image } from '@/components';
 import styles from './Cover.module.scss';
 
 interface ICoverProps {
@@ -8,7 +9,7 @@ interface ICoverProps {
 export const Cover = ({ url, alt }: ICoverProps): JSX.Element => {
   return (
     <div className={styles.root}>
-      <img src={url} alt={alt} className={styles.root__img} />
+      <Image src={url} alt={alt} className={styles.root__img} />
     </div>
   );
 };

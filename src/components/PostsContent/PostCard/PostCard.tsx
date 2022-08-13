@@ -1,8 +1,9 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import { Link } from 'wouter';
 import { Eye } from 'react-bootstrap-icons';
 
+import { Image } from '@/components';
 import { ReactComponent as Votes } from '@/assets/icons/vote.svg';
 import { ReactComponent as Comments } from '@/assets/icons/comments.svg';
 import { ReducedPost } from '@/api';
@@ -19,22 +20,19 @@ export const PostCard = ({ post, gridRowHeight, gridGap }: IPostCardProps) => {
 
   const cardContentRef = useRef<HTMLAnchorElement>(null);
 
-  const handleOnLoad = useCallback(() => {
-    console.log(cardContentRef.current!.getBoundingClientRect().height!);
-    console.log(cardContentRef.current!.clientHeight);
-
+  const handleOnLoad = () => {
     const rowSpan = Math.ceil(
       (cardContentRef.current!.clientHeight + gridGap) /
         (gridRowHeight + gridGap),
     );
     cardRootRef.current!.style.gridRowEnd = `span ${rowSpan}`;
-  }, []);
+  };
 
   return (
     <div ref={cardRootRef} id={post.webId} className={styles.root}>
       <Link href={`/p/${post.webId}`}>
         <a ref={cardContentRef} className={styles.root__link}>
-          <img
+          <Image
             src={post.coverUrl}
             alt={post.title}
             onLoad={handleOnLoad}

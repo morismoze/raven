@@ -1,0 +1,8 @@
+@import 'src/styles/util.module.scss';
+
+.root {
+  text-transform: uppercase;
+  font-size: toRem(16);
+  color: var(--text-darker);
+  font-weight: 600;
+}
