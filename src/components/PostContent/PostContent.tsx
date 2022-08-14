@@ -21,7 +21,7 @@ export const PostContent = ({ post }: IPostContentProps): JSX.Element => {
       <Cover url={post?.coverUrl} alt={post?.title} />
       <div className={styles.root__tagsContainer}>
         {post?.tags.map((tag, index) => (
-          <Link href={`/t/${tag.tagName.toLowerCase}`} key={index}>
+          <Link href={`/t/${tag.tagName}`} key={index}>
             <a className={styles.root__tagLink}>
               <Chip
                 action={ChipAction.primary}

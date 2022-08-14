@@ -3,12 +3,12 @@ export type Tag = {
   tagName: string;
 };
 
-export type TagPosts = Tag & {
+export type TagPost = Tag & {
   posts: number;
 };
 
 export type AllTagsResponseDto = {
-  data: TagPosts[];
+  data: TagPost[];
   hasErrors: boolean;
   message?: string;
   fieldErrors: [];

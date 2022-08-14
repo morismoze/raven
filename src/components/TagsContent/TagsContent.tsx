@@ -1,17 +1,16 @@
-import { SectionTitle, Tag, ShowMoreTags } from '@/components';
-import { Tag as TTag } from '@/api';
-import styles from './TagsContent.module.scss';
 import { useState } from 'react';
-import { useLocation } from 'wouter';
+
 import classNames from 'classnames';
 
+import { SectionTitle, Tag, ShowMoreTags } from '@/components';
+import { TagPost } from '@/api';
+import styles from './TagsContent.module.scss';
+
 interface ITagsContentProps {
-  tags?: TTag[];
+  tags?: TagPost[];
 }
 
 export const TagsContent = ({ tags }: ITagsContentProps): JSX.Element => {
-  const [, setLocation] = useLocation();
-
   const [isMoreTagsActive, setIsMoreTagsActive] = useState<boolean>(false);
 
   const toggleTags = () => {
@@ -29,8 +28,8 @@ export const TagsContent = ({ tags }: ITagsContentProps): JSX.Element => {
           [styles['root__tagsContainer--active']]: isMoreTagsActive,
         })}
       >
-        {tags?.map((tag: TTag, index) => (
-          <Tag name={tag.tagName} key={index} />
+        {tags?.map((tag: TagPost, index) => (
+          <Tag name={tag.tagName} postsCount={tag.posts} key={index} />
         ))}
       </div>
     </div>

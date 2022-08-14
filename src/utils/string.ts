@@ -1,7 +1,7 @@
 import * as timeago from 'timeago.js';
 
 export const formatNumber = (number?: number) => {
-  if (!number) {
+  if (number === undefined || number === null) {
     return;
   }
 

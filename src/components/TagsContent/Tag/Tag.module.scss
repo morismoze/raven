@@ -2,8 +2,10 @@
 
 .root {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 5px;
   padding: 10px 15px;
   background-image: linear-gradient(to right, var(--primary), var(--secondary));
   background-attachment: fixed;
@@ -19,5 +21,11 @@
     font-weight: 600;
     word-break: keep-all;
     text-align: center;
+  }
+
+  &__postsCount {
+    color: var(--white-opacity);
+    font-size: toRem(11);
+    font-weight: 600;
   }
 }

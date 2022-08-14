@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { useRoute } from 'wouter';
 import { useInfiniteQuery, useQuery } from 'react-query';
@@ -55,6 +55,10 @@ export const Post = (): JSX.Element => {
   const refetchCommentsPage = (pageToRefetch: number) => {
     refetch({ refetchPage: (_, index) => index === pageToRefetch });
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
