@@ -39,15 +39,11 @@ export const Home = (): JSX.Element => {
     },
   );
 
-  const handleOnTagSelect = (tagId: number) => {
-    // fetch posts on specific tag
-  };
-
   return (
     <>
       <Header />
       <HeaderLayout className={styles.root}>
-        <TagsContent tags={tags?.data} onSelect={handleOnTagSelect} />
+        <TagsContent tags={tags?.data} />
         <PostsContent
           postsGroups={posts?.pages}
           hasMorePosts={hasNextPage}

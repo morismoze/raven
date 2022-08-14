@@ -4,6 +4,6 @@ interface ISectionTitleProps {
   children: React.ReactNode;
 }
 
-export const SectionTitle = ({ children }: ISectionTitleProps) => {
+export const SectionTitle = ({ children }: ISectionTitleProps): JSX.Element => {
   return <span className={styles.root}>{children}</span>;
 };
