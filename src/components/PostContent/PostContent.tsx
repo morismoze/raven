@@ -25,7 +25,7 @@ export const PostContent = ({ post }: IPostContentProps): JSX.Element => {
             <a className={styles.root__tagLink}>
               <Chip
                 action={ChipAction.primary}
-                text={tag.tagName}
+                text={tag.tagDisplayName}
                 key={index}
               />
             </a>

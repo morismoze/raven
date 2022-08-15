@@ -1,6 +1,7 @@
 export type Tag = {
   id: number;
   tagName: string;
+  tagDisplayName: string;
 };
 
 export type TagPost = Tag & {

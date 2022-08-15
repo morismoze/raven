@@ -54,10 +54,11 @@ export const TagSelect = ({
               onTagsSelect={(tags: Tag[]) =>
                 handleOnTagsSelect(setFieldValue, tags)
               }
+              value={value}
             />
             {value.map((selectedTag: Tag) => (
               <Chip
-                text={selectedTag.tagName}
+                text={selectedTag.tagDisplayName}
                 action={ChipAction.secondary}
                 key={selectedTag.id}
               />

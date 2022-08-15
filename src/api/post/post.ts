@@ -46,6 +46,15 @@ export const fetchPosts = async (page: number) => {
   }
 };
 
+export const fetchNewest20Posts = async () => {
+  try {
+    const response = await axiosInstance.get(`${API_URL}/post/newest`);
+    return response.data;
+  } catch (error: any) {
+    return error.response;
+  }
+};
+
 export const fetchPost = async (webId: string) => {
   try {
     const response = await axiosInstance.get(`${API_URL}/post/${webId}`);

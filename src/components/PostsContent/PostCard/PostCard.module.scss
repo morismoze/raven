@@ -13,6 +13,10 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
+
+    & > div:first-child {
+      flex-basis: 100%;
+    }
   }
 
   &__img {

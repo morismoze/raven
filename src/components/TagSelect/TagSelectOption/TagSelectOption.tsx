@@ -24,7 +24,7 @@ export const TagSelectOption = ({
       })}
       onClick={handleOnClick}
     >
-      <span className={styles.root__tag}>{tag.tagName}</span>
+      <span className={styles.root__tag}>{tag.tagDisplayName}</span>
     </div>
   );
 };

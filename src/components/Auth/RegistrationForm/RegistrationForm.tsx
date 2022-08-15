@@ -14,27 +14,36 @@ import styles from './RegistrationForm.module.scss';
 const RegistrationSchema = Yup.object().shape({
   firstName: Yup.string()
     .max(30, 'First name must be at most 30 characters')
+    .trim()
     .required('First name is required'),
   lastName: Yup.string()
     .max(30, 'Last name must be at most 30 characters')
+    .trim()
     .required('Last name is required'),
   email: Yup.string()
     .max(255, 'Email must be at most 255 characters')
+    .trim()
     .matches(
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}/,
       'Email is not of valid type',
     )
     .required('Email is required'),
+  username: Yup.string()
+    .max(255, 'Username must be at most 255 characters')
+    .trim()
+    .required('Username is required'),
   password: Yup.string()
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
       'Password must be atleast eight characters, one uppercase, one lowercase, one number and one special character',
     )
     .max(60, 'Password must be at most 60 characters')
+    .trim()
     .required('Password is required'),
   passwordConfirmation: Yup.string()
     .oneOf([Yup.ref('password'), null], 'Passwords must match')
     .max(60, 'Password must be at most 60 characters')
+    .trim()
     .required('Password confirmation is required'),
 });
 

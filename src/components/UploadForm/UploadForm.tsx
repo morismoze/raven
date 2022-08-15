@@ -17,9 +17,11 @@ import { Tag } from '@/api';
 const UploadSchema = Yup.object().shape({
   title: Yup.string()
     .max(255, 'Title must be at most 30 characters')
+    .trim()
     .required('Title is required'),
   description: Yup.string()
     .max(2200, 'Description must be at most 2200 characters')
+    .trim()
     .required('Description is required'),
   tags: Yup.array()
     .min(1, 'Atleast one tag must be selected')

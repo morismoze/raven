@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import FadeIn from 'react-fade-in';
 
@@ -16,6 +16,7 @@ interface ITagSelectModalProps {
   toggleActive: () => void;
   tags: Tag[];
   onTagsSelect: (tags: Tag[]) => void;
+  value: Tag[];
 }
 
 export const TagSelectModal = ({
@@ -23,12 +24,13 @@ export const TagSelectModal = ({
   toggleActive,
   tags,
   onTagsSelect,
+  value,
 }: ITagSelectModalProps): JSX.Element | null => {
-  const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
-
   if (!active) {
     return null;
   }
+
+  const [selectedTags, setSelectedTags] = useState<Tag[]>(value);
 
   const handleOnTagClick = (tag: Tag) => {
     if (!selectedTags.includes(tag)) {

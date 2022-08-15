@@ -9,10 +9,13 @@ import {
   HeaderLayout,
   PostContent,
   PostCommentsContent,
+  NewestPostsContent,
 } from '@/components';
 import {
+  fetchNewest20Posts,
   fetchPost,
   fetchPostComments,
+  Newest20PostsResponseDto,
   PostCommentsResponseDto,
   PostResponseDto,
 } from '@/api';
@@ -24,7 +27,7 @@ export const Post = (): JSX.Element => {
   const commentsRef = useRef<HTMLDivElement>(null);
 
   const { data: post } = useQuery<PostResponseDto>(
-    'fetch-post',
+    ['fetch-post', params],
     () => fetchPost(params!.postId),
     {
       refetchOnMount: true,
@@ -38,7 +41,7 @@ export const Post = (): JSX.Element => {
     hasNextPage,
     refetch,
   } = useInfiniteQuery<PostCommentsResponseDto>(
-    'fetch-post-comments',
+    ['fetch-post-comments', params],
     ({ pageParam = 0 }) => fetchPostComments(params!.postId, pageParam),
     {
       refetchOnMount: true,
@@ -49,6 +52,14 @@ export const Post = (): JSX.Element => {
           return lastPage.data.nextPage;
         }
       },
+    },
+  );
+
+  const { data: newestPosts } = useQuery<Newest20PostsResponseDto>(
+    'fetch-newest-20-posts',
+    () => fetchNewest20Posts(),
+    {
+      refetchOnMount: true,
     },
   );
 
@@ -87,7 +98,7 @@ export const Post = (): JSX.Element => {
             />
           </div>
         </div>
-        <div className={styles.root__trendingContainer}></div>
+        <NewestPostsContent posts={newestPosts?.data} />
       </HeaderLayout>
     </>
   );

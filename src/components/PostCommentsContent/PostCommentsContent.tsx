@@ -1,4 +1,4 @@
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 import {
@@ -20,7 +20,6 @@ import {
   useAuth,
   User,
 } from '@/api';
-import { queryClient } from '@/lib';
 import styles from './PostCommentsContent.module.scss';
 
 interface IPostCommentsContentProps {
@@ -44,6 +43,8 @@ export const PostCommentsContent = ({
   isMoreCommentsRefetching,
   refetchPage,
 }: IPostCommentsContentProps): JSX.Element => {
+  const queryClient = useQueryClient();
+
   const { user } = useAuth();
 
   const { mutate, isLoading } = useMutation<

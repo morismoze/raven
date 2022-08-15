@@ -1,4 +1,4 @@
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 
 import {
   VoteButton,
@@ -8,7 +8,6 @@ import {
 } from '@/components';
 import { downvotePost, PostVoteResponseDto, upvotePost } from '@/api';
 import styles from './ActivityBar.module.scss';
-import { queryClient } from '@/lib';
 
 interface IVotingBar {
   postId?: string;
@@ -23,6 +22,8 @@ export const ActivityBar = ({
   userPrincipalDownvoted,
   votes,
 }: IVotingBar): JSX.Element => {
+  const queryClient = useQueryClient();
+
   const { mutate: upvoteMutate, isLoading: isUpvoteMutateLoading } =
     useMutation<PostVoteResponseDto, unknown>(
       'upvote-post',

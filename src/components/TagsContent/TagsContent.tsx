@@ -29,7 +29,12 @@ export const TagsContent = ({ tags }: ITagsContentProps): JSX.Element => {
         })}
       >
         {tags?.map((tag: TagPost, index) => (
-          <Tag name={tag.tagName} postsCount={tag.posts} key={index} />
+          <Tag
+            name={tag.tagName}
+            displayName={tag.tagDisplayName}
+            postsCount={tag.posts}
+            key={index}
+          />
         ))}
       </div>
     </div>

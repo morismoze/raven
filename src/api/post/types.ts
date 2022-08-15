@@ -44,6 +44,15 @@ export type Post = {
   updatedAt: string;
 };
 
+export type NewestPost = {
+  webId: string;
+  title: string;
+  mature: boolean;
+  coverUrl: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export type PostComment = {
   id: number;
   comment: string;
@@ -75,6 +84,8 @@ export type NewPostId = string;
 export type PostUploadResponseDto = Response<NewPostId>;
 
 export type PostsResponseDto = Response<Posts>;
+
+export type Newest20PostsResponseDto = Response<NewestPost[]>;
 
 export type PostResponseDto = Response<Post>;
 
