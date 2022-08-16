@@ -1,6 +1,13 @@
 import { Link } from 'wouter';
 
-import { Title, Meta, Cover, Chip, ChipAction } from '@/components';
+import {
+  Title,
+  Meta,
+  Cover,
+  Chip,
+  ChipAction,
+  Description,
+} from '@/components';
 import { Post } from '@/api';
 import styles from './PostContent.module.scss';
 
@@ -32,6 +39,7 @@ export const PostContent = ({ post }: IPostContentProps): JSX.Element => {
           </Link>
         ))}
       </div>
+      <Description>{post?.description}</Description>
     </div>
   );
 };

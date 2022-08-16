@@ -12,6 +12,7 @@
     height: 64px;
     object-fit: cover;
     border-radius: 8px;
+    transition: transform 0.15s ease-in-out;
   }
 
   &__dataContainer {
@@ -47,5 +48,9 @@
   &__createdAt {
     color: var(--text-darker);
     font-size: toRem(12);
+  }
+
+  &:hover {
+    filter: brightness(120%);
   }
 }

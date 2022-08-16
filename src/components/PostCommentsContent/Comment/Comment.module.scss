@@ -1,13 +1,26 @@
 @import 'src/styles/util.module.scss';
 
 .root {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
   border-top: 1px solid var(--border-main);
-  padding: 15px 8px 12px;
+  padding: 8px 0;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    border-radius: 6px;
+    padding: 8px 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.05s ease-in-out;
+  }
 
   &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__metadataContainer {
     display: flex;
     align-items: center;
     gap: 5px;
@@ -28,6 +41,10 @@
     color: var(--text-darker);
   }
 
+  &__actionsMenuWrapper {
+    display: none;
+  }
+
   &__comment {
     color: var(--white);
     font-size: toRem(14);
@@ -43,5 +60,18 @@
   &__votes {
     color: var(--white);
     font-size: toRem(12);
+  }
+
+  &:hover {
+    filter: brightness(125%);
+  }
+
+  &:hover &__wrapper {
+    background-color: var(--bg-main);
+    box-shadow: 0 2px 16px rgb(0 0 0 / 16%);
+  }
+
+  &:hover &__actionsMenuWrapper {
+    display: block;
   }
 }

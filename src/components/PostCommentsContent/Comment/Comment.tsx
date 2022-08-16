@@ -1,6 +1,12 @@
 import { useMutation } from 'react-query';
 
-import { Avatar, VoteButton, VoteAction, AlternateLoader } from '@/components';
+import {
+  Avatar,
+  VoteButton,
+  VoteAction,
+  AlternateLoader,
+  ActionsMenu,
+} from '@/components';
 import {
   downvotePostComment,
   PostCommentVoteResponseDto,
@@ -57,32 +63,39 @@ export const Comment = ({
 
   return (
     <div className={styles.root}>
-      <div className={styles.root__header}>
-        <Avatar id={comment.userId} username={comment.username} size={25} />
-        <span className={styles.root__username}>{comment.username}</span>
-        <span className={styles.root__separator}>&bull;</span>
-        <span className={styles.root__createdAt}>{formattedCreatedAt}</span>
-      </div>
-      <span className={styles.root__comment}>{comment.comment}</span>
-      <div className={styles.root__footer}>
-        <VoteButton
-          action={VoteAction.upvote}
-          onClick={handleCommentUpvote}
-          isActive={comment.userPrincipalUpvoted}
-          size={16}
-        />
-        {!isDownvoteMutateLoading && !isDownvoteMutateLoading && (
-          <span className={styles.root__votes}>{comment.votes}</span>
-        )}
-        <AlternateLoader
-          isLoading={isUpvoteMutateLoading || isDownvoteMutateLoading}
-        />
-        <VoteButton
-          action={VoteAction.downvote}
-          onClick={handleCommentDownvote}
-          isActive={comment.userPrincipalDownvoted}
-          size={16}
-        />
+      <div className={styles.root__wrapper}>
+        <div className={styles.root__header}>
+          <div className={styles.root__metadataContainer}>
+            <Avatar id={comment.userId} username={comment.username} size={25} />
+            <span className={styles.root__username}>{comment.username}</span>
+            <span className={styles.root__separator}>&bull;</span>
+            <span className={styles.root__createdAt}>{formattedCreatedAt}</span>
+          </div>
+          <div className={styles.root__actionsMenuWrapper}>
+            <ActionsMenu />
+          </div>
+        </div>
+        <span className={styles.root__comment}>{comment.comment}</span>
+        <div className={styles.root__footer}>
+          <VoteButton
+            action={VoteAction.upvote}
+            onClick={handleCommentUpvote}
+            isActive={comment.userPrincipalUpvoted}
+            size={16}
+          />
+          {!isDownvoteMutateLoading && !isDownvoteMutateLoading && (
+            <span className={styles.root__votes}>{comment.votes}</span>
+          )}
+          <AlternateLoader
+            isLoading={isUpvoteMutateLoading || isDownvoteMutateLoading}
+          />
+          <VoteButton
+            action={VoteAction.downvote}
+            onClick={handleCommentDownvote}
+            isActive={comment.userPrincipalDownvoted}
+            size={16}
+          />
+        </div>
       </div>
     </div>
   );

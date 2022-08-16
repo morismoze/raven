@@ -1,0 +1,8 @@
+@import 'src/styles/util.module.scss';
+
+.root {
+  margin-top: 20px;
+  font-size: toRem(14);
+  color: var(--white);
+  line-height: 20px;
+}

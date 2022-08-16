@@ -41,7 +41,12 @@ export const LinkUpload = ({ onUpload }: ILinkUploadProps) => {
     if (url) {
       try {
         const response = await axiosInstance.head(url);
-        if (!response.headers['content-type'].match('image/*')) {
+        console.log(response);
+
+        if (
+          !response.headers['content-type'].match('image/*') &&
+          response.status !== 200
+        ) {
           setFieldError('url', 'Given image URL is not valid');
         } else {
           onUpload(url);
