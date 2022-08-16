@@ -33,7 +33,8 @@
     "no-useless-escape": "off",
     "no-constant-condition": "off",
     "@typescript-eslint/no-empty-function": "off",
-    "no-empty": "off"
+    "no-empty": "off",
+    "@typescript-eslint/ban-ts-comment": "off"
   },
   "ignorePatterns": ["**/*.css", "**/*.scss"]
 }
