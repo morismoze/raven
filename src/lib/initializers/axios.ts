@@ -56,8 +56,10 @@ axiosInstance.interceptors.response.use(
     if (
       errorHeader &&
       errorHeader === EXPIRED_ACCESS_TOKEN_ERROR &&
+      // @ts-ignore
       !originalRequest._retry
     ) {
+      // @ts-ignore
       originalRequest._retry = true;
       await refreshAccessToken();
       return axiosInstance(originalRequest);
