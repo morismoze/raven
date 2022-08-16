@@ -13,6 +13,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 
   &__dropZone {
     display: flex;
@@ -28,5 +29,16 @@
     color: var(--white);
     font-size: toRem(13);
     font-weight: 600;
+  }
+
+  &__errorMessage {
+    color: var(--error);
+    font-size: toRem(12);
+    word-break: break-word;
+    text-align: center;
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }

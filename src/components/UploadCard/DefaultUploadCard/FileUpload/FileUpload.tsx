@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 import { FileImage } from 'react-bootstrap-icons';
 
@@ -9,25 +9,35 @@ interface IFileUploadProps {
 }
 
 export const FileUpload = ({ onUpload }: IFileUploadProps) => {
+  const [error, setError] = useState<string | null>(null);
+
   const handleImageUpload = async (event: ChangeEvent): Promise<void> => {
     const target = event.target as HTMLInputElement;
     const file = (target.files as FileList)[0];
-    onUpload(file);
+
+    if (!file.type.match('image/*')) {
+      setError('Only image file types are allowed');
+    } else {
+      onUpload(file);
+    }
   };
 
   return (
-    <div className={styles.root}>
-      <label htmlFor="image-input" className={styles.root__labelContainer}>
-        <FileImage className={styles.root__imageIcon} />
-        <span className={styles.root__chooseText}>Choose an image</span>
-      </label>
-      <input
-        id="image-input"
-        type="file"
-        accept="image/png,image/gif,image/jpeg,image/webp"
-        onChange={handleImageUpload}
-        className={styles.root__input}
-      />
-    </div>
+    <>
+      <div className={styles.root}>
+        <label htmlFor="image-input" className={styles.root__labelContainer}>
+          <FileImage className={styles.root__imageIcon} />
+          <span className={styles.root__chooseText}>Choose an image</span>
+        </label>
+        <input
+          id="image-input"
+          type="file"
+          accept="image/*"
+          onChange={handleImageUpload}
+          className={styles.root__input}
+        />
+      </div>
+      {error && <span className={styles.errorMessage}>{error}</span>}
+    </>
   );
 };

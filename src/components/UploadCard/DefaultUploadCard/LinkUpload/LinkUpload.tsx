@@ -38,11 +38,10 @@ export const LinkUpload = ({ onUpload }: ILinkUploadProps) => {
     setFieldError: FormikSetFieldErrorFn,
   ) => {
     const url = (event.target as HTMLInputElement).value.trim().toLowerCase();
+
     if (url) {
       try {
         const response = await axiosInstance.head(url);
-        console.log(response);
-
         if (
           !response.headers['content-type'].match('image/*') &&
           response.status !== 200
@@ -61,7 +60,6 @@ export const LinkUpload = ({ onUpload }: ILinkUploadProps) => {
     <Formik
       initialValues={initialValues}
       validationSchema={LinkUploadSchema}
-      validateOnChange
       onSubmit={handleOnSubmit}
     >
       {({ errors, touched, values, setFieldError }) => {
@@ -71,6 +69,7 @@ export const LinkUpload = ({ onUpload }: ILinkUploadProps) => {
             onChange={(event: FormEvent) =>
               handleOnChange(event, setFieldError)
             }
+            onBlur={(event: FormEvent) => handleOnChange(event, setFieldError)}
           >
             <StyledField
               name="url"

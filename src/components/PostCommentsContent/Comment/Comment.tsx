@@ -75,7 +75,7 @@ export const Comment = ({
             <ActionsMenu />
           </div>
         </div>
-        <span className={styles.root__comment}>{comment.comment}</span>
+        <pre className={styles.root__comment}>{comment.comment}</pre>
         <div className={styles.root__footer}>
           <VoteButton
             action={VoteAction.upvote}

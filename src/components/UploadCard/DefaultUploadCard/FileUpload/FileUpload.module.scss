@@ -30,3 +30,11 @@
     display: none;
   }
 }
+
+.errorMessage {
+  color: var(--error);
+  font-size: toRem(12);
+  word-break: break-word;
+  text-align: center;
+  margin-top: -10px;
+}
