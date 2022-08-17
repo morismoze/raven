@@ -3,6 +3,7 @@
 .root {
   stroke: var(--white);
   cursor: pointer;
+  outline: none;
   transition: transform 0.25s ease-in-out;
 
   &.upvote {

@@ -5,5 +5,5 @@ interface IDescriptionProps {
 }
 
 export const Description = ({ children }: IDescriptionProps): JSX.Element => {
-  return <p className={styles.root}>{children}</p>;
+  return <pre className={styles.root}>{children}</pre>;
 };

@@ -3,6 +3,7 @@ import React from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { ErrorBoundary } from 'react-error-boundary';
 import { QueryClientProvider } from 'react-query';
+import { Toaster } from 'react-hot-toast';
 
 import { Loader } from '@/components';
 import { AuthProvider } from '@/api/auth/auth';
@@ -32,6 +33,7 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
           <QueryClientProvider client={queryClient}>
             <AuthProvider>
               <UploadProvider>{children}</UploadProvider>
+              <Toaster position="bottom-left" />
             </AuthProvider>
           </QueryClientProvider>
         </HelmetProvider>

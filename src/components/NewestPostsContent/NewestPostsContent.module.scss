@@ -5,8 +5,10 @@
   gap: 15px;
   position: sticky;
   align-self: flex-start;
-  top: 100px;
+  top: 150px;
   width: 100%;
+  min-width: 400px;
+  max-width: 400px;
 
   &__postsContainer {
     max-height: 300px;

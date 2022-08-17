@@ -35,7 +35,7 @@ const RegistrationSchema = Yup.object().shape({
   password: Yup.string()
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-      'Password must be atleast eight characters, one uppercase, one lowercase, one number and one special character',
+      'Password must be at least eight characters, one uppercase, one lowercase, one number and one special character',
     )
     .max(60, 'Password must be at most 60 characters')
     .trim()

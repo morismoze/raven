@@ -1,7 +1,9 @@
 import classNames from 'classnames';
-import { ReactComponent as Vote } from '@/assets/icons/vote.svg';
+import toast from 'react-hot-toast';
 
+import { ReactComponent as Vote } from '@/assets/icons/vote.svg';
 import styles from './VoteButton.module.scss';
+import { useAuth, User } from '@/api';
 
 export enum VoteAction {
   upvote = 'upvote',
@@ -21,8 +23,21 @@ export const VoteButton = ({
   isActive,
   size,
 }: IVoteButtonProps): JSX.Element => {
+  const { user } = useAuth();
+
+  const userPrincipal = user?.data as User;
+
   const handleOnClick = () => {
-    onClick();
+    if (!userPrincipal) {
+      toast.error('You have to be logged in order to vote', {
+        style: {
+          color: 'var(--error)',
+          fontSize: 13,
+        },
+      });
+    } else {
+      onClick();
+    }
   };
 
   return (

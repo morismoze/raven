@@ -24,7 +24,7 @@ const UploadSchema = Yup.object().shape({
     .trim()
     .required('Description is required'),
   tags: Yup.array()
-    .min(1, 'Atleast one tag must be selected')
+    .min(1, 'At least one tag must be selected')
     .required('Tag is required'),
   mature: Yup.boolean(),
 });

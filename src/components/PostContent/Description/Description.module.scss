@@ -5,4 +5,7 @@
   font-size: toRem(14);
   color: var(--white);
   line-height: 20px;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  max-width: 100%;
 }
