@@ -46,6 +46,17 @@ export const fetchPosts = async (page: number) => {
   }
 };
 
+export const fetchPostsByTagName = async (tagName: string, page: number) => {
+  try {
+    const response = await axiosInstance.get(
+      `${API_URL}/post/all?tagName=${tagName}&page=${page}&limit=${POSTS_LIMIT}`,
+    );
+    return response.data;
+  } catch (error: any) {
+    return error.response;
+  }
+};
+
 export const fetchNewest20Posts = async () => {
   try {
     const response = await axiosInstance.get(`${API_URL}/post/newest`);

@@ -31,8 +31,11 @@ export const VoteButton = ({
     if (!userPrincipal) {
       toast.error('You have to be logged in order to vote', {
         style: {
-          color: 'var(--error)',
           fontSize: 13,
+        },
+        iconTheme: {
+          primary: 'var(--error)',
+          secondary: '#FFFAEE',
         },
       });
     } else {

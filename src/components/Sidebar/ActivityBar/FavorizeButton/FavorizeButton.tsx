@@ -19,8 +19,11 @@ export const FavorizeButton = ({
     if (!userPrincipal) {
       toast.error('You have to be logged in order to favorize', {
         style: {
-          color: 'var(--error)',
           fontSize: 13,
+        },
+        iconTheme: {
+          primary: 'var(--error)',
+          secondary: '#FFFAEE',
         },
       });
     } else {

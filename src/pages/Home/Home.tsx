@@ -6,7 +6,6 @@ import {
   fetchAllTags,
   fetchPosts,
   PostsResponseDto,
-  Tag,
 } from '@/api';
 import styles from './Home.module.scss';
 
