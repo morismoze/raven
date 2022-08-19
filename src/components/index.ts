@@ -52,3 +52,4 @@ export * from './TagsContent/TagsContent';
 export * from './TagsContent/Tag/Tag';
 export * from './TagsContent/ShowMoreTags/ShowMoreTags';
 export * from './SectionTitle/SectionTitle';
+export * from './EmptyPostsData/EmptyPostsData';

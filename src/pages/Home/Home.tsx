@@ -1,6 +1,12 @@
 import { useInfiniteQuery, useQuery } from 'react-query';
 
-import { Header, HeaderLayout, PostsContent, TagsContent } from '@/components';
+import {
+  Header,
+  HeaderLayout,
+  PostsContent,
+  TagsContent,
+  EmptyPostsData,
+} from '@/components';
 import {
   AllTagsResponseDto,
   fetchAllTags,
@@ -43,12 +49,16 @@ export const Home = (): JSX.Element => {
       <Header />
       <HeaderLayout className={styles.root}>
         <TagsContent tags={tags?.data} />
-        <PostsContent
-          postsGroups={posts?.pages}
-          hasMorePosts={hasNextPage}
-          onLoadMorePosts={fetchNextPage}
-          isMorePostsRefetching={isFetchingNextPage}
-        />
+        {posts?.pages[0].data.count === 0 ? (
+          <EmptyPostsData />
+        ) : (
+          <PostsContent
+            postsGroups={posts?.pages}
+            hasMorePosts={hasNextPage}
+            onLoadMorePosts={fetchNextPage}
+            isMorePostsRefetching={isFetchingNextPage}
+          />
+        )}
       </HeaderLayout>
     </>
   );

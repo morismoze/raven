@@ -11,7 +11,6 @@ export const Image = (props: ImageProps): JSX.Element | null => {
   const imgContainerRef = useRef<HTMLDivElement>(null);
 
   useIntersection(imgContainerRef, () => {
-    console.log(props.src);
     setIsInView(true);
   });
 
