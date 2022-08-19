@@ -11,12 +11,13 @@ export const Image = (props: ImageProps): JSX.Element | null => {
   const imgContainerRef = useRef<HTMLDivElement>(null);
 
   useIntersection(imgContainerRef, () => {
+    console.log(props.src);
     setIsInView(true);
   });
 
   return (
     <div ref={imgContainerRef} className={styles.root}>
-      {isInView && <img {...props} />}
+      {isInView && <img {...props} loading="lazy" />}
     </div>
   );
 };

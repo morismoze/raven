@@ -32,6 +32,7 @@ export const VoteButton = ({
       toast.error('You have to be logged in order to vote', {
         style: {
           fontSize: 13,
+          color: 'var(--bg-main)',
         },
         iconTheme: {
           primary: 'var(--error)',

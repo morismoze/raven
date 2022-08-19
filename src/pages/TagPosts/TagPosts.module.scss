@@ -1,0 +1,33 @@
+.root {
+  margin-top: 30px;
+
+  &__metaContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  &__tag {
+    font-size: 40px;
+    font-weight: 700;
+    -webkit-text-fill-color: transparent;
+  }
+
+  &__separator {
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 10px;
+    -webkit-text-fill-color: transparent;
+  }
+
+  &__postsCount {
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 10px;
+    -webkit-text-fill-color: transparent;
+  }
+}

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 
 import { Link } from 'wouter';
 import { Eye } from 'react-bootstrap-icons';
@@ -20,13 +20,13 @@ export const PostCard = ({ post, gridRowHeight, gridGap }: IPostCardProps) => {
 
   const cardContentRef = useRef<HTMLAnchorElement>(null);
 
-  const handleOnLoad = () => {
+  const handleOnLoad = useCallback(() => {
     const rowSpan = Math.ceil(
       (cardContentRef.current!.clientHeight + gridGap) /
         (gridRowHeight + gridGap),
     );
     cardRootRef.current!.style.gridRowEnd = `span ${rowSpan}`;
-  };
+  }, []);
 
   return (
     <div ref={cardRootRef} id={post.webId} className={styles.root}>

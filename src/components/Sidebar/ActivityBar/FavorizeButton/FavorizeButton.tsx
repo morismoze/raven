@@ -20,6 +20,7 @@ export const FavorizeButton = ({
       toast.error('You have to be logged in order to favorize', {
         style: {
           fontSize: 13,
+          color: 'var(--bg-main)',
         },
         iconTheme: {
           primary: 'var(--error)',
