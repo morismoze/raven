@@ -49,29 +49,31 @@ export const Login = (): JSX.Element => {
 
   const handleSuccessfulLogin = () => {
     const prevPath = localStorage.getItem('prevPath');
-    location.replace(prevPath || '/');
+    setLocation(prevPath || '/', { replace: true });
   };
 
   return (
-    <div className={styles.root}>
-      <FadeIn className={styles.root__wrapper}>
-        <AuthCard
-          form={LoginForm}
-          onAuth={handleLogin}
-          isAuthenticating={isLoggingIn}
-          notificationMessage={notification}
-          notificationType={AuthNotificationMessageType.error}
-        />
-        <AccountExistence
-          preText="Don't have an account?"
-          linkText="Sign up"
-          link="/signup"
-        />
-      </FadeIn>
+    <>
+      <div className={styles.root}>
+        <FadeIn className={styles.root__wrapper}>
+          <AuthCard
+            form={LoginForm}
+            onAuth={handleLogin}
+            isAuthenticating={isLoggingIn}
+            notificationMessage={notification}
+            notificationType={AuthNotificationMessageType.error}
+          />
+          <AccountExistence
+            preText="Don't have an account?"
+            linkText="Sign up"
+            link="/signup"
+          />
+        </FadeIn>
+      </div>
       <SuccessAnimation
         show={isSuccess}
         onAnimationFinish={handleSuccessfulLogin}
       />
-    </div>
+    </>
   );
 };

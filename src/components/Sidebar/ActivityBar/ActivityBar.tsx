@@ -63,11 +63,12 @@ export const ActivityBar = ({
         onClick={handleOnUpvote}
         isActive={userPrincipalUpvoted}
       />
-      {!isDownvoteMutateLoading && !isDownvoteMutateLoading && (
+      {!isUpvoteMutateLoading && !isDownvoteMutateLoading && (
         <span className={styles.root__votes}>{votes}</span>
       )}
       <AlternateLoader
         isLoading={isUpvoteMutateLoading || isDownvoteMutateLoading}
+        size={18}
       />
       <VoteButton
         action={VoteAction.downvote}

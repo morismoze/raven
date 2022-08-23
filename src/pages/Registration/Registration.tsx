@@ -41,6 +41,7 @@ export const Registration = (): JSX.Element => {
   };
 
   const handleSuccessfulRegistration = () => {
+    localStorage.setItem('activation', JSON.stringify('true'));
     setLocation('/signin');
   };
 

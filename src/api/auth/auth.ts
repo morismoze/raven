@@ -1,12 +1,7 @@
 import { initReactQueryAuth } from 'react-query-auth';
 
 import { Loader } from '@/components';
-import {
-  AuthUser,
-  Error,
-  LoginCredentialsDTO,
-  RegisterCredentialsDTO,
-} from './types';
+import { AuthUser, Error, LoginRequestDto, RegisterRequestDto } from './types';
 import {
   ACCESS_TOKEN_HEADER,
   axiosInstance,
@@ -24,7 +19,7 @@ const loadUser = async () => {
   }
 };
 
-const loginFn = async (data: LoginCredentialsDTO) => {
+const loginFn = async (data: LoginRequestDto) => {
   try {
     const response = await axiosInstance.post(`${API_URL}/login`, data);
     return response.data;
@@ -33,13 +28,20 @@ const loginFn = async (data: LoginCredentialsDTO) => {
   }
 };
 
-const registerFn = async (data: RegisterCredentialsDTO): Promise<AuthUser> => {
+const registerFn = async (data: RegisterRequestDto): Promise<AuthUser> => {
   try {
     const response = await axiosInstance.post(`${API_URL}/user/create`, data);
     return response.data;
   } catch (error: any) {
     return error.response.data;
   }
+};
+
+export const activateAccount = async (uuid: string) => {
+  const response = await axiosInstance.put(
+    `${API_URL}/user/activate?uuid=${uuid}`,
+  );
+  return response.data;
 };
 
 const logoutFn = async () => {
@@ -72,6 +74,6 @@ const authConfig = {
 export const { AuthProvider, useAuth } = initReactQueryAuth<
   AuthUser,
   Error,
-  LoginCredentialsDTO,
-  RegisterCredentialsDTO
+  LoginRequestDto,
+  RegisterRequestDto
 >(authConfig);

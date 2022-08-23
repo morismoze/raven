@@ -31,6 +31,9 @@ export const Post = (): JSX.Element => {
     () => fetchPost(params!.postId),
     {
       refetchOnMount: true,
+      onError: (err) => {
+        console.log(err);
+      },
     },
   );
 

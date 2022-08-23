@@ -1,0 +1,42 @@
+@import 'src/styles/util.module.scss';
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: fit-content;
+  margin: 0 auto;
+
+  &__textContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &__text {
+    font-size: toRem(15);
+    font-weight: 500;
+    color: var(--white);
+    text-align: center;
+  }
+
+  &__logo {
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+  }
+
+  & > div:last-child {
+    width: fit-content;
+  }
+
+  &__submitContainer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+}

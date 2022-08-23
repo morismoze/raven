@@ -23,15 +23,17 @@ export type AuthUser = Response<User | Unauthorized>;
 
 export type Error = AuthUser;
 
-export type LoginCredentialsDTO = {
+export type LoginRequestDto = {
   username: string;
   password: string;
 };
 
-export type RegisterCredentialsDTO = {
+export type RegisterRequestDto = {
   firstName: string;
   lastName: string;
   email: string;
   username: string;
   password: string;
 };
+
+export type ActivationResponseDto = Response<null>;

@@ -13,7 +13,7 @@
 
 .pace .pace-progress {
   background: var(--primary);
-  background: linear-gradient(to left, var(--primary), var(--secondary));
+  background: linear-gradient(to right, var(--primary), var(--secondary));
   position: fixed;
   z-index: 2000;
   top: 0;

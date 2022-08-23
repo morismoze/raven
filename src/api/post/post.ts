@@ -1,4 +1,5 @@
 import { axiosInstance } from '@/lib';
+import { AxiosError } from 'axios';
 import {
   PostCommentRequestDto,
   PostFileUploadRequestDto,
@@ -67,12 +68,8 @@ export const fetchNewest20Posts = async () => {
 };
 
 export const fetchPost = async (webId: string) => {
-  try {
-    const response = await axiosInstance.get(`${API_URL}/post/${webId}`);
-    return response.data;
-  } catch (error: any) {
-    return error.response;
-  }
+  const response = await axiosInstance.get(`${API_URL}/post/${webId}`);
+  return response.data;
 };
 
 export const upvotePost = async (webId: string) => {

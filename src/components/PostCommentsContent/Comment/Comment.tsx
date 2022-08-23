@@ -83,11 +83,12 @@ export const Comment = ({
             isActive={comment.userPrincipalUpvoted}
             size={16}
           />
-          {!isDownvoteMutateLoading && !isDownvoteMutateLoading && (
+          {!isUpvoteMutateLoading && !isDownvoteMutateLoading && (
             <span className={styles.root__votes}>{comment.votes}</span>
           )}
           <AlternateLoader
             isLoading={isUpvoteMutateLoading || isDownvoteMutateLoading}
+            size={14}
           />
           <VoteButton
             action={VoteAction.downvote}

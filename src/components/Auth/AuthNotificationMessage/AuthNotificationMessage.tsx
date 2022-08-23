@@ -5,6 +5,7 @@ import styles from './AuthNotificationMessage.module.scss';
 
 export enum AuthNotificationMessageType {
   success = 'success',
+  info = 'info',
   error = 'error',
 }
 
@@ -23,6 +24,7 @@ export const AuthNotificationMessage = ({
         className={classNames(
           styles.root,
           { [styles.success]: type === AuthNotificationMessageType.success },
+          { [styles.info]: type === AuthNotificationMessageType.info },
           { [styles.error]: type === AuthNotificationMessageType.error },
         )}
       >
