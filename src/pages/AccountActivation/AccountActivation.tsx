@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { AxiosError } from 'axios';
 import { ShieldCheck } from 'react-bootstrap-icons';
+import FadeIn from 'react-fade-in';
 import { useLocation } from 'wouter';
 import { useMutation } from 'react-query';
 
@@ -47,34 +48,36 @@ export const AccountActivation = () => {
 
   return (
     <>
-      <div className={styles.root}>
-        {error && (
-          <AuthNotificationMessage
-            message={error}
-            type={AuthNotificationMessageType.error}
-          />
-        )}
-        <div className={styles.root__textContainer}>
-          <span className={styles.root__text}>
-            Thank you for registering on{' '}
-            <span className={styles.root__logo}>raven</span>!
-          </span>
-          <span className={styles.root__text}>
-            Activate your account by clicking the button below:
-          </span>
-        </div>
-        <Button
-          onClick={handleActivation}
-          size={ButtonSize.small}
-          action={ButtonAction.primary}
-          Icon={ShieldCheck}
-        >
-          <div className={styles.root__submitContainer}>
-            <span>Verify email</span>
-            <AlternateLoader isLoading={isLoading} />
+      <FadeIn className={styles.root}>
+        <div className={styles.root__contentContainer}>
+          {error && (
+            <AuthNotificationMessage
+              message={error}
+              type={AuthNotificationMessageType.error}
+            />
+          )}
+          <div className={styles.root__textContainer}>
+            <span className={styles.root__text}>
+              Thank you for registering on{' '}
+              <span className={styles.root__logo}>raven</span>!
+            </span>
+            <span className={styles.root__text}>
+              Activate your account by clicking the button below:
+            </span>
           </div>
-        </Button>
-      </div>
+          <Button
+            onClick={handleActivation}
+            size={ButtonSize.small}
+            action={ButtonAction.primary}
+            Icon={ShieldCheck}
+          >
+            <div className={styles.root__submitContainer}>
+              <span>Verify email</span>
+              <AlternateLoader isLoading={isLoading} />
+            </div>
+          </Button>
+        </div>
+      </FadeIn>
       <SuccessAnimation
         show={isSuccess}
         onAnimationFinish={handleSuccessfulActivation}

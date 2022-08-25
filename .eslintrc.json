@@ -34,7 +34,8 @@
     "no-constant-condition": "off",
     "@typescript-eslint/no-empty-function": "off",
     "no-empty": "off",
-    "@typescript-eslint/ban-ts-comment": "off"
+    "@typescript-eslint/ban-ts-comment": "off",
+    "react/no-unescaped-entities": "off"
   },
   "ignorePatterns": ["**/*.css", "**/*.scss"]
 }
