@@ -41,30 +41,31 @@ export const Registration = (): JSX.Element => {
   };
 
   const handleSuccessfulRegistration = () => {
-    localStorage.setItem('activation', JSON.stringify('true'));
-    setLocation('/signin');
+    setLocation('/post-registration');
   };
 
   return (
-    <div className={styles.root}>
-      <FadeIn className={styles.root__wrapper}>
-        <AuthCard
-          form={RegistrationForm}
-          onAuth={handleRegistration}
-          isAuthenticating={isRegistering}
-          notificationMessage={notification}
-          notificationType={AuthNotificationMessageType.error}
-        />
-        <AccountExistence
-          preText="Already have an account?"
-          linkText="Sign in"
-          link="/signin"
-        />
-      </FadeIn>
+    <>
+      <div className={styles.root}>
+        <FadeIn className={styles.root__wrapper}>
+          <AuthCard
+            form={RegistrationForm}
+            onAuth={handleRegistration}
+            isAuthenticating={isRegistering}
+            notificationMessage={notification}
+            notificationType={AuthNotificationMessageType.error}
+          />
+          <AccountExistence
+            preText="Already have an account?"
+            linkText="Sign in"
+            link="/signin"
+          />
+        </FadeIn>
+      </div>
       <SuccessAnimation
         show={isSuccess}
         onAnimationFinish={handleSuccessfulRegistration}
       />
-    </div>
+    </>
   );
 };

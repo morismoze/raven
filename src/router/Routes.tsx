@@ -8,6 +8,10 @@ const { AccountActivation } = lazyImport(
   () => import('@/pages'),
   'AccountActivation',
 );
+const { PostRegistration } = lazyImport(
+  () => import('@/pages'),
+  'PostRegistration',
+);
 const { Login } = lazyImport(() => import('@/pages'), 'Login');
 const { Home } = lazyImport(() => import('@/pages'), 'Home');
 const { Upload } = lazyImport(() => import('@/pages'), 'Upload');
@@ -22,6 +26,7 @@ export const Routes = (): JSX.Element => {
     <Switch>
       <Route path="/signup" component={Registration} />
       <Route path="/activate" component={AccountActivation} />
+      <Route path="/post-registration" component={PostRegistration} />
       <Route path="/signin" component={Login} />
       <Route path="/" component={Home} />
       <ProtectedRoute path="/upload" component={Upload} />

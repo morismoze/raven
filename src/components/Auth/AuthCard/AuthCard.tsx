@@ -18,9 +18,6 @@ interface IAuthCardLayoutProps {
   notificationType?: AuthNotificationMessageType;
 }
 
-const ACTIVATION_MESSAGE =
-  'A verification link has been sent to your email address';
-
 export const AuthCard = ({
   form: Form,
   onAuth,
@@ -31,8 +28,6 @@ export const AuthCard = ({
   const handleGoogleAuth = () => {
     // google auth
   };
-
-  const activation = localStorage.getItem('activation');
 
   return (
     <div className={styles.root}>
@@ -45,12 +40,6 @@ export const AuthCard = ({
         Continue with Google
       </Button>
       <span className={styles.root__alternativeBinder}>Or continue with</span>
-      {activation && (
-        <AuthNotificationMessage
-          message={ACTIVATION_MESSAGE}
-          type={AuthNotificationMessageType.info}
-        />
-      )}
       {notificationMessage && notificationType && (
         <AuthNotificationMessage
           message={notificationMessage}

@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
-import { useLocation } from 'wouter';
+import { AxiosError } from 'axios';
 import { ShieldCheck } from 'react-bootstrap-icons';
+import { useLocation } from 'wouter';
 import { useMutation } from 'react-query';
 
 import {
@@ -15,7 +16,6 @@ import {
 } from '@/components';
 import { activateAccount, ActivationResponseDto } from '@/api';
 import styles from './AccountActivation.module.scss';
-import { AxiosError } from 'axios';
 
 export const AccountActivation = () => {
   const [, setLocation] = useLocation();
@@ -43,7 +43,6 @@ export const AccountActivation = () => {
 
   const handleSuccessfulActivation = () => {
     setLocation('/signin');
-    localStorage.removeItem('activation');
   };
 
   return (
