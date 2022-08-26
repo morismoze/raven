@@ -1,7 +1,14 @@
 import { initReactQueryAuth } from 'react-query-auth';
 
 import { Loader } from '@/components';
-import { AuthUser, Error, LoginRequestDto, RegisterRequestDto } from './types';
+import {
+  AuthUser,
+  Error,
+  ForgotPasswordRequestDto,
+  LoginRequestDto,
+  PasswordResetRequestDto,
+  RegisterRequestDto,
+} from './types';
 import {
   ACCESS_TOKEN_HEADER,
   axiosInstance,
@@ -28,6 +35,27 @@ const loginFn = async (data: LoginRequestDto) => {
   }
 };
 
+export const sendPasswordResetEmail = async (
+  email: ForgotPasswordRequestDto,
+) => {
+  const response = await axiosInstance.post(
+    `${API_URL}/user/password/reset`,
+    email,
+  );
+  return response.data;
+};
+
+export const resetPassword = async (
+  uuid: string,
+  password: PasswordResetRequestDto,
+) => {
+  const response = await axiosInstance.put(
+    `${API_URL}/user/password/reset?uuid=${uuid}`,
+    password,
+  );
+  return response.data;
+};
+
 const registerFn = async (data: RegisterRequestDto): Promise<AuthUser> => {
   try {
     const response = await axiosInstance.post(`${API_URL}/user/create`, data);
@@ -35,6 +63,13 @@ const registerFn = async (data: RegisterRequestDto): Promise<AuthUser> => {
   } catch (error: any) {
     return error.response.data;
   }
+};
+
+export const resendActivationEmail = async (userId: string) => {
+  const response = await axiosInstance.put(
+    `${API_URL}/user/create/resend?id=${userId}`,
+  );
+  return response.data;
 };
 
 export const activateAccount = async (uuid: string) => {

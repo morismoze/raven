@@ -6,20 +6,22 @@ import FadeIn from 'react-fade-in';
 import {
   AccountExistence,
   AuthCard,
-  AuthNotificationMessageType,
+  NotificationMessageType,
   RegistrationForm,
   IRegistrationFormValues,
   SuccessAnimation,
 } from '@/components';
-import { AuthUser, useAuth } from '@/api';
+import { AuthUser, useAuth, User } from '@/api';
 import styles from './Registration.module.scss';
 
 export const Registration = (): JSX.Element => {
-  const [, setLocation] = useLocation();
-
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
+  const [userId, setUserId] = useState<string>('');
+
   const [notification, setNotification] = useState<string>('');
+
+  const [, setLocation] = useLocation();
 
   const { register, isRegistering } = useAuth();
 
@@ -35,13 +37,14 @@ export const Registration = (): JSX.Element => {
     } else {
       // resetting notification so the previous error message dissapears
       setNotification('');
+      setUserId((response.data as User).id);
       setIsSuccess(true);
       return null;
     }
   };
 
   const handleSuccessfulRegistration = () => {
-    setLocation('/post-registration');
+    setLocation(`/post-registration?uid=${userId}`);
   };
 
   return (
@@ -53,7 +56,7 @@ export const Registration = (): JSX.Element => {
             onAuth={handleRegistration}
             isAuthenticating={isRegistering}
             notificationMessage={notification}
-            notificationType={AuthNotificationMessageType.error}
+            notificationType={NotificationMessageType.error}
           />
           <AccountExistence
             preText="Already have an account?"

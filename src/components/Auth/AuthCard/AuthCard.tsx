@@ -5,8 +5,8 @@ import {
   ButtonSize,
   ButtonAction,
   ToS,
-  AuthNotificationMessage,
-  AuthNotificationMessageType,
+  NotificationMessage,
+  NotificationMessageType,
 } from '@/components';
 import styles from './AuthCard.module.scss';
 
@@ -15,7 +15,7 @@ interface IAuthCardLayoutProps {
   onAuth: (values: any) => void;
   isAuthenticating: boolean;
   notificationMessage?: string;
-  notificationType?: AuthNotificationMessageType;
+  notificationType?: NotificationMessageType;
 }
 
 export const AuthCard = ({
@@ -41,7 +41,7 @@ export const AuthCard = ({
       </Button>
       <span className={styles.root__alternativeBinder}>Or continue with</span>
       {notificationMessage && notificationType && (
-        <AuthNotificationMessage
+        <NotificationMessage
           message={notificationMessage}
           type={notificationType}
         />

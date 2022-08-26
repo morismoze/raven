@@ -1,4 +1,4 @@
-import { Link } from 'wouter';
+import { TextLink } from '@/components';
 import styles from './AccountExistence.module.scss';
 
 interface IAccountExistenceProps {
@@ -15,10 +15,7 @@ export const AccountExistence = ({
   return (
     <div className={styles.root}>
       <span className={styles.root__preText}>
-        {preText}{' '}
-        <Link href={link} className={styles.root__link}>
-          {linkText}
-        </Link>
+        {preText} <TextLink href={link}>{linkText}</TextLink>
       </span>
     </div>
   );

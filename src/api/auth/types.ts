@@ -28,6 +28,14 @@ export type LoginRequestDto = {
   password: string;
 };
 
+export type ForgotPasswordRequestDto = {
+  email: string;
+};
+
+export type PasswordResetRequestDto = {
+  password: string;
+};
+
 export type RegisterRequestDto = {
   firstName: string;
   lastName: string;
@@ -36,4 +44,10 @@ export type RegisterRequestDto = {
   password: string;
 };
 
+export type ActivationEmailResendResponseDto = Response<null>;
+
 export type ActivationResponseDto = Response<null>;
+
+export type ForgotPasswordResponseDto = Response<null>;
+
+export type PasswordResetResponseDto = Response<null>;

@@ -25,10 +25,18 @@
     gap: 6px;
   }
 
-  &__text {
-    font-size: toRem(15);
+  &__title {
+    font-size: toRem(20);
     font-weight: 500;
-    color: var(--white);
+    color: var(--primary);
+    text-align: center;
+  }
+
+  &__text {
+    font-size: toRem(14);
+    font-weight: 500;
+    color: var(--text-darker);
+    line-height: 22px;
     text-align: center;
   }
 

@@ -6,7 +6,7 @@ import FadeIn from 'react-fade-in';
 import {
   AccountExistence,
   AuthCard,
-  AuthNotificationMessageType,
+  NotificationMessageType,
   LoginForm,
   ILoginFormValues,
   SuccessAnimation,
@@ -20,13 +20,13 @@ const LOGIN_ERROR_MESSAGE =
 const INCORRECT_CREDENTIALS = 'Incorrect username or password';
 
 export const Login = (): JSX.Element => {
-  const [, setLocation] = useLocation();
-
-  const { login, isLoggingIn } = useAuth();
-
   const [notification, setNotification] = useState<string>('');
 
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
+
+  const [, setLocation] = useLocation();
+
+  const { login, isLoggingIn } = useAuth();
 
   const handleLogin = async (values: ILoginFormValues) => {
     const response: AuthUser = await login(values);
@@ -61,7 +61,7 @@ export const Login = (): JSX.Element => {
             onAuth={handleLogin}
             isAuthenticating={isLoggingIn}
             notificationMessage={notification}
-            notificationType={AuthNotificationMessageType.error}
+            notificationType={NotificationMessageType.error}
           />
           <AccountExistence
             preText="Don't have an account?"

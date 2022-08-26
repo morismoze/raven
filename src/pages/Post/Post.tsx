@@ -20,20 +20,18 @@ import {
   PostResponseDto,
 } from '@/api';
 import styles from './Post.module.scss';
+import { AxiosError } from 'axios';
 
 export const Post = (): JSX.Element => {
-  const [, params] = useRoute('/p/:postId');
-
   const commentsRef = useRef<HTMLDivElement>(null);
 
-  const { data: post } = useQuery<PostResponseDto>(
+  const [, params] = useRoute('/p/:postId');
+
+  const { data: post } = useQuery<PostResponseDto, AxiosError>(
     ['fetch-post', params],
     () => fetchPost(params!.postId),
     {
       refetchOnMount: true,
-      onError: (err) => {
-        console.log(err);
-      },
     },
   );
 
@@ -43,7 +41,7 @@ export const Post = (): JSX.Element => {
     isFetchingNextPage,
     hasNextPage,
     refetch,
-  } = useInfiniteQuery<PostCommentsResponseDto>(
+  } = useInfiniteQuery<PostCommentsResponseDto, AxiosError>(
     ['fetch-post-comments', params],
     ({ pageParam = 0 }) => fetchPostComments(params!.postId, pageParam),
     {
@@ -78,29 +76,33 @@ export const Post = (): JSX.Element => {
     <>
       <Header />
       <HeaderLayout className={styles.root}>
-        <div className={styles.root__activityPostContainer}>
-          <Sidebar
-            postId={post?.data.webId}
-            userPrincipalUpvoted={post?.data.userPrincipalUpvoted}
-            userPrincipalDownvoted={post?.data.userPrincipalDownvoted}
-            votesCount={post?.data.votes}
-            totalCommentsCount={postCommentsGroups?.pages[0].data.count}
-            commentsSectionRef={commentsRef}
-          />
-          <div className={styles.root__postCommentsContainer}>
-            <PostContent post={post?.data} />
-            <PostCommentsContent
-              postId={post?.data.webId}
-              commentsGroups={postCommentsGroups?.pages}
-              hasMoreComments={hasNextPage}
-              totalCommentsCount={postCommentsGroups?.pages[0].data.count}
-              commentsRef={commentsRef}
-              onLoadMoreComments={fetchNextPage}
-              isMoreCommentsRefetching={isFetchingNextPage}
-              refetchPage={refetchCommentsPage}
+        {post && postCommentsGroups ? (
+          <div className={styles.root__activityPostContainer}>
+            <Sidebar
+              postId={post.data.webId}
+              userPrincipalUpvoted={post.data.userPrincipalUpvoted}
+              userPrincipalDownvoted={post.data.userPrincipalDownvoted}
+              votesCount={post.data.votes}
+              totalCommentsCount={postCommentsGroups.pages[0].data.count}
+              commentsSectionRef={commentsRef}
             />
+            <div className={styles.root__postCommentsContainer}>
+              <PostContent post={post.data} />
+              <PostCommentsContent
+                postId={post.data.webId}
+                commentsGroups={postCommentsGroups.pages}
+                hasMoreComments={hasNextPage}
+                totalCommentsCount={postCommentsGroups.pages[0].data.count}
+                commentsRef={commentsRef}
+                onLoadMoreComments={fetchNextPage}
+                isMoreCommentsRefetching={isFetchingNextPage}
+                refetchPage={refetchCommentsPage}
+              />
+            </div>
           </div>
-        </div>
+        ) : (
+          <div>ou jes</div>
+        )}
         <NewestPostsContent posts={newestPosts?.data} />
       </HeaderLayout>
     </>

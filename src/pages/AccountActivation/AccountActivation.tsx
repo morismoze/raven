@@ -8,8 +8,8 @@ import { useMutation } from 'react-query';
 
 import {
   AlternateLoader,
-  AuthNotificationMessage,
-  AuthNotificationMessageType,
+  NotificationMessage,
+  NotificationMessageType,
   Button,
   ButtonAction,
   ButtonSize,
@@ -23,7 +23,7 @@ export const AccountActivation = () => {
 
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
-  const [error, setError] = useState<string>('');
+  const [notification, setNotification] = useState<string>('');
 
   const { mutate, isLoading } = useMutation(
     () => activateAccount(window.location.search.split('=')[1]),
@@ -33,7 +33,7 @@ export const AccountActivation = () => {
       },
       onError: (err: AxiosError) => {
         const message = (err.response?.data as ActivationResponseDto).message!;
-        setError(message);
+        setNotification(message);
       },
     },
   );
@@ -50,12 +50,13 @@ export const AccountActivation = () => {
     <>
       <FadeIn className={styles.root}>
         <div className={styles.root__contentContainer}>
-          {error && (
-            <AuthNotificationMessage
-              message={error}
-              type={AuthNotificationMessageType.error}
+          {notification && (
+            <NotificationMessage
+              message={notification}
+              type={NotificationMessageType.error}
             />
           )}
+          <span className={styles.root__title}>Email activation</span>
           <div className={styles.root__textContainer}>
             <span className={styles.root__text}>
               Thank you for registering on{' '}

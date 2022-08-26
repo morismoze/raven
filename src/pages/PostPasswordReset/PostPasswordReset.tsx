@@ -15,9 +15,9 @@ import {
   NotificationMessageType,
 } from '@/components';
 import { ActivationEmailResendResponseDto, resendActivationEmail } from '@/api';
-import styles from './PostRegistration.module.scss';
+import styles from './PostPasswordReset.module.scss';
 
-export const PostRegistration = (): JSX.Element => {
+export const PostPasswordReset = (): JSX.Element => {
   const [notification, setNotification] = useState<string>('');
 
   const { mutate, isLoading } = useMutation(
@@ -25,7 +25,7 @@ export const PostRegistration = (): JSX.Element => {
     {
       onSuccess: () => {
         setNotification('');
-        toast.success('Activation email resent!', {
+        toast.success('Password reset email resent!', {
           style: {
             fontSize: 13,
             color: 'var(--bg-main)',
@@ -44,7 +44,7 @@ export const PostRegistration = (): JSX.Element => {
     },
   );
 
-  const handleResendActivationEmail = () => {
+  const handleResendPasswordResetEmail = () => {
     mutate();
   };
 
@@ -57,23 +57,18 @@ export const PostRegistration = (): JSX.Element => {
             type={NotificationMessageType.error}
           />
         )}
-        <span className={styles.root__title}>Thank you</span>
+        <span className={styles.root__title}>Password reset email</span>
         <span className={styles.root__text}>
-          Great! Thank you for registering on{' '}
-          <span className={styles.root__logo}>raven</span>!
-        </span>
-        <span className={styles.root__text}>
-          We've reserved your space and sent you a activation link to your email
-          address. Be sure to check it out!
+          We've sent you a password reset link to your email address.
         </span>
         <div className={styles.root__separator} />
         <span className={styles.root__text}>
-          Didn't get the activation email?
+          Didn't get the password reset email?
         </span>
         <Button
           size={ButtonSize.small}
           action={ButtonAction.primary}
-          onClick={handleResendActivationEmail}
+          onClick={handleResendPasswordResetEmail}
           Icon={ArrowRepeat}
           disabled={isLoading}
         >

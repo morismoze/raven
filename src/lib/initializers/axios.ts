@@ -41,8 +41,11 @@ axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => {
     const accessToken = response.headers[ACCESS_TOKEN_HEADER];
     const refreshToken = response.headers[REFRESH_TOKEN_HEADER];
-    localStorage.setItem(ACCESS_TOKEN_HEADER, accessToken);
-    localStorage.setItem(REFRESH_TOKEN_HEADER, refreshToken);
+
+    if (accessToken && refreshToken) {
+      localStorage.setItem(ACCESS_TOKEN_HEADER, accessToken);
+      localStorage.setItem(REFRESH_TOKEN_HEADER, refreshToken);
+    }
 
     return response;
   },

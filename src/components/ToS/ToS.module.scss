@@ -5,10 +5,7 @@
   font-size: toRem(12);
   line-height: 18px;
 
-  &__tos,
-  &__pp {
-    color: var(--primary);
-    font-weight: 500;
-    text-decoration: none;
+  &__link {
+    font-size: toRem(12);
   }
 }

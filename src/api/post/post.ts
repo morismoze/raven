@@ -72,6 +72,13 @@ export const fetchPost = async (webId: string) => {
   return response.data;
 };
 
+export const fetchPostComments = async (webId: string, page: number) => {
+  const response = await axiosInstance.get(
+    `${API_URL}/post/${webId}/comments?page=${page}&limit=${COMMENTS_LIMIT}`,
+  );
+  return response.data;
+};
+
 export const upvotePost = async (webId: string) => {
   try {
     const response = await axiosInstance.post(
@@ -87,17 +94,6 @@ export const downvotePost = async (webId: string) => {
   try {
     const response = await axiosInstance.post(
       `${API_URL}/post/${webId}/downvote`,
-    );
-    return response.data;
-  } catch (error: any) {
-    return error.response;
-  }
-};
-
-export const fetchPostComments = async (webId: string, page: number) => {
-  try {
-    const response = await axiosInstance.get(
-      `${API_URL}/post/${webId}/comments?page=${page}&limit=${COMMENTS_LIMIT}`,
     );
     return response.data;
   } catch (error: any) {

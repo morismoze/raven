@@ -13,6 +13,15 @@ const { PostRegistration } = lazyImport(
   'PostRegistration',
 );
 const { Login } = lazyImport(() => import('@/pages'), 'Login');
+const { ForgotPassword } = lazyImport(
+  () => import('@/pages'),
+  'ForgotPassword',
+);
+const { PostPasswordReset } = lazyImport(
+  () => import('@/pages'),
+  'PostPasswordReset',
+);
+const { PasswordReset } = lazyImport(() => import('@/pages'), 'PasswordReset');
 const { Home } = lazyImport(() => import('@/pages'), 'Home');
 const { Upload } = lazyImport(() => import('@/pages'), 'Upload');
 const { UploadPreview } = lazyImport(() => import('@/pages'), 'UploadPreview');
@@ -28,6 +37,9 @@ export const Routes = (): JSX.Element => {
       <Route path="/activate" component={AccountActivation} />
       <Route path="/post-registration" component={PostRegistration} />
       <Route path="/signin" component={Login} />
+      <Route path="/forgot-password" component={ForgotPassword} />
+      <Route path="/post-password-reset" component={PostPasswordReset} />
+      <Route path="/reset-password" component={PasswordReset} />
       <Route path="/" component={Home} />
       <ProtectedRoute path="/upload" component={Upload} />
       <ProtectedRoute path="/upload/preview" component={UploadPreview} />
