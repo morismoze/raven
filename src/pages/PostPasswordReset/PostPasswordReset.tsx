@@ -62,9 +62,7 @@ export const PostPasswordReset = (): JSX.Element => {
           We've sent you a password reset link to your email address.
         </span>
         <div className={styles.root__separator} />
-        <span className={styles.root__text}>
-          Didn't get the password reset email?
-        </span>
+        <span className={styles.root__text}>Didn't get the email?</span>
         <Button
           size={ButtonSize.small}
           action={ButtonAction.primary}

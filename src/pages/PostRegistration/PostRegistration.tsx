@@ -67,9 +67,7 @@ export const PostRegistration = (): JSX.Element => {
           address. Be sure to check it out!
         </span>
         <div className={styles.root__separator} />
-        <span className={styles.root__text}>
-          Didn't get the activation email?
-        </span>
+        <span className={styles.root__text}>Didn't get the email?</span>
         <Button
           size={ButtonSize.small}
           action={ButtonAction.primary}

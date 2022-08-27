@@ -24,6 +24,8 @@ export const ForgotPassword = (): JSX.Element => {
 
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
+  const [userId, setUserId] = useState<string>('');
+
   const [, setLocation] = useLocation();
 
   const { mutate, isLoading } = useMutation<
@@ -31,8 +33,9 @@ export const ForgotPassword = (): JSX.Element => {
     AxiosError,
     ForgotPasswordRequestDto
   >((data) => sendPasswordResetEmail(data), {
-    onSuccess: () => {
+    onSuccess: (data) => {
       setIsSuccess(true);
+      setUserId(data.data.id);
     },
     onError: (err) => {
       setNotification(
@@ -46,7 +49,7 @@ export const ForgotPassword = (): JSX.Element => {
   };
 
   const handleSUccessfulEmailSubmit = () => {
-    setLocation('/post-password-reset');
+    setLocation(`/post-password-reset?uid=${userId}`);
   };
 
   return (

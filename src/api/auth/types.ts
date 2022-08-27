@@ -48,6 +48,6 @@ export type ActivationEmailResendResponseDto = Response<null>;
 
 export type ActivationResponseDto = Response<null>;
 
-export type ForgotPasswordResponseDto = Response<null>;
+export type ForgotPasswordResponseDto = Response<User>;
 
 export type PasswordResetResponseDto = Response<null>;
