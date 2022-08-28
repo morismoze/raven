@@ -36,6 +36,7 @@ export * from './VoteButton/VoteButton';
 export * from './Sidebar/ActivityBar/FavorizeButton/FavorizeButton';
 export * from './Sidebar/ShareButton/ShareButton';
 export * from './Sidebar/CommentsRefButton/CommentsRefButton';
+export * from './FourZeroFourPost/FourZeroFourPost';
 export * from './PostContent/PostContent';
 export * from './PostContent/Title/Title';
 export * from './PostContent/Meta/Meta';

@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 
+import { AxiosError } from 'axios';
 import { useRoute } from 'wouter';
 import { useInfiniteQuery, useQuery } from 'react-query';
 
@@ -10,6 +11,7 @@ import {
   PostContent,
   PostCommentsContent,
   NewestPostsContent,
+  FourZeroFourPost,
 } from '@/components';
 import {
   fetchNewest20Posts,
@@ -20,18 +22,27 @@ import {
   PostResponseDto,
 } from '@/api';
 import styles from './Post.module.scss';
-import { AxiosError } from 'axios';
 
-export const Post = (): JSX.Element => {
+const FOUR_ZERO_FOUR_POST = "The post you were trying to access doesn't exist.";
+
+export const Post = (): JSX.Element | undefined => {
   const commentsRef = useRef<HTMLDivElement>(null);
 
   const [, params] = useRoute('/p/:postId');
 
-  const { data: post } = useQuery<PostResponseDto, AxiosError>(
+  const {
+    data: post,
+    isSuccess,
+    error,
+  } = useQuery<PostResponseDto, AxiosError>(
     ['fetch-post', params],
     () => fetchPost(params!.postId),
     {
       refetchOnMount: true,
+      retry: false,
+      onSuccess: () => {
+        refetch();
+      },
     },
   );
 
@@ -53,6 +64,7 @@ export const Post = (): JSX.Element => {
           return lastPage.data.nextPage;
         }
       },
+      enabled: false,
     },
   );
 
@@ -72,27 +84,38 @@ export const Post = (): JSX.Element => {
     window.scrollTo(0, 0);
   }, []);
 
-  return (
-    <>
-      <Header />
-      <HeaderLayout className={styles.root}>
-        {post && postCommentsGroups ? (
+  if (error?.response?.status === 404) {
+    return (
+      <>
+        <Header />
+        <HeaderLayout className={styles.fourZeroFourWrapper}>
+          <FourZeroFourPost text={FOUR_ZERO_FOUR_POST} />
+        </HeaderLayout>
+      </>
+    );
+  }
+
+  if (isSuccess) {
+    return (
+      <>
+        <Header />
+        <HeaderLayout className={styles.root}>
           <div className={styles.root__activityPostContainer}>
             <Sidebar
-              postId={post.data.webId}
-              userPrincipalUpvoted={post.data.userPrincipalUpvoted}
-              userPrincipalDownvoted={post.data.userPrincipalDownvoted}
-              votesCount={post.data.votes}
-              totalCommentsCount={postCommentsGroups.pages[0].data.count}
+              postId={post?.data.webId}
+              userPrincipalUpvoted={post?.data.userPrincipalUpvoted}
+              userPrincipalDownvoted={post?.data.userPrincipalDownvoted}
+              votesCount={post?.data.votes}
+              totalCommentsCount={postCommentsGroups?.pages[0].data.count}
               commentsSectionRef={commentsRef}
             />
             <div className={styles.root__postCommentsContainer}>
-              <PostContent post={post.data} />
+              <PostContent post={post?.data} />
               <PostCommentsContent
-                postId={post.data.webId}
-                commentsGroups={postCommentsGroups.pages}
+                postId={post?.data.webId}
+                commentsGroups={postCommentsGroups?.pages}
                 hasMoreComments={hasNextPage}
-                totalCommentsCount={postCommentsGroups.pages[0].data.count}
+                totalCommentsCount={postCommentsGroups?.pages[0].data.count}
                 commentsRef={commentsRef}
                 onLoadMoreComments={fetchNextPage}
                 isMoreCommentsRefetching={isFetchingNextPage}
@@ -100,11 +123,9 @@ export const Post = (): JSX.Element => {
               />
             </div>
           </div>
-        ) : (
-          <div>ou jes</div>
-        )}
-        <NewestPostsContent posts={newestPosts?.data} />
-      </HeaderLayout>
-    </>
-  );
+          <NewestPostsContent posts={newestPosts?.data} />
+        </HeaderLayout>
+      </>
+    );
+  }
 };
