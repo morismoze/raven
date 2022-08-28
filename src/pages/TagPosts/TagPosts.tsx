@@ -16,7 +16,7 @@ import styles from './TagPosts.module.scss';
 const FOUR_ZERO_FOUR_TAG_POSTS =
   "The tag you were trying to access doesn't exist.";
 
-export const TagPosts = (): JSX.Element | undefined => {
+export const TagPosts = (): JSX.Element | null => {
   const [, params] = useRoute('/t/:tagName');
 
   const {
@@ -82,4 +82,6 @@ export const TagPosts = (): JSX.Element | undefined => {
       </>
     );
   }
+
+  return null;
 };

@@ -25,7 +25,7 @@ import styles from './Post.module.scss';
 
 const FOUR_ZERO_FOUR_POST = "The post you were trying to access doesn't exist.";
 
-export const Post = (): JSX.Element | undefined => {
+export const Post = (): JSX.Element | null => {
   const commentsRef = useRef<HTMLDivElement>(null);
 
   const [, params] = useRoute('/p/:postId');
@@ -128,4 +128,6 @@ export const Post = (): JSX.Element | undefined => {
       </>
     );
   }
+
+  return null;
 };
