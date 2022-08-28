@@ -10,6 +10,7 @@ import {
   LoginForm,
   ILoginFormValues,
   SuccessAnimation,
+  Logo,
 } from '@/components';
 import { AuthUser, useAuth } from '@/api';
 import styles from './Login.module.scss';
@@ -56,6 +57,7 @@ export const Login = (): JSX.Element => {
     <>
       <div className={styles.root}>
         <FadeIn className={styles.root__wrapper}>
+          <Logo />
           <AuthCard
             form={LoginForm}
             onAuth={handleLogin}

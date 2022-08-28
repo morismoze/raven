@@ -11,6 +11,7 @@ import {
   NotificationMessage,
   ForgotPasswordForm,
   IForgotPasswordFormValues,
+  Logo,
 } from '@/components';
 import {
   ForgotPasswordResponseDto,
@@ -36,6 +37,7 @@ export const ForgotPassword = (): JSX.Element => {
     onSuccess: (data) => {
       setIsSuccess(true);
       setUserId(data.data.id);
+      setNotification('');
     },
     onError: (err) => {
       setNotification(
@@ -56,18 +58,18 @@ export const ForgotPassword = (): JSX.Element => {
     <>
       <div className={styles.root}>
         <FadeIn className={styles.root__wrapper}>
-          <div className={styles.root__formContainer}>
-            {notification && (
-              <NotificationMessage
-                message={notification}
-                type={NotificationMessageType.error}
-              />
-            )}
+          <Logo />
+          <div className={styles.root__contentContainer}>
             <span className={styles.root__title}>Password reset</span>
             <span className={styles.root__text}>
               Enter your email address below and we'll send you a link to reset
               your password.
             </span>
+            <NotificationMessage
+              active={Boolean(notification)}
+              message={notification}
+              type={NotificationMessageType.error}
+            />
             <ForgotPasswordForm
               onAuth={handleSugmitEmail}
               isAuthenticating={isLoading}

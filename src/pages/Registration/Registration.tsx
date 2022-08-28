@@ -10,6 +10,7 @@ import {
   RegistrationForm,
   IRegistrationFormValues,
   SuccessAnimation,
+  Logo,
 } from '@/components';
 import { AuthUser, useAuth, User } from '@/api';
 import styles from './Registration.module.scss';
@@ -51,6 +52,7 @@ export const Registration = (): JSX.Element => {
     <>
       <div className={styles.root}>
         <FadeIn className={styles.root__wrapper}>
+          <Logo />
           <AuthCard
             form={RegistrationForm}
             onAuth={handleRegistration}

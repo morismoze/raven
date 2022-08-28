@@ -40,7 +40,7 @@ export const Header = (): JSX.Element => {
     <Headroom>
       <header className={styles.root}>
         <div className={styles.root__mainContainer}>
-          <Logo />
+          <Logo reduced />
           <Button
             action={ButtonAction.primary}
             onClick={handleAddNewPost}

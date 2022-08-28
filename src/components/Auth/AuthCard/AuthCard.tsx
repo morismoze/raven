@@ -40,12 +40,11 @@ export const AuthCard = ({
         Continue with Google
       </Button>
       <span className={styles.root__alternativeBinder}>Or continue with</span>
-      {notificationMessage && notificationType && (
-        <NotificationMessage
-          message={notificationMessage}
-          type={notificationType}
-        />
-      )}
+      <NotificationMessage
+        active={Boolean(notificationMessage && notificationType)}
+        message={notificationMessage!}
+        type={notificationType!}
+      />
       <Form onAuth={onAuth} isAuthenticating={isAuthenticating} />
       <ToS />
     </div>

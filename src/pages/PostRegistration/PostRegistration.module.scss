@@ -1,11 +1,24 @@
 @import 'src/styles/util.module.scss';
 
 .root {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 500px;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  height: auto;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 50px 10px;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 90%;
+    max-width: 490px;
+  }
 
   &__contentContainer {
     display: flex;
@@ -13,10 +26,6 @@
     gap: 20px;
     align-items: center;
     justify-content: center;
-    width: fit-content;
-    margin: auto;
-    width: fit-content;
-    max-width: 100%;
     background-color: var(--bg-main-opacity);
     padding: 20px 35px;
     border: 1px solid var(--border-main);
@@ -34,6 +43,7 @@
     font-weight: 500;
     color: var(--text-darker);
     line-height: 22px;
+    text-align: center;
   }
 
   &__logo {

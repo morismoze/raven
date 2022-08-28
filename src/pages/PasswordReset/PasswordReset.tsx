@@ -11,6 +11,7 @@ import {
   NotificationMessageType,
   SuccessAnimation,
   NotificationMessage,
+  Logo,
 } from '@/components';
 import {
   PasswordResetRequestDto,
@@ -33,6 +34,7 @@ export const PasswordReset = (): JSX.Element => {
   >((data) => resetPassword(window.location.search.split('=')[1], data), {
     onSuccess: () => {
       setIsSuccess(true);
+      setNotification('');
     },
     onError: (err) => {
       setNotification(
@@ -55,17 +57,17 @@ export const PasswordReset = (): JSX.Element => {
     <>
       <div className={styles.root}>
         <FadeIn className={styles.root__wrapper}>
-          <div className={styles.root__formContainer}>
-            {notification && (
-              <NotificationMessage
-                message={notification}
-                type={NotificationMessageType.error}
-              />
-            )}
+          <Logo />
+          <div className={styles.root__contentContainer}>
             <span className={styles.root__title}>Password reset</span>
             <span className={styles.root__text}>
               Enter your new password below.
             </span>
+            <NotificationMessage
+              active={Boolean(notification)}
+              message={notification}
+              type={NotificationMessageType.error}
+            />
             <PasswordResetForm
               onAuth={handleResetPassword}
               isAuthenticating={isLoading}

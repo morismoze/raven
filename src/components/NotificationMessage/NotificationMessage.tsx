@@ -10,14 +10,20 @@ export enum NotificationMessageType {
 }
 
 interface INotificationMessageProps {
+  active: boolean;
   message: string;
   type: NotificationMessageType;
 }
 
 export const NotificationMessage = ({
+  active,
   message,
   type,
-}: INotificationMessageProps): JSX.Element => {
+}: INotificationMessageProps): JSX.Element | null => {
+  if (!active) {
+    return null;
+  }
+
   return (
     <FadeIn>
       <div

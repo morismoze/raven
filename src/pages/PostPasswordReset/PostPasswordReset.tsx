@@ -11,6 +11,7 @@ import {
   Button,
   ButtonAction,
   ButtonSize,
+  Logo,
   NotificationMessage,
   NotificationMessageType,
 } from '@/components';
@@ -49,33 +50,35 @@ export const PostPasswordReset = (): JSX.Element => {
   };
 
   return (
-    <FadeIn className={styles.root}>
-      <div className={styles.root__contentContainer}>
-        {notification && (
+    <div className={styles.root}>
+      <FadeIn className={styles.root__wrapper}>
+        <Logo />
+        <div className={styles.root__contentContainer}>
+          <span className={styles.root__title}>Password reset email</span>
+          <span className={styles.root__text}>
+            We've sent you a password reset link to your email address.
+          </span>
+          <div className={styles.root__separator} />
+          <span className={styles.root__text}>Didn't get the email?</span>
           <NotificationMessage
+            active={Boolean(notification)}
             message={notification}
             type={NotificationMessageType.error}
           />
-        )}
-        <span className={styles.root__title}>Password reset email</span>
-        <span className={styles.root__text}>
-          We've sent you a password reset link to your email address.
-        </span>
-        <div className={styles.root__separator} />
-        <span className={styles.root__text}>Didn't get the email?</span>
-        <Button
-          size={ButtonSize.small}
-          action={ButtonAction.primary}
-          onClick={handleResendPasswordResetEmail}
-          Icon={ArrowRepeat}
-          disabled={isLoading}
-        >
-          <div className={styles.root__submitContainer}>
-            <span>Resend email</span>
-            <AlternateLoader isLoading={isLoading} />
-          </div>
-        </Button>
-      </div>
-    </FadeIn>
+          <Button
+            size={ButtonSize.small}
+            action={ButtonAction.primary}
+            onClick={handleResendPasswordResetEmail}
+            Icon={ArrowRepeat}
+            disabled={isLoading}
+          >
+            <div className={styles.root__submitContainer}>
+              <span>Resend email</span>
+              <AlternateLoader isLoading={isLoading} />
+            </div>
+          </Button>
+        </div>
+      </FadeIn>
+    </div>
   );
 };

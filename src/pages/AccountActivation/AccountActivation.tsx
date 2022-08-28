@@ -14,6 +14,7 @@ import {
   ButtonAction,
   ButtonSize,
   SuccessAnimation,
+  Logo,
 } from '@/components';
 import { activateAccount, ActivationResponseDto } from '@/api';
 import styles from './AccountActivation.module.scss';
@@ -30,6 +31,7 @@ export const AccountActivation = () => {
     {
       onSuccess: () => {
         setIsSuccess(true);
+        setNotification('');
       },
       onError: (err: AxiosError) => {
         const message = (err.response?.data as ActivationResponseDto).message!;
@@ -48,37 +50,40 @@ export const AccountActivation = () => {
 
   return (
     <>
-      <FadeIn className={styles.root}>
-        <div className={styles.root__contentContainer}>
-          {notification && (
+      <div className={styles.root}>
+        <FadeIn className={styles.root__wrapper}>
+          <Logo />
+          <div className={styles.root__contentContainer}>
+            <span className={styles.root__title}>Email activation</span>
+            <div className={styles.root__textContainer}>
+              <span className={styles.root__text}>
+                Thank you for registering on{' '}
+                <span className={styles.root__logo}>raven</span>!
+              </span>
+              <span className={styles.root__text}>
+                To start exploring posts and people of raven activate your
+                account by clicking the button below:
+              </span>
+            </div>
             <NotificationMessage
+              active={Boolean(notification)}
               message={notification}
               type={NotificationMessageType.error}
             />
-          )}
-          <span className={styles.root__title}>Email activation</span>
-          <div className={styles.root__textContainer}>
-            <span className={styles.root__text}>
-              Thank you for registering on{' '}
-              <span className={styles.root__logo}>raven</span>!
-            </span>
-            <span className={styles.root__text}>
-              Activate your account by clicking the button below:
-            </span>
+            <Button
+              onClick={handleActivation}
+              size={ButtonSize.small}
+              action={ButtonAction.primary}
+              Icon={ShieldCheck}
+            >
+              <div className={styles.root__submitContainer}>
+                <span>Verify email</span>
+                <AlternateLoader isLoading={isLoading} />
+              </div>
+            </Button>
           </div>
-          <Button
-            onClick={handleActivation}
-            size={ButtonSize.small}
-            action={ButtonAction.primary}
-            Icon={ShieldCheck}
-          >
-            <div className={styles.root__submitContainer}>
-              <span>Verify email</span>
-              <AlternateLoader isLoading={isLoading} />
-            </div>
-          </Button>
-        </div>
-      </FadeIn>
+        </FadeIn>
+      </div>
       <SuccessAnimation
         show={isSuccess}
         onAnimationFinish={handleSuccessfulActivation}
