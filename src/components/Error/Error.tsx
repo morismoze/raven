@@ -14,12 +14,13 @@ type IFourZeroFourProps = FallbackProps & {
 
 // eslint-disable-next-line n/handle-callback-err
 export const Error = ({
-  error,
-  resetErrorBoundary,
   title,
   text,
   className,
+  ...props
 }: IFourZeroFourProps): JSX.Element => {
+  const { error, resetErrorBoundary } = props;
+
   const handleReload = () => {
     window.location.reload();
   };
