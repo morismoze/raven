@@ -9,6 +9,7 @@ import {
   AlternateLoader,
   TextLink,
 } from '@/components';
+import { FieldError } from '@/api';
 import styles from './LoginForm.module.scss';
 
 const LoginSchema = Yup.object().shape({
@@ -22,7 +23,7 @@ export interface ILoginFormValues {
 }
 
 interface ILoginFormProps {
-  onAuth: (values: ILoginFormValues) => void;
+  onAuth: (values: ILoginFormValues) => Promise<FieldError[] | null>;
   isAuthenticating: boolean;
 }
 
@@ -35,9 +36,18 @@ export const LoginForm = ({
     password: '',
   };
 
-  const handleLocalAuthSubmit = (values: ILoginFormValues) => {
+  const handleLocalAuthSubmit = async (
+    values: ILoginFormValues,
+    { setFieldError }: any,
+  ) => {
     const { username, password } = values;
-    onAuth({ username, password });
+    const fieldErrors = await onAuth({ username, password });
+
+    if (fieldErrors) {
+      fieldErrors.forEach((e) => {
+        setFieldError(e.field, e.error);
+      });
+    }
   };
 
   return (

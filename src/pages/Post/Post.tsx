@@ -11,7 +11,7 @@ import {
   PostContent,
   PostCommentsContent,
   NewestPostsContent,
-  FourZeroFourPost,
+  Error,
 } from '@/components';
 import {
   fetchNewest20Posts,
@@ -23,6 +23,7 @@ import {
 } from '@/api';
 import styles from './Post.module.scss';
 
+const FOUR_ZERO_FOUR_POST_TITLE = '404';
 const FOUR_ZERO_FOUR_POST = "The post you were trying to access doesn't exist.";
 
 export const Post = (): JSX.Element | null => {
@@ -89,7 +90,7 @@ export const Post = (): JSX.Element | null => {
       <>
         <Header />
         <HeaderLayout className={styles.fourZeroFourWrapper}>
-          <FourZeroFourPost text={FOUR_ZERO_FOUR_POST} />
+          <Error title={FOUR_ZERO_FOUR_POST_TITLE} text={FOUR_ZERO_FOUR_POST} />
         </HeaderLayout>
       </>
     );

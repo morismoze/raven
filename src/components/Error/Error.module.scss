@@ -8,7 +8,7 @@
   max-width: fit-content;
 
   &__fourZeroFour {
-    font-size: toRem(70);
+    font-size: toRem(50);
     font-weight: 400;
     background: linear-gradient(to right, var(--primary), var(--secondary));
     -webkit-background-clip: text;
@@ -16,7 +16,7 @@
   }
 
   &__subText {
-    font-size: toRem(40);
+    font-size: toRem(30);
     font-weight: 500;
     color: var(--text-darker);
   }
@@ -27,12 +27,13 @@
     color: var(--text-darker);
   }
 
-  &__homeLink {
-    text-decoration: none;
+  &__actionsContainer {
+    display: flex;
+    align-items: center;
+    gap: 15px;
   }
 
-  & div:last-child {
-    width: fit-content;
-    margin-top: 10px;
+  &__homeLink {
+    text-decoration: none;
   }
 }

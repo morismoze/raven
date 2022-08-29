@@ -76,7 +76,10 @@ export const RegistrationForm = ({
     passwordConfirmation: '',
   };
 
-  const handleLocalAuthSubmit = async (values: any, { setFieldError }: any) => {
+  const handleLocalAuthSubmit = async (
+    values: IRegistrationFormValues,
+    { setFieldError }: any,
+  ) => {
     const { firstName, lastName, email, username, password } = values;
 
     const fieldErrors = await onAuth({

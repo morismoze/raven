@@ -1,34 +1,39 @@
 import React from 'react';
 
 import { HelmetProvider } from 'react-helmet-async';
-import { ErrorBoundary } from 'react-error-boundary';
+import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 import { QueryClientProvider } from 'react-query';
 import { Toaster } from 'react-hot-toast';
 
-import { Loader } from '@/components';
+import { Error, Loader } from '@/components';
 import { AuthProvider } from '@/api/auth/auth';
 import { UploadProvider } from '@/context';
 import { queryClient } from '@/lib/initializers/react-query';
-
-const ErrorFallback = (): JSX.Element => {
-  return (
-    <div>
-      <h2>Ooops, something went wrong</h2>
-      <button onClick={() => window.location.assign(window.location.origin)}>
-        Refresh
-      </button>
-    </div>
-  );
-};
+import styles from './AppProvider.module.scss';
 
 interface IAppProviderProps {
   children: React.ReactNode;
 }
 
+const APPLICATION_ERROR_TITLE = 'Application error';
+const APPLICATION_ERROR =
+  "We're sorry this error happened.\nTry reloading the page or going back to the homepage.";
+
+const Fallback = (props: FallbackProps) => {
+  return (
+    <Error
+      {...props}
+      title={APPLICATION_ERROR_TITLE}
+      text={APPLICATION_ERROR}
+      className={styles.error}
+    />
+  );
+};
+
 export const AppProvider = ({ children }: IAppProviderProps) => {
   return (
     <React.Suspense fallback={<Loader />}>
-      <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <ErrorBoundary FallbackComponent={Fallback} key="global-error-boundary">
         <HelmetProvider>
           <QueryClientProvider client={queryClient}>
             <AuthProvider>

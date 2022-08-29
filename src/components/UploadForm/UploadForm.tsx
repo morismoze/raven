@@ -1,4 +1,4 @@
-import { Form, Formik } from 'formik';
+import { Form, Formik, FormikProps } from 'formik';
 import * as Yup from 'yup';
 import { Upload } from 'react-bootstrap-icons';
 
@@ -12,7 +12,8 @@ import {
   AlternateLoader,
 } from '@/components';
 import styles from './UploadForm.module.scss';
-import { Tag } from '@/api';
+import { FieldError, Tag } from '@/api';
+import { useEffect, useRef } from 'react';
 
 const UploadSchema = Yup.object().shape({
   title: Yup.string()
@@ -38,15 +39,19 @@ export interface IUploadFormValues {
 
 export interface IUploadFormProps {
   onSubmit: (values: IUploadFormValues) => void;
+  fieldErrors?: FieldError[];
   tags?: Tag[];
   isUploading: boolean;
 }
 
 export const UploadForm = ({
   onSubmit,
+  fieldErrors,
   tags,
   isUploading,
 }: IUploadFormProps): JSX.Element => {
+  const formRef = useRef<FormikProps<IUploadFormValues>>(null);
+
   const initialValues: IUploadFormValues = {
     title: '',
     description: '',
@@ -58,6 +63,14 @@ export const UploadForm = ({
     onSubmit(values);
   };
 
+  useEffect(() => {
+    if (fieldErrors) {
+      fieldErrors.forEach((e) => {
+        formRef.current?.setFieldError(e.field, e.error);
+      });
+    }
+  }, [fieldErrors]);
+
   return (
     <div className={styles.root}>
       <Formik
@@ -65,6 +78,7 @@ export const UploadForm = ({
         validationSchema={UploadSchema}
         validateOnChange
         onSubmit={handleOnSubmit}
+        innerRef={formRef}
       >
         {({ errors, touched, values }) => (
           <Form className={styles.root__form}>

@@ -7,12 +7,13 @@ import {
   HeaderLayout,
   PostsContent,
   EmptyPostsData,
-  FourZeroFourPost,
+  Error,
 } from '@/components';
 import { fetchPostsByTagName, PostsResponseDto } from '@/api';
 import { formatNumber } from '@/utils';
 import styles from './TagPosts.module.scss';
 
+const FOUR_ZERO_FOUR_TAG_POSTS_TITLE = '404';
 const FOUR_ZERO_FOUR_TAG_POSTS =
   "The tag you were trying to access doesn't exist.";
 
@@ -51,7 +52,10 @@ export const TagPosts = (): JSX.Element | null => {
       <>
         <Header />
         <HeaderLayout className={styles.fourZeroFourWrapper}>
-          <FourZeroFourPost text={FOUR_ZERO_FOUR_TAG_POSTS} />
+          <Error
+            title={FOUR_ZERO_FOUR_TAG_POSTS_TITLE}
+            text={FOUR_ZERO_FOUR_TAG_POSTS}
+          />
         </HeaderLayout>
       </>
     );

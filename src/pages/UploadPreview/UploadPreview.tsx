@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useMutation, useQuery } from 'react-query';
 
@@ -13,6 +13,7 @@ import { IUploadContext, UploadContext } from '@/context';
 import {
   AllTagsResponseDto,
   fetchAllTags,
+  FieldError,
   NewPostId,
   PostFileUploadRequestDto,
   PostUploadResponseDto,
@@ -22,9 +23,12 @@ import {
 } from '@/api';
 import styles from './UploadPreview.module.scss';
 import { useLocation } from 'wouter';
+import { AxiosError } from 'axios';
 
 export const UploadPreview = (): JSX.Element => {
   const [, setLocation] = useLocation();
+
+  const [fieldErrors, setFieldErrors] = useState<FieldError[] | undefined>();
 
   const { data: tags } = useQuery<AllTagsResponseDto>(
     'fetch-all-tags',
@@ -35,32 +39,45 @@ export const UploadPreview = (): JSX.Element => {
   );
 
   const { mutate: postUrlMutate, isLoading: isPostUrlMutateLoading } =
-    useMutation<PostUploadResponseDto, unknown, PostUrlUploadRequestDto>(
+    useMutation<PostUploadResponseDto, AxiosError, PostUrlUploadRequestDto>(
       (data) => uploadPostByImageUrl(data),
       {
         onSuccess: (data) => {
           redirectToNewPost(data.data);
         },
+        onError: (err) => {
+          setFieldErrors(
+            (err.response?.data as PostUploadResponseDto).fieldErrors,
+          );
+        },
       },
     );
 
   const { mutate: postFileMutate, isLoading: isPostFileMutateLoading } =
-    useMutation<PostUploadResponseDto, unknown, PostFileUploadRequestDto>(
+    useMutation<PostUploadResponseDto, AxiosError, PostFileUploadRequestDto>(
       (data) => uploadPostByImageFile(data),
       {
         onSuccess: (data) => {
           redirectToNewPost(data.data);
+        },
+        onError: (err) => {
+          setFieldErrors(
+            (err.response?.data as PostUploadResponseDto).fieldErrors,
+          );
         },
       },
     );
 
   const { file, url } = React.useContext(UploadContext) as IUploadContext;
 
-  const handleUpload = async (values: IUploadFormValues) => {
+  const handleUpload = (values: IUploadFormValues) => {
     const { title, description, tags, mature } = values;
 
     if (!file) {
       postUrlMutate({ url, title, description, tags, mature });
+      if (fieldErrors) {
+        return fieldErrors;
+      }
     } else {
       const formData = new FormData();
       formData.append('title', title);
@@ -70,6 +87,8 @@ export const UploadPreview = (): JSX.Element => {
       formData.append('mature', JSON.stringify(mature));
       postFileMutate(formData);
     }
+
+    return null;
   };
 
   const redirectToNewPost = (id: NewPostId) => {
@@ -83,6 +102,7 @@ export const UploadPreview = (): JSX.Element => {
         <UploadPreviewImage file={file} url={url} />
         <UploadForm
           onSubmit={handleUpload}
+          fieldErrors={fieldErrors}
           tags={tags?.data}
           isUploading={isPostUrlMutateLoading || isPostFileMutateLoading}
         />
