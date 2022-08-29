@@ -4,23 +4,19 @@ import classNames from 'classnames';
 
 import { Button, ButtonSize, ButtonAction } from '@/components';
 import styles from './Error.module.scss';
-import { FallbackProps } from 'react-error-boundary';
 
-type IFourZeroFourProps = FallbackProps & {
+interface IFourZeroFourProps {
   title: string;
   text: string;
   className?: string;
-};
+}
 
 // eslint-disable-next-line n/handle-callback-err
 export const Error = ({
   title,
   text,
   className,
-  ...props
 }: IFourZeroFourProps): JSX.Element => {
-  const { error, resetErrorBoundary } = props;
-
   const handleReload = () => {
     window.location.reload();
   };
