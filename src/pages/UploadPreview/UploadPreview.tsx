@@ -79,10 +79,12 @@ export const UploadPreview = (): JSX.Element => {
         return fieldErrors;
       }
     } else {
+      console.log(file);
+
       const formData = new FormData();
       formData.append('title', title);
       formData.append('description', description);
-      formData.append('file', file!);
+      formData.append('file', file);
       formData.append('tags', JSON.stringify(tags));
       formData.append('mature', JSON.stringify(mature));
       postFileMutate(formData);

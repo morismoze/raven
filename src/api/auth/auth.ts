@@ -45,6 +45,13 @@ export const sendPasswordResetEmail = async (
   return response.data;
 };
 
+export const resendPasswordResetEmail = async (userId: string) => {
+  const response = await axiosInstance.put(
+    `${API_URL}/user/password/reset/resend?id=${userId}`,
+  );
+  return response.data;
+};
+
 export const resetPassword = async (
   uuid: string,
   password: PasswordResetRequestDto,

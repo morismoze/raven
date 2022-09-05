@@ -6,6 +6,7 @@ import {
   VoteAction,
   AlternateLoader,
   ActionsMenu,
+  ActionsMenuItem,
 } from '@/components';
 import {
   downvotePostComment,
@@ -15,6 +16,7 @@ import {
 } from '@/api';
 import { formatCreatedAt } from '@/utils';
 import styles from './Comment.module.scss';
+import { Flag } from 'react-bootstrap-icons';
 
 interface ICommentProps {
   postId: string;
@@ -59,6 +61,8 @@ export const Comment = ({
     downvoteMutate();
   };
 
+  const handleOnCommentReportClick = () => {};
+
   const formattedCreatedAt = formatCreatedAt(comment.createdAt);
 
   return (
@@ -72,7 +76,13 @@ export const Comment = ({
             <span className={styles.root__createdAt}>{formattedCreatedAt}</span>
           </div>
           <div className={styles.root__actionsMenuWrapper}>
-            <ActionsMenu />
+            <ActionsMenu key={comment.id}>
+              <ActionsMenuItem
+                Icon={Flag}
+                text="Report this comment"
+                onClick={handleOnCommentReportClick}
+              />
+            </ActionsMenu>
           </div>
         </div>
         <pre className={styles.root__comment}>{comment.comment}</pre>

@@ -15,14 +15,17 @@ import {
   NotificationMessage,
   NotificationMessageType,
 } from '@/components';
-import { ActivationEmailResendResponseDto, resendActivationEmail } from '@/api';
+import {
+  ActivationEmailResendResponseDto,
+  resendPasswordResetEmail,
+} from '@/api';
 import styles from './PostPasswordReset.module.scss';
 
 export const PostPasswordReset = (): JSX.Element => {
   const [notification, setNotification] = useState<string>('');
 
   const { mutate, isLoading } = useMutation(
-    () => resendActivationEmail(window.location.search.split('=')[1]),
+    () => resendPasswordResetEmail(window.location.search.split('=')[1]),
     {
       onSuccess: () => {
         setNotification('');

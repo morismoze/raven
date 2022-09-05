@@ -1,0 +1,19 @@
+@import 'src/styles/util.module.scss';
+
+.root {
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  &__icon {
+    color: var(--bg-main);
+  }
+
+  &__text {
+    color: var(--bg-main);
+    font-size: toRem(13);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+}

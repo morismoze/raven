@@ -60,7 +60,7 @@ export const PostRegistration = (): JSX.Element => {
             <span className={styles.root__logo}>raven</span>!
           </span>
           <span className={styles.root__text}>
-            We've reserved your space and sent you a activation link to your
+            We've reserved your space and sent you an activation link to your
             email address. Be sure to check it out!
           </span>
           <div className={styles.root__separator} />

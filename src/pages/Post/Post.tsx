@@ -65,7 +65,6 @@ export const Post = (): JSX.Element | null => {
           return lastPage.data.nextPage;
         }
       },
-      enabled: false,
     },
   );
 

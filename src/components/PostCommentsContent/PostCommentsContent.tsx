@@ -53,6 +53,8 @@ export const PostCommentsContent = ({
     PostCommentRequestDto
   >((data) => uploadPostComment(postId || '', data), {
     onSuccess: () => {
+      console.log('wut');
+
       queryClient.invalidateQueries('fetch-post-comments');
     },
   });
