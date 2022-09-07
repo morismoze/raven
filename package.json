@@ -13,6 +13,7 @@
     "@types/react-headroom": "^2.2.2",
     "@types/react-lottie": "^1.2.6",
     "axios": "^0.27.2",
+    "blurhash": "^1.1.5",
     "classnames": "^2.3.1",
     "formik": "^2.2.9",
     "pace-js": "^1.2.4",
