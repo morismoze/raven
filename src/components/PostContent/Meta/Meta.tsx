@@ -3,7 +3,7 @@ import { formatNumber, formatCreatedAt } from '@/utils';
 import styles from './Meta.module.scss';
 
 interface IMetaProps {
-  userId?: string;
+  userId?: number;
   username?: string;
   views?: number;
   createdAt?: string;

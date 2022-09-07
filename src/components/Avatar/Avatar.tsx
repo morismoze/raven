@@ -2,7 +2,7 @@ import { Link } from 'wouter';
 import styles from './Avatar.module.scss';
 
 interface IAvatarProps {
-  id?: string;
+  id?: number;
   username?: string;
   size?: number;
 }

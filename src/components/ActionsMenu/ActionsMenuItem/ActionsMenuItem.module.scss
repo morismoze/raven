@@ -1,10 +1,11 @@
 @import 'src/styles/util.module.scss';
 
 .root {
-  padding: 8px 12px;
+  padding: 10px 12px;
   display: flex;
   align-items: center;
   gap: 8px;
+  background-color: var(--white);
 
   &__icon {
     color: var(--bg-main);
@@ -15,5 +16,9 @@
     font-size: toRem(13);
     font-weight: 600;
     white-space: nowrap;
+  }
+
+  &:hover {
+    filter: brightness(75%);
   }
 }

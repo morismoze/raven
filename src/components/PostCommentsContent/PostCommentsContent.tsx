@@ -14,6 +14,7 @@ import {
 } from '@/components';
 import {
   PostComment,
+  PostCommentReportReason,
   PostCommentRequestDto,
   PostCommentsResponseDto,
   uploadPostComment,
@@ -27,6 +28,7 @@ interface IPostCommentsContentProps {
   commentsGroups?: PostCommentsResponseDto[];
   hasMoreComments?: boolean;
   totalCommentsCount?: number;
+  commentReportReasons?: PostCommentReportReason[];
   commentsRef?: React.RefObject<HTMLDivElement>;
   onLoadMoreComments: () => void;
   isMoreCommentsRefetching: boolean;
@@ -38,6 +40,7 @@ export const PostCommentsContent = ({
   commentsGroups,
   hasMoreComments,
   totalCommentsCount,
+  commentReportReasons,
   commentsRef,
   onLoadMoreComments,
   isMoreCommentsRefetching,
@@ -53,8 +56,6 @@ export const PostCommentsContent = ({
     PostCommentRequestDto
   >((data) => uploadPostComment(postId || '', data), {
     onSuccess: () => {
-      console.log('wut');
-
       queryClient.invalidateQueries('fetch-post-comments');
     },
   });
@@ -87,6 +88,7 @@ export const PostCommentsContent = ({
             <Comment
               postId={postId!}
               comment={comment}
+              commentReportReasons={commentReportReasons}
               commentPage={groupIndex}
               refetchPage={refetchPage}
               key={index}

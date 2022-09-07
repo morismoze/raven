@@ -89,3 +89,10 @@ export const downvotePostComment = async (webId: string, commentId: number) => {
   );
   return response.data;
 };
+
+export const fetchPostCommentReportReasons = async () => {
+  const response = await axiosInstance.get(
+    `${API_URL}/post-comment-report-reason/all`,
+  );
+  return response.data;
+};

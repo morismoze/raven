@@ -25,7 +25,13 @@ export const PostContent = ({ post }: IPostContentProps): JSX.Element => {
         views={post?.views}
         createdAt={post?.createdAt}
       />
-      <Cover url={post?.coverUrl} alt={post?.title} />
+      <Cover
+        blurhash={post?.coverBlurHash}
+        width={post?.coverWidth}
+        height={post?.coverHeight}
+        url={post?.coverUrl}
+        alt={post?.title}
+      />
       <div className={styles.root__tagsContainer}>
         {post?.tags.map((tag, index) => (
           <Link href={`/t/${tag.tagName}`} key={index}>

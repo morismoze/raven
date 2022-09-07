@@ -1,0 +1,68 @@
+@import 'src/styles/util.module.scss';
+
+.root {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+
+  --horizontalPadding: 22px;
+
+  &__fadeWrapper {
+    width: 90%;
+    max-width: 540px;
+  }
+
+  &__modal {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background-color: var(--bg-main-opacity);
+    border-radius: 7px;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    background-color: var(--border-main);
+    height: 40px;
+    padding: 0 var(--horizontalPadding);
+  }
+
+  &__title {
+    font-size: toRem(15);
+    color: var(--white);
+    font-weight: 600;
+    flex-basis: 100%;
+    text-align: center;
+  }
+
+  &__close {
+    font-size: toRem(25);
+    color: var(--white);
+    cursor: pointer;
+  }
+
+  &__body {
+    padding: 24px var(--horizontalPadding);
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 var(--horizontalPadding) 20px;
+
+    & > div:last-child {
+      width: fit-content;
+    }
+  }
+}

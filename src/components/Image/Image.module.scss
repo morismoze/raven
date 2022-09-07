@@ -1,4 +1,17 @@
 .root {
   display: flex;
-  justify-content: center;
+  overflow: hidden;
+  width: 100%;
+
+  &__blurhash {
+    max-width: 100%;
+    min-width: 100%;
+    width: 100% !important;
+    height: auto !important;
+    object-fit: cover;
+  }
+
+  &__isLoaded {
+    display: none !important;
+  }
 }

@@ -11,6 +11,8 @@ interface INewPostCardProps {
   onClick: () => void;
 }
 
+const IMAGE_SIZE = 64;
+
 export const NewPostCard = ({
   post,
   onClick,
@@ -20,11 +22,19 @@ export const NewPostCard = ({
   return (
     <Link href={`/p/${post?.webId}`} onClick={onClick}>
       <a className={styles.root}>
-        <Image
-          src={post?.coverUrl}
-          alt={post?.title}
-          className={styles.root__cover}
-        />
+        <div
+          className={styles.root__imageWrapper}
+          style={{ width: IMAGE_SIZE, height: IMAGE_SIZE }}
+        >
+          <Image
+            blurhash={post?.coverBlurHash}
+            width={IMAGE_SIZE}
+            height={IMAGE_SIZE}
+            src={post?.coverUrl}
+            alt={post?.title}
+            className={styles.root__img}
+          />
+        </div>
         <div className={styles.root__dataContainer}>
           <span className={styles.root__title}>{post?.title}</span>
           <div className={styles.root__metadataContainer}>

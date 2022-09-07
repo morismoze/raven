@@ -18,12 +18,8 @@ import {
 const API_URL = import.meta.env.VITE_API_URL;
 
 const loadUser = async () => {
-  try {
-    const response = await axiosInstance.get(`${API_URL}/user/current`);
-    return response.data;
-  } catch (error: any) {
-    return error.response.data;
-  }
+  const response = await axiosInstance.get(`${API_URL}/user/current`);
+  return response.data;
 };
 
 const loginFn = async (data: LoginRequestDto) => {
@@ -45,7 +41,7 @@ export const sendPasswordResetEmail = async (
   return response.data;
 };
 
-export const resendPasswordResetEmail = async (userId: string) => {
+export const resendPasswordResetEmail = async (userId: number) => {
   const response = await axiosInstance.put(
     `${API_URL}/user/password/reset/resend?id=${userId}`,
   );
@@ -72,7 +68,7 @@ const registerFn = async (data: RegisterRequestDto): Promise<AuthUser> => {
   }
 };
 
-export const resendActivationEmail = async (userId: string) => {
+export const resendActivationEmail = async (userId: number) => {
   const response = await axiosInstance.put(
     `${API_URL}/user/create/resend?id=${userId}`,
   );

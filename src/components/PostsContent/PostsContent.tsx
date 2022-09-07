@@ -18,6 +18,7 @@ interface IPostsContentProps {
 }
 
 const GRID_ROW_HEIGHT = 0;
+const GRID_COLUMN_WIDTH = 260;
 const GRID_GAP = 15;
 
 export const PostsContent = ({
@@ -36,6 +37,7 @@ export const PostsContent = ({
         style={{
           gridAutoRows: `${GRID_ROW_HEIGHT}px`,
           gridGap: `${GRID_GAP}px`,
+          gridTemplateColumns: `repeat(auto-fill, minmax(${GRID_COLUMN_WIDTH}px, ${GRID_COLUMN_WIDTH}px))`,
         }}
       >
         {postsGroups?.map((group: PostsResponseDto) => {
@@ -43,6 +45,7 @@ export const PostsContent = ({
             <PostCard
               post={post}
               gridRowHeight={GRID_ROW_HEIGHT}
+              gridColumnWidth={GRID_COLUMN_WIDTH}
               gridGap={GRID_GAP}
               key={index}
             />

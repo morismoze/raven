@@ -25,7 +25,7 @@ export const ForgotPassword = (): JSX.Element => {
 
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
-  const [userId, setUserId] = useState<string>('');
+  const [userId, setUserId] = useState<number>();
 
   const [, setLocation] = useLocation();
 

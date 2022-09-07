@@ -18,7 +18,7 @@ import styles from './Registration.module.scss';
 export const Registration = (): JSX.Element => {
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
-  const [userId, setUserId] = useState<string>('');
+  const [userId, setUserId] = useState<number>();
 
   const [notification, setNotification] = useState<string>('');
 

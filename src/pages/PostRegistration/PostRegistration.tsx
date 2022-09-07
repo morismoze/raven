@@ -22,7 +22,7 @@ export const PostRegistration = (): JSX.Element => {
   const [notification, setNotification] = useState<string>('');
 
   const { mutate, isLoading } = useMutation(
-    () => resendActivationEmail(window.location.search.split('=')[1]),
+    () => resendActivationEmail(Number(window.location.search.split('=')[1])),
     {
       onSuccess: () => {
         setNotification('');

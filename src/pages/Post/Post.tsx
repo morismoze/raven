@@ -16,12 +16,15 @@ import {
 import {
   fetchNewest20Posts,
   fetchPost,
+  fetchPostCommentReportReasons,
   fetchPostComments,
   Newest20PostsResponseDto,
+  PostCommentReportReasonsResponseDto,
   PostCommentsResponseDto,
   PostResponseDto,
 } from '@/api';
 import styles from './Post.module.scss';
+import { axiosInstance } from '@/lib';
 
 const FOUR_ZERO_FOUR_POST_TITLE = '404';
 const FOUR_ZERO_FOUR_POST = "The post you were trying to access doesn't exist.";
@@ -76,6 +79,12 @@ export const Post = (): JSX.Element | null => {
     },
   );
 
+  const { data: commentReportReasons } =
+    useQuery<PostCommentReportReasonsResponseDto>(
+      'fetch-comment-report-reasons',
+      () => fetchPostCommentReportReasons(),
+    );
+
   const refetchCommentsPage = (pageToRefetch: number) => {
     refetch({ refetchPage: (_, index) => index === pageToRefetch });
   };
@@ -116,6 +125,7 @@ export const Post = (): JSX.Element | null => {
                 commentsGroups={postCommentsGroups?.pages}
                 hasMoreComments={hasNextPage}
                 totalCommentsCount={postCommentsGroups?.pages[0].data.count}
+                commentReportReasons={commentReportReasons?.data}
                 commentsRef={commentsRef}
                 onLoadMoreComments={fetchNextPage}
                 isMoreCommentsRefetching={isFetchingNextPage}

@@ -14,6 +14,9 @@ export type ReducedPost = {
   title: string;
   mature: boolean;
   coverUrl: string;
+  coverBlurHash: string;
+  coverWidth: number;
+  coverHeight: number;
   votes: number;
   comments: number;
   views: number;
@@ -31,7 +34,10 @@ export type Post = {
   description: string;
   mature: boolean;
   coverUrl: string;
-  userId: string;
+  coverBlurHash: string;
+  coverWidth: number;
+  coverHeight: number;
+  userId: number;
   username: string;
   userPrincipalUpvoted: boolean;
   userPrincipalDownvoted: boolean;
@@ -49,6 +55,9 @@ export type NewestPost = {
   title: string;
   mature: boolean;
   coverUrl: string;
+  coverBlurHash: string;
+  coverWidth: number;
+  coverHeight: number;
   createdAt: string;
   updatedAt: string;
 };
@@ -56,7 +65,7 @@ export type NewestPost = {
 export type PostComment = {
   id: number;
   comment: string;
-  userId: string;
+  userId: number;
   username: string;
   upvotes: number;
   downvotes: number;
@@ -73,6 +82,11 @@ export type PostComments = {
   nextPage: number | null;
 };
 
+export type PostCommentReportReason = {
+  id: number;
+  reasonValue: string;
+};
+
 export type PostCommentRequestDto = {
   comment: string;
 };
@@ -86,6 +100,10 @@ export type PostUploadResponseDto = Response<NewPostId>;
 export type PostsResponseDto = Response<Posts>;
 
 export type Newest20PostsResponseDto = Response<NewestPost[]>;
+
+export type PostCommentReportReasonsResponseDto = Response<
+  PostCommentReportReason[]
+>;
 
 export type PostResponseDto = Response<Post>;
 

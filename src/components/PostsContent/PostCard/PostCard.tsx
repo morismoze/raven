@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import { Link } from 'wouter';
 import { Eye } from 'react-bootstrap-icons';
@@ -12,21 +12,34 @@ import styles from './PostCard.module.scss';
 interface IPostCardProps {
   post: ReducedPost;
   gridRowHeight: number;
+  gridColumnWidth: number;
   gridGap: number;
 }
 
-export const PostCard = ({ post, gridRowHeight, gridGap }: IPostCardProps) => {
+const META_DATA_HEIGHT = 61;
+
+export const PostCard = ({
+  post,
+  gridRowHeight,
+  gridColumnWidth,
+  gridGap,
+}: IPostCardProps) => {
   const cardRootRef = useRef<HTMLDivElement>(null);
 
   const cardContentRef = useRef<HTMLAnchorElement>(null);
 
-  const handleOnLoad = useCallback(() => {
-    const rowSpan = Math.ceil(
-      (cardContentRef.current!.clientHeight + gridGap) /
-        (gridRowHeight + gridGap),
-    );
-    cardRootRef.current!.style.gridRowEnd = `span ${rowSpan}`;
-  }, []);
+  useEffect(() => {
+    if (post) {
+      const CARD_HEIGHT =
+        META_DATA_HEIGHT +
+        gridColumnWidth / (post.coverWidth / post.coverHeight);
+
+      const rowSpan = Math.ceil(
+        (CARD_HEIGHT + gridGap) / (gridRowHeight + gridGap),
+      );
+      cardRootRef.current!.style.gridRowEnd = `span ${rowSpan}`;
+    }
+  }, [post]);
 
   return (
     <div ref={cardRootRef} id={post.webId} className={styles.root}>
@@ -35,10 +48,15 @@ export const PostCard = ({ post, gridRowHeight, gridGap }: IPostCardProps) => {
           <Image
             src={post.coverUrl}
             alt={post.title}
-            onLoad={handleOnLoad}
+            blurhash={post.coverBlurHash}
+            width={post.coverWidth}
+            height={post.coverHeight}
             className={styles.root__img}
           />
-          <div className={styles.root__metaContainer}>
+          <div
+            className={styles.root__metaContainer}
+            style={{ height: `${META_DATA_HEIGHT}` }}
+          >
             <span className={styles.root__title}>{post.title}</span>
             <div className={styles.root__metaDataWrapper}>
               <div className={styles.root__votesContainer}>

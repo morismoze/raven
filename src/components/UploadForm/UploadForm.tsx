@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react';
+
 import { Form, Formik, FormikProps } from 'formik';
 import * as Yup from 'yup';
 import { Upload } from 'react-bootstrap-icons';
@@ -11,9 +13,8 @@ import {
   TagSelect,
   AlternateLoader,
 } from '@/components';
-import styles from './UploadForm.module.scss';
 import { FieldError, Tag } from '@/api';
-import { useEffect, useRef } from 'react';
+import styles from './UploadForm.module.scss';
 
 const UploadSchema = Yup.object().shape({
   title: Yup.string()

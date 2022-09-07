@@ -25,7 +25,8 @@ export const PostPasswordReset = (): JSX.Element => {
   const [notification, setNotification] = useState<string>('');
 
   const { mutate, isLoading } = useMutation(
-    () => resendPasswordResetEmail(window.location.search.split('=')[1]),
+    () =>
+      resendPasswordResetEmail(Number(window.location.search.split('=')[1])),
     {
       onSuccess: () => {
         setNotification('');

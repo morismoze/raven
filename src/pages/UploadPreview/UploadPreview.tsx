@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 
+import { AxiosError } from 'axios';
+import toast from 'react-hot-toast';
 import { useMutation, useQuery } from 'react-query';
+import { useLocation } from 'wouter';
 
 import {
   Header,
@@ -22,8 +25,6 @@ import {
   uploadPostByImageUrl,
 } from '@/api';
 import styles from './UploadPreview.module.scss';
-import { useLocation } from 'wouter';
-import { AxiosError } from 'axios';
 
 export const UploadPreview = (): JSX.Element => {
   const [, setLocation] = useLocation();
@@ -46,9 +47,23 @@ export const UploadPreview = (): JSX.Element => {
           redirectToNewPost(data.data);
         },
         onError: (err) => {
-          setFieldErrors(
-            (err.response?.data as PostUploadResponseDto).fieldErrors,
-          );
+          const responseError = err.response?.data as PostUploadResponseDto;
+          if (responseError.message) {
+            toast.error(responseError.message, {
+              style: {
+                fontSize: 13,
+                color: 'var(--bg-main)',
+              },
+              iconTheme: {
+                primary: 'var(--error)',
+                secondary: '#FFFAEE',
+              },
+            });
+          } else if (responseError.fieldErrors.length > 0) {
+            setFieldErrors(
+              (err.response?.data as PostUploadResponseDto).fieldErrors,
+            );
+          }
         },
       },
     );
@@ -61,9 +76,23 @@ export const UploadPreview = (): JSX.Element => {
           redirectToNewPost(data.data);
         },
         onError: (err) => {
-          setFieldErrors(
-            (err.response?.data as PostUploadResponseDto).fieldErrors,
-          );
+          const responseError = err.response?.data as PostUploadResponseDto;
+          if (responseError.message) {
+            toast.error(responseError.message, {
+              style: {
+                fontSize: 13,
+                color: 'var(--bg-main)',
+              },
+              iconTheme: {
+                primary: 'var(--error)',
+                secondary: '#FFFAEE',
+              },
+            });
+          } else if (responseError.fieldErrors.length > 0) {
+            setFieldErrors(
+              (err.response?.data as PostUploadResponseDto).fieldErrors,
+            );
+          }
         },
       },
     );
@@ -79,8 +108,6 @@ export const UploadPreview = (): JSX.Element => {
         return fieldErrors;
       }
     } else {
-      console.log(file);
-
       const formData = new FormData();
       formData.append('title', title);
       formData.append('description', description);
