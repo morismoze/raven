@@ -43,6 +43,7 @@ export const UploadPreview = (): JSX.Element => {
     useMutation<PostUploadResponseDto, AxiosError, PostUrlUploadRequestDto>(
       (data) => uploadPostByImageUrl(data),
       {
+        retry: false,
         onSuccess: (data) => {
           redirectToNewPost(data.data);
         },
@@ -72,6 +73,7 @@ export const UploadPreview = (): JSX.Element => {
     useMutation<PostUploadResponseDto, AxiosError, PostFileUploadRequestDto>(
       (data) => uploadPostByImageFile(data),
       {
+        retry: false,
         onSuccess: (data) => {
           redirectToNewPost(data.data);
         },
