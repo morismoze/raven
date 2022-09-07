@@ -18,8 +18,12 @@ import {
 const API_URL = import.meta.env.VITE_API_URL;
 
 const loadUser = async () => {
-  const response = await axiosInstance.get(`${API_URL}/user/current`);
-  return response.data;
+  try {
+    const response = await axiosInstance.get(`${API_URL}/user/current`);
+    return response.data;
+  } catch (error: any) {
+    return error.response.data;
+  }
 };
 
 const loginFn = async (data: LoginRequestDto) => {
