@@ -8,6 +8,7 @@ import styles from './Error.module.scss';
 interface IFourZeroFourProps {
   title: string;
   text: string;
+  reload?: boolean;
   className?: string;
 }
 
@@ -15,6 +16,7 @@ interface IFourZeroFourProps {
 export const Error = ({
   title,
   text,
+  reload = true,
   className,
 }: IFourZeroFourProps): JSX.Element => {
   const handleReload = () => {
@@ -27,13 +29,15 @@ export const Error = ({
       <span className={styles.root__subText}>Something's wrong.</span>
       <span className={styles.root__text}>{text}</span>
       <div className={styles.root__actionsContainer}>
-        <Button
-          size={ButtonSize.small}
-          action={ButtonAction.primary}
-          onClick={handleReload}
-        >
-          Reload the page
-        </Button>
+        {reload && (
+          <Button
+            size={ButtonSize.small}
+            action={ButtonAction.primary}
+            onClick={handleReload}
+          >
+            Reload the page
+          </Button>
+        )}
         <Link href="/" onClick={handleReload}>
           <a className={styles.root__homeLink}>
             <Button size={ButtonSize.small} action={ButtonAction.primary}>

@@ -13,11 +13,18 @@
     justify-content: stretch;
     border-radius: 5px;
     overflow: hidden;
+    background-color: var(--bg-main);
+    border-radius: 5px;
   }
 
   &__img {
     object-fit: cover;
     transition: transform 0.15s ease-in-out;
+  }
+
+  &__imgError {
+    font-size: toRem(8);
+    padding: 0;
   }
 
   &__dataContainer {

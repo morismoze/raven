@@ -38,7 +38,10 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
           <QueryClientProvider client={queryClient}>
             <AuthProvider>
               <UploadProvider>{children}</UploadProvider>
-              <Toaster position="bottom-left" />
+              <Toaster
+                position="bottom-left"
+                toastOptions={{ duration: 3000 }}
+              />
             </AuthProvider>
           </QueryClientProvider>
         </HelmetProvider>

@@ -98,7 +98,11 @@ export const Post = (): JSX.Element | null => {
       <>
         <Header />
         <HeaderLayout className={styles.fourZeroFourWrapper}>
-          <Error title={FOUR_ZERO_FOUR_POST_TITLE} text={FOUR_ZERO_FOUR_POST} />
+          <Error
+            title={FOUR_ZERO_FOUR_POST_TITLE}
+            text={FOUR_ZERO_FOUR_POST}
+            reload={false}
+          />
         </HeaderLayout>
       </>
     );

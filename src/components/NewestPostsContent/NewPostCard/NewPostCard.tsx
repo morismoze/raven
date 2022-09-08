@@ -33,6 +33,7 @@ export const NewPostCard = ({
             src={post?.coverUrl}
             alt={post?.title}
             className={styles.root__img}
+            errorClassName={styles.root__imgError}
           />
         </div>
         <div className={styles.root__dataContainer}>

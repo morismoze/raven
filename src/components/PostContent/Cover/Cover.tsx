@@ -25,6 +25,7 @@ export const Cover = ({
         height={height}
         alt={alt}
         className={styles.root__img}
+        errorClassName={styles.root__error}
       />
     </div>
   );

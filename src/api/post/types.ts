@@ -82,13 +82,18 @@ export type PostComments = {
   nextPage: number | null;
 };
 
+export type PostCommentRequestDto = {
+  comment: string;
+};
+
 export type PostCommentReportReason = {
   id: number;
   reasonValue: string;
 };
 
-export type PostCommentRequestDto = {
-  comment: string;
+export type PostCommentReportRequestDto = {
+  description: string;
+  reason: PostCommentReportReason;
 };
 
 export type PostFileUploadRequestDto = FormData;

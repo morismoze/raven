@@ -1,5 +1,6 @@
 import { axiosInstance } from '@/lib';
 import {
+  PostCommentReportRequestDto,
   PostCommentRequestDto,
   PostFileUploadRequestDto,
   PostUrlUploadRequestDto,
@@ -93,6 +94,18 @@ export const downvotePostComment = async (webId: string, commentId: number) => {
 export const fetchPostCommentReportReasons = async () => {
   const response = await axiosInstance.get(
     `${API_URL}/post-comment-report-reason/all`,
+  );
+  return response.data;
+};
+
+export const reportPostComment = async (
+  webId: string,
+  commentId: number,
+  data: PostCommentReportRequestDto,
+) => {
+  const response = await axiosInstance.post(
+    `${API_URL}/post/${webId}/comments/${commentId}/report`,
+    data,
   );
   return response.data;
 };

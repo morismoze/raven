@@ -45,5 +45,5 @@ export const useIntersection = (
         observer.unobserve(target);
       };
     }
-  }, [elem.current]);
+  }, [elem]);
 };

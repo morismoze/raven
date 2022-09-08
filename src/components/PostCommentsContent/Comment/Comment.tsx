@@ -1,7 +1,10 @@
 import { useState } from 'react';
+import { flushSync } from 'react-dom';
 
 import { Flag, Pencil } from 'react-bootstrap-icons';
 import { useMutation } from 'react-query';
+import { useLocation } from 'wouter';
+import toast from 'react-hot-toast';
 
 import {
   Avatar,
@@ -12,6 +15,7 @@ import {
   ActionsMenuItem,
   Modal,
   CommentReportForm,
+  ICommentReportFormValues,
 } from '@/components';
 import {
   downvotePostComment,
@@ -21,6 +25,8 @@ import {
   useAuth,
   User,
   PostCommentReportReason,
+  PostCommentReportRequestDto,
+  reportPostComment,
 } from '@/api';
 import { formatCreatedAt } from '@/utils';
 import styles from './Comment.module.scss';
@@ -42,6 +48,8 @@ export const Comment = ({
 }: ICommentProps): JSX.Element => {
   const [isCommentReportActive, setIsCommentReportActive] =
     useState<boolean>(false);
+
+  const [location, setLocation] = useLocation();
 
   const { user } = useAuth();
 
@@ -67,6 +75,30 @@ export const Comment = ({
       },
     );
 
+  const { mutate: commentReportMutate, isLoading: isCommentReportLoading } =
+    useMutation<unknown, unknown, PostCommentReportRequestDto>(
+      (data) => reportPostComment(postId, comment.id, data),
+      {
+        onSuccess: () => {
+          flushSync(() => {
+            setIsCommentReportActive(false);
+            setTimeout(() => {
+              toast.success('Thank you for reporting!', {
+                style: {
+                  fontSize: 13,
+                  color: 'var(--bg-main)',
+                },
+                iconTheme: {
+                  primary: 'var(--success)',
+                  secondary: '#FFFAEE',
+                },
+              });
+            }, 500);
+          });
+        },
+      },
+    );
+
   const userPrincipal = user?.data as User;
 
   const handleCommentUpvote = () => {
@@ -78,10 +110,24 @@ export const Comment = ({
   };
 
   const handleCommentReportClick = () => {
+    if (!userPrincipal) {
+      localStorage.setItem('prevPath', location);
+      setLocation('/signin');
+    }
+
     setIsCommentReportActive(true);
   };
 
-  const handleCommentReportSubmit = () => {};
+  const handleCommentReportSubmit = (values: ICommentReportFormValues) => {
+    const { description, reason } = values;
+    const reasonId = commentReportReasons!.find(
+      (reportReason) => reportReason.reasonValue === reason,
+    )!.id!;
+    commentReportMutate({
+      description,
+      reason: { id: reasonId, reasonValue: reason },
+    });
+  };
 
   const handleEditComment = () => {};
 
@@ -154,7 +200,7 @@ export const Comment = ({
         <CommentReportForm
           commentReportReasons={commentReportReasons}
           onSubmit={handleCommentReportSubmit}
-          isUploading={false}
+          isUploading={isCommentReportLoading}
         />
       </Modal>
     </>

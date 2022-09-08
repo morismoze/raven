@@ -75,6 +75,7 @@ export const CommentReportForm = ({
                 touched={touched.description}
                 value={values.description}
                 as="textarea"
+                showSuccessIcon={false}
               />
             </div>
             <div className={styles.root__footer}>
