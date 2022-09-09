@@ -14,15 +14,22 @@ import {
   AlternateLoader,
 } from '@/components';
 import { FieldError, Tag } from '@/api';
+import { INPUT_CHARACTER_LIMITS } from '@/constants';
 import styles from './UploadForm.module.scss';
 
 const UploadSchema = Yup.object().shape({
   title: Yup.string()
-    .max(255, 'Title must be at most 30 characters')
+    .max(
+      INPUT_CHARACTER_LIMITS.POST_TITLE,
+      `Title must be at most ${INPUT_CHARACTER_LIMITS.POST_TITLE} characters`,
+    )
     .trim()
     .required('Title is required'),
   description: Yup.string()
-    .max(2200, 'Description must be at most 2200 characters')
+    .max(
+      INPUT_CHARACTER_LIMITS.POST_DESCRIPTION,
+      `Description must be at most ${INPUT_CHARACTER_LIMITS.POST_DESCRIPTION} characters`,
+    )
     .trim()
     .required('Description is required'),
   tags: Yup.array()
@@ -90,6 +97,7 @@ export const UploadForm = ({
               error={errors.title}
               touched={touched.title}
               value={values.title}
+              maxLength={INPUT_CHARACTER_LIMITS.POST_TITLE + 1}
             />
             <StyledField
               name="description"
@@ -100,6 +108,7 @@ export const UploadForm = ({
               value={values.description}
               as="textarea"
               rows={5}
+              maxLength={INPUT_CHARACTER_LIMITS.POST_DESCRIPTION + 1}
             />
             <TagSelect
               name="tags"

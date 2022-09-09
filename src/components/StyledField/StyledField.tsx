@@ -19,10 +19,7 @@ export const StyledField = ({
 }: StyledFieldProps): JSX.Element => {
   const { type } = props;
 
-  const isError =
-    type === 'password' || type === 'email' || type === 'url'
-      ? (error && value) || (error && !value && touched)
-      : error && touched;
+  const isError = (error && value) || (error && !value && touched);
 
   return (
     <div className={styles.root}>

@@ -11,12 +11,16 @@ import {
   TextLink,
 } from '@/components';
 import { PostCommentReportReason } from '@/api';
+import { INPUT_CHARACTER_LIMITS } from '@/constants';
 import styles from './CommentReportForm.module.scss';
 
 const UploadSchema = Yup.object().shape({
   reason: Yup.string().required('Reason is required'),
   description: Yup.string()
-    .max(2200, 'Description must be at most 2200 characters')
+    .max(
+      INPUT_CHARACTER_LIMITS.POST_COMMENT_REPORT_DESCRIPTION,
+      `Description must be at most ${INPUT_CHARACTER_LIMITS.POST_COMMENT_REPORT_DESCRIPTION} characters`,
+    )
     .trim()
     .required('Description is required'),
 });
@@ -76,6 +80,9 @@ export const CommentReportForm = ({
                 value={values.description}
                 as="textarea"
                 showSuccessIcon={false}
+                maxLength={
+                  INPUT_CHARACTER_LIMITS.POST_COMMENT_REPORT_DESCRIPTION + 1
+                }
               />
             </div>
             <div className={styles.root__footer}>

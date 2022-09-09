@@ -8,12 +8,17 @@ import {
   ButtonAction,
   ButtonSize,
   AlternateLoader,
+  CharacterCount,
 } from '@/components';
+import { INPUT_CHARACTER_LIMITS } from '@/constants';
 import styles from './CommentForm.module.scss';
 
 const CommentSchema = Yup.object().shape({
   comment: Yup.string()
-    .max(2200, 'Comment must be at most 2200 characters')
+    .max(
+      INPUT_CHARACTER_LIMITS.POST_COMMENT,
+      `Comment must be at most ${INPUT_CHARACTER_LIMITS.POST_COMMENT} characters`,
+    )
     .required('Comment is required'),
 });
 
@@ -64,19 +69,26 @@ export const CommentForm = ({
               as="textarea"
               rows={5}
               showSuccessIcon={false}
+              maxLength={INPUT_CHARACTER_LIMITS.POST_COMMENT}
             />
-            <Button
-              size={ButtonSize.small}
-              action={ButtonAction.primary}
-              type="submit"
-              Icon={ArrowBarUp}
-              disabled={isSubmitting}
-            >
-              <div className={styles.root__submitContainer}>
-                <span>Submit comment</span>
-                <AlternateLoader isLoading={isSubmitting} />
-              </div>
-            </Button>
+            <div className={styles.root__footer}>
+              <Button
+                size={ButtonSize.small}
+                action={ButtonAction.primary}
+                type="submit"
+                Icon={ArrowBarUp}
+                disabled={isSubmitting}
+              >
+                <div className={styles.root__submitContainer}>
+                  <span>Submit comment</span>
+                  <AlternateLoader isLoading={isSubmitting} />
+                </div>
+              </Button>
+              <CharacterCount
+                maxCharactes={INPUT_CHARACTER_LIMITS.POST_COMMENT}
+                characters={values.comment.length}
+              />
+            </div>
           </Form>
         )}
       </Formik>

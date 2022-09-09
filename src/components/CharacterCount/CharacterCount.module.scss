@@ -1,0 +1,10 @@
+@import 'src/styles/util.module.scss';
+
+.root {
+  font-size: toRem(12);
+  color: var(--text-darker);
+
+  &__characterCount {
+    color: var(--primary);
+  }
+}

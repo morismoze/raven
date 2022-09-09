@@ -43,6 +43,11 @@
     font-size: toRem(12);
     margin-top: 5px;
     word-break: break-word;
+    display: none;
+  }
+
+  &:first-of-type &__error {
+    display: inline-block;
   }
 
   &__success {

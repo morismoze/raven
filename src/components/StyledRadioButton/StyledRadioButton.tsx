@@ -18,6 +18,8 @@ export const StyledRadioButton = ({
 }: StyledCheckboxProps): JSX.Element => {
   const { label } = props;
 
+  const isError = error && touched;
+
   return (
     <div className={styles.root}>
       <label className={styles.root__label}>
@@ -28,7 +30,7 @@ export const StyledRadioButton = ({
         />
         {label}
       </label>
-      {error && <span className={styles.root__error}>{error}</span>}
+      {isError && <span className={styles.root__error}>{error}</span>}
     </div>
   );
 };

@@ -9,19 +9,29 @@ import {
   AlternateLoader,
 } from '@/components';
 import { FieldError } from '@/api';
+import { INPUT_CHARACTER_LIMITS } from '@/constants';
 import styles from './RegistrationForm.module.scss';
 
 const RegistrationSchema = Yup.object().shape({
   firstName: Yup.string()
-    .max(30, 'First name must be at most 30 characters')
+    .max(
+      INPUT_CHARACTER_LIMITS.FIRSTNAME,
+      `First name must be at most ${INPUT_CHARACTER_LIMITS.FIRSTNAME} characters`,
+    )
     .trim()
     .required('First name is required'),
   lastName: Yup.string()
-    .max(30, 'Last name must be at most 30 characters')
+    .max(
+      INPUT_CHARACTER_LIMITS.LASTNAME,
+      `Last name must be at most ${INPUT_CHARACTER_LIMITS.LASTNAME} characters`,
+    )
     .trim()
     .required('Last name is required'),
   email: Yup.string()
-    .max(255, 'Email must be at most 255 characters')
+    .max(
+      INPUT_CHARACTER_LIMITS.EMAIL,
+      `Email must be at most ${INPUT_CHARACTER_LIMITS.EMAIL} characters`,
+    )
     .trim()
     .matches(
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}/,
@@ -29,7 +39,10 @@ const RegistrationSchema = Yup.object().shape({
     )
     .required('Email is required'),
   username: Yup.string()
-    .max(255, 'Username must be at most 255 characters')
+    .max(
+      INPUT_CHARACTER_LIMITS.USERNAME,
+      `Username must be at most ${INPUT_CHARACTER_LIMITS.USERNAME} characters`,
+    )
     .trim()
     .required('Username is required'),
   password: Yup.string()
@@ -37,12 +50,18 @@ const RegistrationSchema = Yup.object().shape({
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
       'Password must be at least eight characters, one uppercase, one lowercase, one number and one special character',
     )
-    .max(60, 'Password must be at most 60 characters')
+    .max(
+      INPUT_CHARACTER_LIMITS.PASSWORD,
+      `Password must be at most ${INPUT_CHARACTER_LIMITS.PASSWORD} characters`,
+    )
     .trim()
     .required('Password is required'),
   passwordConfirmation: Yup.string()
     .oneOf([Yup.ref('password'), null], 'Passwords must match')
-    .max(60, 'Password must be at most 60 characters')
+    .max(
+      INPUT_CHARACTER_LIMITS.PASSWORD,
+      `Password must be at most ${INPUT_CHARACTER_LIMITS.PASSWORD} characters`,
+    )
     .trim()
     .required('Password confirmation is required'),
 });
@@ -113,6 +132,7 @@ export const RegistrationForm = ({
             error={errors.firstName}
             touched={touched.firstName}
             value={values.firstName}
+            maxLength={INPUT_CHARACTER_LIMITS.FIRSTNAME + 1}
           />
           <StyledField
             name="lastName"
@@ -121,6 +141,7 @@ export const RegistrationForm = ({
             error={errors.lastName}
             touched={touched.lastName}
             value={values.lastName}
+            maxLength={INPUT_CHARACTER_LIMITS.LASTNAME + 1}
           />
           <StyledField
             name="email"
@@ -129,6 +150,7 @@ export const RegistrationForm = ({
             error={errors.email}
             touched={touched.email}
             value={values.email}
+            maxLength={INPUT_CHARACTER_LIMITS.EMAIL + 1}
           />
           <StyledField
             name="username"
@@ -137,6 +159,7 @@ export const RegistrationForm = ({
             error={errors.username}
             touched={touched.username}
             value={values.username}
+            maxLength={INPUT_CHARACTER_LIMITS.USERNAME + 1}
           />
           <StyledField
             name="password"
@@ -145,6 +168,7 @@ export const RegistrationForm = ({
             error={errors.password}
             touched={touched.password}
             value={values.password}
+            maxLength={INPUT_CHARACTER_LIMITS.PASSWORD + 1}
           />
           <StyledField
             name="passwordConfirmation"
@@ -153,6 +177,7 @@ export const RegistrationForm = ({
             error={errors.passwordConfirmation}
             touched={touched.passwordConfirmation}
             value={values.passwordConfirmation}
+            maxLength={INPUT_CHARACTER_LIMITS.PASSWORD + 1}
           />
           <Button
             size={ButtonSize.small}

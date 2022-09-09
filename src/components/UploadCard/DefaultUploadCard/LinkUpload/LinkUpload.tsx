@@ -4,8 +4,8 @@ import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
 
 import { StyledField } from '@/components';
-import styles from './LinkUpload.module.scss';
 import { axiosInstance } from '@/lib';
+import styles from './LinkUpload.module.scss';
 
 const LinkUploadSchema = Yup.object().shape({
   url: Yup.string().required('Image URL is required'),

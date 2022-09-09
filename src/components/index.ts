@@ -61,3 +61,4 @@ export * from './TagsContent/ShowMoreTags/ShowMoreTags';
 export * from './SectionTitle/SectionTitle';
 export * from './EmptyPostsData/EmptyPostsData';
 export * from './Modal/Modal';
+export * from './CharacterCount/CharacterCount';

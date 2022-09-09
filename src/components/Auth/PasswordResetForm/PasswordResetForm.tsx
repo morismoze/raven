@@ -8,6 +8,7 @@ import {
   ButtonAction,
   AlternateLoader,
 } from '@/components';
+import { INPUT_CHARACTER_LIMITS } from '@/constants';
 import styles from './PasswordResetForm.module.scss';
 
 const PasswordResetSchema = Yup.object().shape({
@@ -16,12 +17,18 @@ const PasswordResetSchema = Yup.object().shape({
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
       'Password must be at least eight characters, one uppercase, one lowercase, one number and one special character',
     )
-    .max(60, 'Password must be at most 60 characters')
+    .max(
+      INPUT_CHARACTER_LIMITS.PASSWORD,
+      `Password must be at most ${INPUT_CHARACTER_LIMITS.PASSWORD} characters`,
+    )
     .trim()
     .required('Password is required'),
   passwordConfirmation: Yup.string()
     .oneOf([Yup.ref('password'), null], 'Passwords must match')
-    .max(60, 'Password must be at most 60 characters')
+    .max(
+      INPUT_CHARACTER_LIMITS.PASSWORD,
+      `Password must be at most ${INPUT_CHARACTER_LIMITS.PASSWORD} characters`,
+    )
     .trim()
     .required('Password confirmation is required'),
 });
@@ -68,6 +75,7 @@ export const PasswordResetForm = ({
               error={errors.password}
               touched={touched.password}
               value={values.password}
+              maxLength={INPUT_CHARACTER_LIMITS.PASSWORD + 1}
             />
             <StyledField
               name="passwordConfirmation"
@@ -76,6 +84,7 @@ export const PasswordResetForm = ({
               error={errors.passwordConfirmation}
               touched={touched.passwordConfirmation}
               value={values.passwordConfirmation}
+              maxLength={INPUT_CHARACTER_LIMITS.PASSWORD + 1}
             />
             <Button
               size={ButtonSize.small}

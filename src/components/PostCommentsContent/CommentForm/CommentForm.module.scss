@@ -5,16 +5,22 @@
   &__form {
     display: flex;
     flex-direction: column;
-
-    & > div:last-child {
-      margin-top: 10px;
-      width: fit-content;
-    }
   }
 
   &__submitContainer {
     display: flex;
     align-items: center;
     gap: 12px;
+  }
+
+  &__footer {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    & div:first-child {
+      width: fit-content;
+    }
   }
 }

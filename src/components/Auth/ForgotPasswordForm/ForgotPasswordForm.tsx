@@ -8,11 +8,15 @@ import {
   ButtonAction,
   AlternateLoader,
 } from '@/components';
+import { INPUT_CHARACTER_LIMITS } from '@/constants';
 import styles from './ForgotPasswordForm.module.scss';
 
 const ForgotPasswordSchema = Yup.object().shape({
   email: Yup.string()
-    .max(255, 'Email must be at most 255 characters')
+    .max(
+      INPUT_CHARACTER_LIMITS.EMAIL,
+      `Email must be at most ${INPUT_CHARACTER_LIMITS.EMAIL} characters`,
+    )
     .trim()
     .matches(
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}/,
@@ -58,6 +62,7 @@ export const ForgotPasswordForm = ({
               error={errors.email}
               touched={touched.email}
               value={values.email}
+              maxLength={INPUT_CHARACTER_LIMITS.EMAIL + 1}
             />
             <Button
               size={ButtonSize.small}
