@@ -45,6 +45,10 @@
     display: none;
   }
 
+  &__deleteCommentText * {
+    color: var(--error) !important;
+  }
+
   &__comment {
     color: var(--white);
     font-size: toRem(14);

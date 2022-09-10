@@ -208,6 +208,7 @@ export const Comment = ({
                     Icon={Trash}
                     text="Delete comment"
                     onClick={handleDeleteCommentClick}
+                    className={styles.root__deleteCommentText}
                   />
                 )}
               </ActionsMenu>
