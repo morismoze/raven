@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { flushSync } from 'react-dom';
 
-import { Flag, Pencil } from 'react-bootstrap-icons';
+import { Flag, Pencil, Trash } from 'react-bootstrap-icons';
 import { useMutation } from 'react-query';
 import { useLocation } from 'wouter';
 import toast from 'react-hot-toast';
@@ -16,6 +16,7 @@ import {
   Modal,
   CommentReportForm,
   ICommentReportFormValues,
+  CommentDeletionForm,
 } from '@/components';
 import {
   downvotePostComment,
@@ -27,9 +28,11 @@ import {
   PostCommentReportReason,
   PostCommentReportRequestDto,
   reportPostComment,
+  deletePostComment,
 } from '@/api';
 import { formatCreatedAt } from '@/utils';
 import styles from './Comment.module.scss';
+import { AxiosError } from 'axios';
 
 interface ICommentProps {
   postId: string;
@@ -49,12 +52,15 @@ export const Comment = ({
   const [isCommentReportActive, setIsCommentReportActive] =
     useState<boolean>(false);
 
+  const [isCommentDeletionActive, setIsCommentDeletionActive] =
+    useState<boolean>(false);
+
   const [location, setLocation] = useLocation();
 
   const { user } = useAuth();
 
   const { mutate: upvoteMutate, isLoading: isUpvoteMutateLoading } =
-    useMutation<PostCommentVoteResponseDto, unknown>(
+    useMutation<PostCommentVoteResponseDto>(
       'upvote-post-comment',
       () => upvotePostComment(postId, comment.id),
       {
@@ -65,7 +71,7 @@ export const Comment = ({
     );
 
   const { mutate: downvoteMutate, isLoading: isDownvoteMutateLoading } =
-    useMutation<PostCommentVoteResponseDto, unknown>(
+    useMutation<PostCommentVoteResponseDto>(
       'downvote-post-comment',
       () => downvotePostComment(postId, comment.id),
       {
@@ -84,6 +90,31 @@ export const Comment = ({
             setIsCommentReportActive(false);
             setTimeout(() => {
               toast.success('Thank you for reporting!', {
+                style: {
+                  fontSize: 13,
+                  color: 'var(--bg-main)',
+                },
+                iconTheme: {
+                  primary: 'var(--success)',
+                  secondary: '#FFFAEE',
+                },
+              });
+            }, 500);
+          });
+        },
+      },
+    );
+
+  const { mutate: commentDeletionMutate, isLoading: isCommentDeletionLoading } =
+    useMutation<unknown, AxiosError>(
+      () => deletePostComment(postId, comment.id),
+      {
+        onSuccess: () => {
+          flushSync(() => {
+            setIsCommentDeletionActive(false);
+            refetchPage(commentPage);
+            setTimeout(() => {
+              toast.success('Your comment was deleted', {
                 style: {
                   fontSize: 13,
                   color: 'var(--bg-main)',
@@ -129,7 +160,15 @@ export const Comment = ({
     });
   };
 
-  const handleEditComment = () => {};
+  const handleEditCommentClick = () => {};
+
+  const handleDeleteCommentClick = () => {
+    setIsCommentDeletionActive(true);
+  };
+
+  const handleCommentDeleteSubmit = () => {
+    commentDeletionMutate();
+  };
 
   const formattedCreatedAt = formatCreatedAt(comment.createdAt);
 
@@ -161,7 +200,14 @@ export const Comment = ({
                   <ActionsMenuItem
                     Icon={Pencil}
                     text="Edit comment"
-                    onClick={handleEditComment}
+                    onClick={handleEditCommentClick}
+                  />
+                )}
+                {userPrincipal && userPrincipal.id === comment.userId && (
+                  <ActionsMenuItem
+                    Icon={Trash}
+                    text="Delete comment"
+                    onClick={handleDeleteCommentClick}
                   />
                 )}
               </ActionsMenu>
@@ -195,12 +241,22 @@ export const Comment = ({
         active={isCommentReportActive}
         setIsActive={setIsCommentReportActive}
         title="Report comment"
-        submitButtonName="Report"
       >
         <CommentReportForm
           commentReportReasons={commentReportReasons}
           onSubmit={handleCommentReportSubmit}
-          isUploading={isCommentReportLoading}
+          isLoading={isCommentReportLoading}
+        />
+      </Modal>
+      <Modal
+        active={isCommentDeletionActive}
+        setIsActive={setIsCommentDeletionActive}
+        title="Delete comment"
+      >
+        <CommentDeletionForm
+          onSubmit={handleCommentDeleteSubmit}
+          isLoading={isCommentDeletionLoading}
+          setIsActive={setIsCommentDeletionActive}
         />
       </Modal>
     </>

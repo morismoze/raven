@@ -1,0 +1,35 @@
+@import 'src/styles/util.module.scss';
+
+.root {
+  background-color: var(--bg-main-opacity);
+  padding: 25px;
+  border: 1px solid var(--border-main);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+
+  &__actionsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    width: 100%;
+
+    & > div {
+      width: fit-content;
+    }
+  }
+
+  &__text {
+    color: var(--text-darker);
+    font-size: toRem(15);
+    text-align: center;
+  }
+
+  &__submitContainer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+}

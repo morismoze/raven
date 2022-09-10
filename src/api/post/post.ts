@@ -109,3 +109,10 @@ export const reportPostComment = async (
   );
   return response.data;
 };
+
+export const deletePostComment = async (webId: string, commentId: number) => {
+  const response = await axiosInstance.delete(
+    `${API_URL}/post/${webId}/comments/${commentId}/delete`,
+  );
+  return response.data;
+};

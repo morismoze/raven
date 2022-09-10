@@ -96,6 +96,10 @@ export type PostCommentReportRequestDto = {
   reason: PostCommentReportReason;
 };
 
+export type PostCommentEditRequestDto = {
+  comment: string;
+};
+
 export type PostFileUploadRequestDto = FormData;
 
 export type NewPostId = string;

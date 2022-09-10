@@ -49,6 +49,7 @@ export * from './PostCommentsContent/CommentForm/CommentForm';
 export * from './PostCommentsContent/CommentsHeader/CommentsHeader';
 export * from './PostCommentsContent/Comment/Comment';
 export * from './PostCommentsContent/CommentReportForm/CommentReportForm';
+export * from './PostCommentsContent/CommentDeletionForm/CommentDeletionForm';
 export * from './ActionsMenu/ActionsMenu';
 export * from './ActionsMenu/ActionsMenuItem/ActionsMenuItem';
 export * from './NewestPostsContent/NewestPostsContent';

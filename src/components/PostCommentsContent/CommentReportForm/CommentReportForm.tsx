@@ -33,13 +33,13 @@ export interface ICommentReportFormValues {
 export interface ICommentReportFormProps {
   commentReportReasons?: PostCommentReportReason[];
   onSubmit: (values: ICommentReportFormValues) => void;
-  isUploading: boolean;
+  isLoading: boolean;
 }
 
 export const CommentReportForm = ({
   commentReportReasons,
   onSubmit,
-  isUploading,
+  isLoading,
 }: ICommentReportFormProps): JSX.Element => {
   const initialValues: ICommentReportFormValues = {
     reason: '',
@@ -94,11 +94,11 @@ export const CommentReportForm = ({
                 size={ButtonSize.small}
                 action={ButtonAction.primary}
                 type="submit"
-                disabled={isUploading}
+                disabled={isLoading}
               >
                 <div className={styles.root__submitContainer}>
                   <span>Report</span>
-                  <AlternateLoader isLoading={isUploading} />
+                  <AlternateLoader isLoading={isLoading} />
                 </div>
               </Button>
             </div>

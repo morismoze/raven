@@ -84,14 +84,14 @@ export const PostCommentsContent = ({
         className={styles.root__componentsContainer}
       >
         {commentsGroups?.map((group: PostCommentsResponseDto, groupIndex) => {
-          return group.data.comments.map((comment: PostComment, index) => (
+          return group.data.comments.map((comment: PostComment) => (
             <Comment
               postId={postId!}
               comment={comment}
               commentReportReasons={commentReportReasons}
               commentPage={groupIndex}
               refetchPage={refetchPage}
-              key={index}
+              key={comment.id}
             />
           ));
         })}
