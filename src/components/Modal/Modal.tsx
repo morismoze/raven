@@ -41,7 +41,7 @@ export const Modal = ({
 
   return (
     <div className={styles.root}>
-      <FadeIn delay={500} className={styles.root__fadeWrapper}>
+      <FadeIn delay={350} className={styles.root__fadeWrapper}>
         <div className={styles.root__modal}>
           <div className={styles.root__header}>
             <span className={styles.root__title}>{title}</span>

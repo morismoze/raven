@@ -1,0 +1,15 @@
+.root {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.25s ease-in-out;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+}

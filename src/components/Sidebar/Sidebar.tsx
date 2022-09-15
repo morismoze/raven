@@ -18,8 +18,6 @@ export const Sidebar = ({
   commentsSectionRef,
   totalCommentsCount,
 }: ISidebarProps): JSX.Element => {
-  const handleOnShare = () => {};
-
   return (
     <div className={styles.root}>
       <ActivityBar
@@ -28,7 +26,7 @@ export const Sidebar = ({
         userPrincipalDownvoted={userPrincipalDownvoted}
         votes={votesCount}
       />
-      <ShareButton onClick={handleOnShare} />
+      <ShareButton />
       <CommentsRefButton
         commentsSectionRef={commentsSectionRef}
         comments={totalCommentsCount}
