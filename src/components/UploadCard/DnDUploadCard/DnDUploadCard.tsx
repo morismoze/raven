@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import Dropzone from 'react-dropzone';
 import { useLocation } from 'wouter';
+import toast from 'react-hot-toast';
 
 import { IUploadContext, UploadContext } from '@/context';
+import { WRONG_TYPE_FILE } from '@/constants/uploadErrorConstants';
 import styles from './DnDUploadCard.module.scss';
 
 export const DnDUploadCard = (): JSX.Element => {
@@ -11,15 +13,22 @@ export const DnDUploadCard = (): JSX.Element => {
 
   const { setUrl, setFile } = React.useContext(UploadContext) as IUploadContext;
 
-  const [error, setError] = useState<string | null>(null);
-
   const acceptTypes = {
-    'image/*': [],
+    'image/': ['.jpeg', '.png', '.gif', '.apng', '.tiff', '.avif'],
   };
 
   const handleOnDrop = async (fileArray: File[]) => {
     if (fileArray.length === 0) {
-      setError('Only image file types are allowed');
+      toast.error(WRONG_TYPE_FILE, {
+        style: {
+          fontSize: 13,
+          color: 'var(--bg-main)',
+        },
+        iconTheme: {
+          primary: 'var(--error)',
+          secondary: '#FFFAEE',
+        },
+      });
     } else {
       setUrl('');
       const file = fileArray[0];
@@ -36,7 +45,6 @@ export const DnDUploadCard = (): JSX.Element => {
             <input {...getInputProps()} />
             <span className={styles.root__dropText}>Drop an image here</span>
           </div>
-          {error && <span className={styles.root__errorMessage}>{error}</span>}
         </div>
       )}
     </Dropzone>

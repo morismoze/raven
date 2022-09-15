@@ -40,7 +40,7 @@ export const AppProvider = ({ children }: IAppProviderProps) => {
               <UploadProvider>{children}</UploadProvider>
               <Toaster
                 position="bottom-left"
-                toastOptions={{ duration: 3000 }}
+                toastOptions={{ duration: 5000 }}
               />
             </AuthProvider>
           </QueryClientProvider>

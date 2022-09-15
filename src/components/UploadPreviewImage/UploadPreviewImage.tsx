@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 
+import classNames from 'classnames';
+
 import { useLocation } from 'wouter';
 import { AlternateLoader } from '@/components';
-
 import styles from './UploadPreviewImage.module.scss';
-import classNames from 'classnames';
 
 interface IUploadPreviewImageProps {
   file: File | null;
@@ -40,7 +40,6 @@ export const UploadPreviewImage = ({
     }
   }, []);
 
-  // upload by url
   return (
     <>
       <AlternateLoader isLoading={isLoading} size={32} />

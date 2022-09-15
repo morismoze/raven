@@ -91,9 +91,26 @@ export const UploadPreview = (): JSX.Element => {
               },
             });
           } else if (responseError.fieldErrors.length > 0) {
-            setFieldErrors(
-              (err.response?.data as PostUploadResponseDto).fieldErrors,
+            const fileFieldError = responseError.fieldErrors.find(
+              (fieldError: FieldError) => fieldError.field === 'file',
             );
+
+            if (fileFieldError) {
+              toast.error(fileFieldError.error, {
+                style: {
+                  fontSize: 13,
+                  color: 'var(--bg-main)',
+                },
+                iconTheme: {
+                  primary: 'var(--error)',
+                  secondary: '#FFFAEE',
+                },
+              });
+            } else {
+              setFieldErrors(
+                (err.response?.data as PostUploadResponseDto).fieldErrors,
+              );
+            }
           }
         },
       },
