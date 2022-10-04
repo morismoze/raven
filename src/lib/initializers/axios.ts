@@ -1,6 +1,7 @@
-import { refreshAccessToken } from '@/api';
 import Axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import Pace from 'pace-js';
+
+import { refreshAccessToken } from '@/api';
 
 export const axiosInstance = Axios.create({
   baseURL: import.meta.env.VITE_API_URL,

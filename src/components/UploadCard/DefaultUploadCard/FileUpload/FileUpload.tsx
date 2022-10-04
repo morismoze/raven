@@ -15,7 +15,7 @@ export const FileUpload = ({ onUpload }: IFileUploadProps) => {
     const target = event.target as HTMLInputElement;
     const file = (target.files as FileList)[0];
 
-    if (!file.type.match('image/(jpeg|png|gif|apng|tiff)')) {
+    if (!file.type.match('image/(jpeg|jpg|png|gif|apng|tiff)')) {
       toast.error(WRONG_TYPE_FILE, {
         style: {
           fontSize: 13,

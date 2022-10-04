@@ -8,7 +8,7 @@ import {
 
 import { Button, ButtonAction, Logo, Avatar } from '@/components';
 import styles from './Header.module.scss';
-import { useLocation } from 'wouter';
+import { Link, useLocation } from 'wouter';
 import { useAuth, User } from '@/api';
 
 export const Header = (): JSX.Element => {
@@ -63,13 +63,17 @@ export const Header = (): JSX.Element => {
             </>
           ) : (
             <>
-              <Button
-                action={ButtonAction.primary}
-                onClick={handleSignIn}
-                Icon={PersonFill}
-              >
-                Sign In
-              </Button>
+              <Link href="/signin">
+                <a className={styles.root__homeLink}>
+                  <Button
+                    action={ButtonAction.primary}
+                    onClick={handleSignIn}
+                    Icon={PersonFill}
+                  >
+                    Sign In
+                  </Button>
+                </a>
+              </Link>
               <Button
                 action={ButtonAction.primary}
                 onClick={handleSignUp}

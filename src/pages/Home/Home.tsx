@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { useInfiniteQuery, useQuery } from 'react-query';
 
 import {
@@ -46,6 +47,9 @@ export const Home = (): JSX.Element => {
 
   return (
     <>
+      <Helmet>
+        <title>Raven &bull; Home</title>
+      </Helmet>
       <Header />
       <HeaderLayout className={styles.root}>
         <TagsContent tags={tags?.data} />

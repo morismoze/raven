@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import { Helmet } from 'react-helmet-async';
 import { AxiosError } from 'axios';
 import toast from 'react-hot-toast';
 import { useMutation, useQuery } from 'react-query';
@@ -145,6 +146,9 @@ export const UploadPreview = (): JSX.Element => {
 
   return (
     <>
+      <Helmet>
+        <title>Raven &bull; Upload Preview</title>
+      </Helmet>
       <Header />
       <HeaderLayout className={styles.root}>
         <UploadPreviewImage file={file} url={url} />

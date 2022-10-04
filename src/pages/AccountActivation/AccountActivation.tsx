@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { AxiosError } from 'axios';
 import { ShieldCheck } from 'react-bootstrap-icons';
 import FadeIn from 'react-fade-in';
+import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'wouter';
 import { useMutation } from 'react-query';
 
@@ -50,6 +51,9 @@ export const AccountActivation = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Raven &bull; Account Activation</title>
+      </Helmet>
       <div className={styles.root}>
         <FadeIn className={styles.root__wrapper}>
           <Logo />

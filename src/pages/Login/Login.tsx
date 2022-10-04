@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
-import { useLocation } from 'wouter';
+import { Helmet } from 'react-helmet-async';
 import FadeIn from 'react-fade-in';
+import { useLocation } from 'wouter';
 
 import {
   AccountExistence,
@@ -55,6 +56,9 @@ export const Login = (): JSX.Element => {
 
   return (
     <>
+      <Helmet>
+        <title>Raven &bull; Login</title>
+      </Helmet>
       <div className={styles.root}>
         <FadeIn className={styles.root__wrapper}>
           <Logo />

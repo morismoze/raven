@@ -14,6 +14,7 @@ import {
 } from '@/components';
 import { AuthUser, useAuth, User } from '@/api';
 import styles from './Registration.module.scss';
+import { Helmet } from 'react-helmet-async';
 
 export const Registration = (): JSX.Element => {
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
@@ -50,6 +51,9 @@ export const Registration = (): JSX.Element => {
 
   return (
     <>
+      <Helmet>
+        <title>Raven &bull; Registration</title>
+      </Helmet>
       <div className={styles.root}>
         <FadeIn className={styles.root__wrapper}>
           <Logo />

@@ -1,4 +1,5 @@
 import { AxiosError } from 'axios';
+import { Helmet } from 'react-helmet-async';
 import { useInfiniteQuery } from 'react-query';
 import { useRoute } from 'wouter';
 
@@ -64,6 +65,9 @@ export const TagPosts = (): JSX.Element | null => {
   if (isSuccess) {
     return (
       <>
+        <Helmet>
+          <title>{params!.tagName} Posts &bull; Raven</title>
+        </Helmet>
         <Header />
         <HeaderLayout className={styles.root}>
           <div className={styles.root__metaContainer}>

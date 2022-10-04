@@ -14,7 +14,7 @@ export const DnDUploadCard = (): JSX.Element => {
   const { setUrl, setFile } = React.useContext(UploadContext) as IUploadContext;
 
   const acceptTypes = {
-    'image/': ['.jpeg', '.png', '.gif', '.apng', '.tiff', '.avif'],
+    'image/': ['.jpeg', '.jpg', '.png', '.gif', '.apng', '.tiff', '.avif'],
   };
 
   const handleOnDrop = async (fileArray: File[]) => {

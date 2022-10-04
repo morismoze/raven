@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { AxiosError } from 'axios';
 import FadeIn from 'react-fade-in';
+import { Helmet } from 'react-helmet-async';
 import { ArrowRepeat } from 'react-bootstrap-icons';
 import { useMutation } from 'react-query';
 import toast from 'react-hot-toast';
@@ -50,40 +51,45 @@ export const PostRegistration = (): JSX.Element => {
   };
 
   return (
-    <div className={styles.root}>
-      <FadeIn className={styles.root__wrapper}>
-        <Logo />
-        <div className={styles.root__contentContainer}>
-          <span className={styles.root__title}>Thank you</span>
-          <span className={styles.root__text}>
-            Great! Thank you for registering on{' '}
-            <span className={styles.root__logo}>raven</span>!
-          </span>
-          <span className={styles.root__text}>
-            We've reserved your space and sent you an activation link to your
-            email address. Be sure to check it out!
-          </span>
-          <div className={styles.root__separator} />
-          <span className={styles.root__text}>Didn't get the email?</span>
-          <NotificationMessage
-            active={Boolean(notification)}
-            message={notification}
-            type={NotificationMessageType.error}
-          />
-          <Button
-            size={ButtonSize.small}
-            action={ButtonAction.primary}
-            onClick={handleResendActivationEmail}
-            Icon={ArrowRepeat}
-            disabled={isLoading}
-          >
-            <div className={styles.root__submitContainer}>
-              <span>Resend email</span>
-              <AlternateLoader isLoading={isLoading} />
-            </div>
-          </Button>
-        </div>
-      </FadeIn>
-    </div>
+    <>
+      <Helmet>
+        <title>Raven &bull; Thank You for Registering</title>
+      </Helmet>
+      <div className={styles.root}>
+        <FadeIn className={styles.root__wrapper}>
+          <Logo />
+          <div className={styles.root__contentContainer}>
+            <span className={styles.root__title}>Thank you</span>
+            <span className={styles.root__text}>
+              Great! Thank you for registering on{' '}
+              <span className={styles.root__logo}>raven</span>!
+            </span>
+            <span className={styles.root__text}>
+              We've reserved your space and sent you an activation link to your
+              email address. Be sure to check it out!
+            </span>
+            <div className={styles.root__separator} />
+            <span className={styles.root__text}>Didn't get the email?</span>
+            <NotificationMessage
+              active={Boolean(notification)}
+              message={notification}
+              type={NotificationMessageType.error}
+            />
+            <Button
+              size={ButtonSize.small}
+              action={ButtonAction.primary}
+              onClick={handleResendActivationEmail}
+              Icon={ArrowRepeat}
+              disabled={isLoading}
+            >
+              <div className={styles.root__submitContainer}>
+                <span>Resend email</span>
+                <AlternateLoader isLoading={isLoading} />
+              </div>
+            </Button>
+          </div>
+        </FadeIn>
+      </div>
+    </>
   );
 };

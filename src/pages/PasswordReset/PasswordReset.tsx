@@ -1,9 +1,10 @@
 import { useState } from 'react';
 
 import FadeIn from 'react-fade-in';
-import { useLocation } from 'wouter';
-import { useMutation } from 'react-query';
+import { Helmet } from 'react-helmet-async';
 import { AxiosError } from 'axios';
+import { useMutation } from 'react-query';
+import { useLocation } from 'wouter';
 
 import {
   PasswordResetForm,
@@ -55,6 +56,9 @@ export const PasswordReset = (): JSX.Element => {
 
   return (
     <>
+      <Helmet>
+        <title>Raven &bull; Password Reset</title>
+      </Helmet>
       <div className={styles.root}>
         <FadeIn className={styles.root__wrapper}>
           <Logo />

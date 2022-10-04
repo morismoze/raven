@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 
+import { Helmet } from 'react-helmet-async';
 import { AxiosError } from 'axios';
 import { useRoute } from 'wouter';
 import { useInfiniteQuery, useQuery } from 'react-query';
@@ -110,6 +111,9 @@ export const Post = (): JSX.Element | null => {
   if (isSuccess) {
     return (
       <>
+        <Helmet>
+          <title>{post.data.title} &bull; Raven</title>
+        </Helmet>
         <Header />
         <HeaderLayout className={styles.root}>
           <div className={styles.root__activityPostContainer}>

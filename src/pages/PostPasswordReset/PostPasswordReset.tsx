@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { AxiosError } from 'axios';
 import FadeIn from 'react-fade-in';
+import { Helmet } from 'react-helmet-async';
 import { ArrowRepeat } from 'react-bootstrap-icons';
 import { useMutation } from 'react-query';
 import toast from 'react-hot-toast';
@@ -54,35 +55,40 @@ export const PostPasswordReset = (): JSX.Element => {
   };
 
   return (
-    <div className={styles.root}>
-      <FadeIn className={styles.root__wrapper}>
-        <Logo />
-        <div className={styles.root__contentContainer}>
-          <span className={styles.root__title}>Password reset email</span>
-          <span className={styles.root__text}>
-            We've sent you a password reset link to your email address.
-          </span>
-          <div className={styles.root__separator} />
-          <span className={styles.root__text}>Didn't get the email?</span>
-          <NotificationMessage
-            active={Boolean(notification)}
-            message={notification}
-            type={NotificationMessageType.error}
-          />
-          <Button
-            size={ButtonSize.small}
-            action={ButtonAction.primary}
-            onClick={handleResendPasswordResetEmail}
-            Icon={ArrowRepeat}
-            disabled={isLoading}
-          >
-            <div className={styles.root__submitContainer}>
-              <span>Resend email</span>
-              <AlternateLoader isLoading={isLoading} />
-            </div>
-          </Button>
-        </div>
-      </FadeIn>
-    </div>
+    <>
+      <Helmet>
+        <title>Raven &bull; Password Reset Email</title>
+      </Helmet>
+      <div className={styles.root}>
+        <FadeIn className={styles.root__wrapper}>
+          <Logo />
+          <div className={styles.root__contentContainer}>
+            <span className={styles.root__title}>Password reset email</span>
+            <span className={styles.root__text}>
+              We've sent you a password reset link to your email address.
+            </span>
+            <div className={styles.root__separator} />
+            <span className={styles.root__text}>Didn't get the email?</span>
+            <NotificationMessage
+              active={Boolean(notification)}
+              message={notification}
+              type={NotificationMessageType.error}
+            />
+            <Button
+              size={ButtonSize.small}
+              action={ButtonAction.primary}
+              onClick={handleResendPasswordResetEmail}
+              Icon={ArrowRepeat}
+              disabled={isLoading}
+            >
+              <div className={styles.root__submitContainer}>
+                <span>Resend email</span>
+                <AlternateLoader isLoading={isLoading} />
+              </div>
+            </Button>
+          </div>
+        </FadeIn>
+      </div>
+    </>
   );
 };

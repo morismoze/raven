@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { Helmet } from 'react-helmet-async';
 import FadeIn from 'react-fade-in';
 import { useLocation } from 'wouter';
 import { useMutation } from 'react-query';
@@ -56,6 +57,9 @@ export const ForgotPassword = (): JSX.Element => {
 
   return (
     <>
+      <Helmet>
+        <title>Raven &bull; Forgot Password</title>
+      </Helmet>
       <div className={styles.root}>
         <FadeIn className={styles.root__wrapper}>
           <Logo />

@@ -1,5 +1,5 @@
 export * from './Home/Home';
-export * from './FourZeroFour';
+export * from './FourZeroFour/FourZeroFour';
 export * from './Registration/Registration';
 export * from './Login/Login';
 export * from './ForgotPassword/ForgotPassword';
